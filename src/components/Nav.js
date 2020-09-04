@@ -6,6 +6,7 @@ const Justify = styled.div`
   display: flex;
   width: 100%;
   height: 100px;
+  top: 0;
   background: red;
   position: fixed;
 `;
