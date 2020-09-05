@@ -1,7 +1,7 @@
 import React from "react";
 import values from "../values.js";
 import styled from "styled-components";
-import "./Nav.css";
+import "../css/Nav.css";
 const Justify = styled.div`
   display: flex;
   width: 100%;
@@ -32,23 +32,24 @@ const Button = styled.button((props) => ({
 
 const Nav = ({ main }) => {
   return (
-    <Justify>
+    <nav>
       <img
+        id="logo"
         src="http://daekyeong.sen.hs.kr/dggb/module/file/selectImageView.do?atchFileId=451075&fileSn=0"
         alt="Logo"
       />
       {!main && (
-        <JustifiedUl>
+        <ul id="nav-menu">
           {values.menuList.map((value, index) => (
-            <Li key={index}>{value}</Li>
+            <li key={index}>{value}</li>
           ))}
-        </JustifiedUl>
+        </ul>
       )}
       <div id="btn-position">
         <button number="1">로그인</button>
         <button number="2">회원가입</button>
       </div>
-    </Justify>
+    </nav>
   );
 };
 

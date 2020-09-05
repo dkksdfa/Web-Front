@@ -5,8 +5,7 @@ const Background = styled.div`
   width: 100%;
   height: 1100px;
   justify-content: center;
-  margin-top: 100px;
-  background: url("background4.jpg");
+  background: url("image/background4.jpg");
   background-size: 100% auto;
 
   text-align: center;
@@ -17,9 +16,9 @@ const Button = styled.button`
   border: none;
   border-radius: 10px;
   color: pink;
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-top: 1rem;
-  padding: 0 1rem;
+  padding: 0.2rem 1rem;
   &:hover {
     background: red;
     color: white;
@@ -32,6 +31,7 @@ const Text = styled.p((props) => ({
   lineHeight: "1rem",
   fontWeight: "bold",
 }));
+
 const MenuTemplate = styled.div`
   width: 1100px;
   height: 200px;
@@ -47,7 +47,7 @@ const MenuTemplate = styled.div`
 const Rolling = styled.div`
   width: 100%;
   padding: 50px 0;
-  background: url("background1.jpg");
+  background: url("image/background1.jpg");
   background-size: cover;
   background-position: 0 -150px;
 `;
