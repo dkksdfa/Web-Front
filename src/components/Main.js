@@ -34,7 +34,7 @@ const Text = styled.p((props) => ({
 }));
 const MenuTemplate = styled.div`
   width: 1100px;
-  height: 400px;
+  height: 200px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.8);
   border: none;
@@ -51,30 +51,14 @@ const Rolling = styled.div`
   background-size: cover;
   background-position: 0 -150px;
 `;
-// let slideIndex = 0;
 
-// function showSlides() {
-//   let i;
-//   let slides = document.getElementsByClassName("mySlides");
-//   let dots = document.getElementsByClassName("dot");
-//   for (i = 0; i < slides.length; i++) {
-//     slides[i].style.display = "none";
-//   }
-//   slideIndex++;
-//   if (slideIndex > slides.length) {
-//     slideIndex = 1;
-//   }
-//   for (i = 0; i < dots.length; i++) {
-//     dots[i].className = dots[i].className.replace(" active", "");
-//   }
-//   slides[slideIndex - 1].style.display = "block";
-//   dots[slideIndex - 1].className += " active";
-//   setTimeout(showSlides, 2000); // Change image every 2 seconds
-// }
 const Menu = styled.div`
   width: 200px;
   height: 150px;
-  /* margin: 100px 40px 0 40px; */
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   background: white;
   color: gray;
   font-size: 2rem;
