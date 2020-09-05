@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import values from "../values.js";
+import { Link } from "react-router-dom";
+
 const Background = styled.div`
   width: 100%;
-  height: 1100px;
+  height: 1600px;
   justify-content: center;
   background: url("image/background4.jpg");
   background-size: 100% auto;
-
+  background-position: 0 -600px;
   text-align: center;
 `;
 
@@ -33,10 +35,10 @@ const Text = styled.p((props) => ({
 }));
 
 const MenuTemplate = styled.div`
-  width: 1100px;
-  height: 200px;
+  width: 1300px;
+  height: 300px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   border: none;
   margin: 100px auto 0;
   display: flex;
@@ -46,21 +48,23 @@ const MenuTemplate = styled.div`
 
 const Rolling = styled.div`
   width: 100%;
+  height: 700px;
   padding: 50px 0;
-  background: url("image/background1.jpg");
+  background: url("image/background1.jpg") no-repeat;
   background-size: cover;
+
   background-position: 0 -150px;
 `;
 
 const Menu = styled.div`
   width: 200px;
   height: 150px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 75px;
+  margin-bottom: 75px;
   background: white;
-  color: gray;
+
   font-size: 2rem;
   font-weight: bold;
   line-height: 150px;
@@ -72,7 +76,6 @@ const Menu = styled.div`
     box-shadow: 7px 7px 20px 0px rgba(0, 0, 0, 0.3);
   }
 `;
-
 const Main = () => {
   return (
     <>
@@ -85,7 +88,9 @@ const Main = () => {
         </Rolling>
         <MenuTemplate>
           {values.menuList.map((value, index) => (
-            <Menu key={index}>{value}</Menu>
+            <Link to={value.link}>
+              <Menu key={index}>{value.name}</Menu>
+            </Link>
           ))}
         </MenuTemplate>
       </Background>

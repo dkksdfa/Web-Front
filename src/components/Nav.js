@@ -41,7 +41,7 @@ const Nav = ({ main }) => {
       {!main && (
         <ul id="nav-menu">
           {values.menuList.map((value, index) => (
-            <li key={index}>{value}</li>
+            <li key={index}>{value.name}</li>
           ))}
         </ul>
       )}
