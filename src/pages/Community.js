@@ -1,6 +1,6 @@
 import React from "react";
 import data from "../data.js";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import styled from "styled-components";
 
 const Background = styled.div`
@@ -39,7 +39,7 @@ const Community = ({ match = "Just Talk" }) => {
       <div>
         <h2 style={{ marginTop: "200px" }}></h2>
         <div>
-          <Link to="/Write">
+          <Link to="../Write">
             <button>글쓰기</button>
           </Link>
           <input type="text" defaultValue="검색어 입력"></input>
