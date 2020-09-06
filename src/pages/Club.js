@@ -2,6 +2,7 @@ import React from "react";
 import values from "../values.js";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import PageWrap from "./PageWrap";
 const Background = styled.div`
   width: 100%;
   height: 1100px;
@@ -61,28 +62,24 @@ const Clubs = ({ match }) => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <Background>
-      <ContentTemplate>
-        <ContentJustify>
-          <ListTemplate>
-            <Title>{match.params.id} Club List</Title>
-            <ClubWrapper>
-              {result ? (
-                result.map((value, index) => {
-                  return (
-                    <Link to={`/community/${value.link}`}>
-                      <ClubIntro key={index}>{value.name}</ClubIntro>
-                    </Link>
-                  );
-                })
-              ) : (
-                <h1>hello</h1>
-              )}
-            </ClubWrapper>
-          </ListTemplate>
-        </ContentJustify>
-      </ContentTemplate>
-    </Background>
+    <PageWrap>
+      <ListTemplate>
+        <Title>{match.params.id} Club List</Title>
+        <ClubWrapper>
+          {result ? (
+            result.map((value, index) => {
+              return (
+                <Link to={`/community/${value.link}`}>
+                  <ClubIntro key={index}>{value.name}</ClubIntro>
+                </Link>
+              );
+            })
+          ) : (
+            <h1>hello</h1>
+          )}
+        </ClubWrapper>
+      </ListTemplate>
+    </PageWrap>
   );
 };
 

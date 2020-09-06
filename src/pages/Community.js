@@ -2,7 +2,7 @@ import React from "react";
 import data from "../data.js";
 import { Link, Route } from "react-router-dom";
 import styled from "styled-components";
-
+import PageWrap from "./PageWrap";
 const Background = styled.div`
   width: 100%;
   height: 1100px;
@@ -35,9 +35,9 @@ const Community = ({ match = "Just Talk" }) => {
     );
   });
   return (
-    <Background>
+    <PageWrap>
       <div>
-        <h2 style={{ marginTop: "200px" }}></h2>
+        <h2>{clubName}</h2>
         <div>
           <Link to="../Write">
             <button>글쓰기</button>
@@ -57,7 +57,7 @@ const Community = ({ match = "Just Talk" }) => {
           <tbody>{a}</tbody>
         </table>
       </div>
-    </Background>
+    </PageWrap>
   );
 };
 export default Community;

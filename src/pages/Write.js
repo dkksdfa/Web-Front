@@ -1,10 +1,10 @@
 import React from "react";
-
+import PageWrap from "./PageWrap";
 const Write = () => {
   return (
-    <div style={{ marginTop: "200px" }}>
+    <PageWrap>
       <h2>글쓰기</h2>
-    </div>
+    </PageWrap>
   );
 };
 export default Write;
