@@ -35,14 +35,13 @@ const Button = styled.button((props) => ({
 const Nav = ({ main }) => {
   return (
     <nav>
-      <Link to = "/">
+      <Link to="/">
         <img
           id="logo"
           src="http://daekyeong.sen.hs.kr/dggb/module/file/selectImageView.do?atchFileId=451075&fileSn=0"
           alt="Logo"
         />
       </Link>
-
       {!main && (
         <ul id="nav-menu">
           {values.menuList.map((value, index) => (
