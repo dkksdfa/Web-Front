@@ -12,7 +12,10 @@ nav {
 }
 
 #logo {
+<<<<<<< HEAD
   width: 18%;
+=======
+>>>>>>> 2ee0e09ced789bb8e7e035cb846e0a375680a2e1
   margin-left: 7rem;
   flex-shrink: 0;
 }
