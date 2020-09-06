@@ -58,7 +58,6 @@ const Rolling = styled.div`
   padding: 50px 0;
   background: url("image/background1.jpg") no-repeat;
   background-size: cover;
-
   background-position: 0 -150px;
 `;
 

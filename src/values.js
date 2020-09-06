@@ -1,10 +1,10 @@
 export default {
   menuList: [
-    { name: "학교 정보", link: "School" },
-    { name: "S/W", link: "Club/SW" },
-    { name: "푸디", link: "Club/Food" },
-    { name: "금경", link: "Club/Commerce" },
-    { name: "커뮤니티", link: "Community" },
+    { name: "Info", link: "School" },
+    { name: "SW", link: "Club/SW" },
+    { name: "Food", link: "Club/Food" },
+    { name: "Finance", link: "Club/Commerce" },
+    { name: "Community", link: "Community" },
   ],
   clubs: {
     SW: [

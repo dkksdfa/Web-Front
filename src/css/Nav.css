@@ -1,13 +1,13 @@
-nav {
+/* nav {
   display: flex;
   position: fixed;
   height: 100px;
   width: 100vw;
   top: 0;
   align-items: center;
-}
+} */
 
-#hidden-menu {
+/* #hidden-menu {
   display: none;
 }
 
@@ -23,26 +23,22 @@ nav {
   font-size: 2rem;
 }
 
-#nav-menu li {
+/* #nav-menu li {
   margin: 0 2rem;
-}
+} */
 
-#btn-position {
+/* #btn-position {
   position: fixed;
   right: 2rem;
-}
+} */
 
-#btn-position button {
+/* #btn-position button {
   margin: 0 0.5rem;
   padding: 0.5rem 2rem;
   border-radius: 20px;
-}
+} */
 
-@media all and (max-width: 1300px) {
-  nav * {
+/* @media all and (max-width: 1300px) {
     display: none;
-  }
-  nav {
     justify-content: flex-end;
-  }
-}
+} */

@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import { Home, Schedule, School, Community, Club, Write } from "../pages";
 import Nav from "../components/Nav.js";
 function App() {
-  const url = "main";
+  const url = "not main";
   return (
     <div>
       <Nav main={url === "main"} />
