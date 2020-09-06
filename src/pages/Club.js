@@ -43,7 +43,11 @@ const ClubIntro = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
   line-height: 350px;
-  background: brown;
+  text-align: center;
+  /* background: brown; */
+  /* background: url("background9.jpg"); */
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png");
+  background-size: cover;
   &:hover {
     background: green;
     color: white;
@@ -66,8 +70,8 @@ const Clubs = ({ match }) => {
               {result ? (
                 result.map((value, index) => {
                   return (
-                    <Link to={`/community/${value}`}>
-                      <ClubIntro key={index}>{value}</ClubIntro>
+                    <Link to={`/community/${value.link}`}>
+                      <ClubIntro key={index}>{value.name}</ClubIntro>
                     </Link>
                   );
                 })

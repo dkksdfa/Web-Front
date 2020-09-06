@@ -14,22 +14,28 @@ const Background = styled.div`
 `;
 
 const Button = styled.button`
-  background: white;
+  @import url("https://fonts.googleapis.com/css?family=Black+Han+Sans:400");
+  @import url("https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean");
+  background: rgba(255, 255, 255, 0.6);
+  font-family: "Black Han Sans", sans-serif;
   border: none;
+  width: 25%;
+  height: 10%;
   border-radius: 10px;
   color: pink;
-  font-size: 2.5rem;
-  margin-top: 1rem;
-  padding: 0.2rem 1rem;
+  font-size: 2.75rem;
+  margin-top: 7rem;
+  /* padding: 0.2rem 1rem; */
+
   &:hover {
-    background: red;
-    color: white;
+    background: white;
+    color: black;
     transition: 0.5s;
   }
 `;
 const Text = styled.p((props) => ({
   fontSize: `${props.size}rem`,
-  color: "white",
+  color: "rgb(172  , 255, 3)",
   lineHeight: "1rem",
   fontWeight: "bold",
 }));
@@ -64,7 +70,7 @@ const Menu = styled.div`
   margin-top: 75px;
   margin-bottom: 75px;
   background: white;
-
+  cursor: pointer;
   font-size: 2rem;
   font-weight: bold;
   line-height: 150px;
@@ -77,6 +83,7 @@ const Menu = styled.div`
   }
 `;
 const Main = () => {
+  // console.log(location.search);
   return (
     <>
       <Background>
@@ -88,9 +95,9 @@ const Main = () => {
         </Rolling>
         <MenuTemplate>
           {values.menuList.map((value, index) => (
-            <Link to={value.link}>
-              <Menu key={index}>{value.name}</Menu>
-            </Link>
+            <Menu key={index}>
+              <Link to={value.link}>{value.name}</Link>
+            </Menu>
           ))}
         </MenuTemplate>
       </Background>
