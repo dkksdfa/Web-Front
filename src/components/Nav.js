@@ -1,8 +1,6 @@
 import React from "react";
 import values from "../values.js";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-
 import "../css/Nav.css";
 const Justify = styled.div`
   display: flex;
@@ -35,13 +33,11 @@ const Button = styled.button((props) => ({
 const Nav = ({ main }) => {
   return (
     <nav>
-      <Link to="/">
-        <img
-          id="logo"
-          src="http://daekyeong.sen.hs.kr/dggb/module/file/selectImageView.do?atchFileId=451075&fileSn=0"
-          alt="Logo"
-        />
-      </Link>
+      <img
+        id="logo"
+        src="http://daekyeong.sen.hs.kr/dggb/module/file/selectImageView.do?atchFileId=451075&fileSn=0"
+        alt="Logo"
+      />
       {!main && (
         <ul id="nav-menu">
           {values.menuList.map((value, index) => (

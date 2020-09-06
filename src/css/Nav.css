@@ -12,6 +12,7 @@ nav {
 }
 
 #logo {
+  width: 18%;
   margin-left: 7rem;
   flex-shrink: 0;
 }

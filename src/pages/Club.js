@@ -49,9 +49,9 @@ const ClubIntro = styled.div`
   background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png");
   background-size: cover;
   &:hover {
+    background: green;
     color: white;
     transition: 0.4s;
-    transform: scale(1.2);
   }
 `;
 
