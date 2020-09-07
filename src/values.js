@@ -3,7 +3,8 @@ export default {
     { name: "Info", link: "School" },
     { name: "SW", link: "Club/SW" },
     { name: "Food", link: "Club/Food" },
-    { name: "Finance", link: "Club/Commerce" },
+    { name: "Finance", link: "Club/Finance" },
+    { name: "Other", link: "Club/Other" },
     { name: "Community", link: "Community" },
   ],
   clubs: {
@@ -21,8 +22,9 @@ export default {
     Food: [
       { name: "조리미디어연구반", link: "cookmedia" },
       { name: "골목식당반", link: "streetfood" },
+      { name: "설탕공예반", link: "sugar" },
     ],
-    Commerce: [
+    Finance: [
       { name: "경제탐구반", link: "exploereconomy" },
       { name: "회계실무반", link: "practicalcommerce" },
       { name: "금융마을 탐방반", link: "financetown" },
@@ -43,7 +45,6 @@ export default {
       { name: "프라모델반", link: "plamodel" },
       { name: "한양답사반", link: "hanyang" },
       { name: "당구반", link: "billiards" },
-      { name: "설탕공예반", link: "sugar" },
       { name: "달보드레반", link: "dalbodre" },
       { name: "밴드반", link: "band" },
       { name: "스크린셀러반", link: "screenseller" },

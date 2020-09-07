@@ -1,17 +1,12 @@
 import React from "react";
 import data from "../data.js";
 import { Link, Route } from "react-router-dom";
-import styled from "styled-components";
 import PageWrap from "./PageWrap";
-const Background = styled.div`
-  width: 100%;
-  height: 1100px;
-  background: #444;
-  display: flex;
-  /* align-self: flex-end; */
-`;
 
 const Community = ({ match = "Just Talk" }) => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const clubName = match.params.clubname || match;
   // console.log(match.params.clubname);
 

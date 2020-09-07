@@ -1,10 +1,11 @@
 import React from "react";
+import PageWrap from "./PageWrap";
 
 const Schedule = () => {
   return (
-    <div>
+    <PageWrap>
       <h2>Schedule</h2>
-    </div>
+    </PageWrap>
   );
 };
 export default Schedule;

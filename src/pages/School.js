@@ -1,10 +1,10 @@
 import React from "react";
-
+import PageWrap from "./PageWrap";
 const School = () => {
   return (
-    <div>
+    <PageWrap>
       <h2>School</h2>
-    </div>
+    </PageWrap>
   );
 };
 export default School;
