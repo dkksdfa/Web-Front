@@ -1,6 +1,6 @@
 export default {
   menuList: [
-    { name: "Info", link: "School" },
+    { name: "School", link: "School" },
     { name: "SW", link: "Club/SW" },
     { name: "Food", link: "Club/Food" },
     { name: "Finance", link: "Club/Finance" },
