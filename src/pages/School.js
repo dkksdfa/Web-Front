@@ -1,17 +1,7 @@
 import React from "react";
-import PageWrap from "./PageWrap";
 import axios from "axios";
 import cheerio from "cheerio";
-import {
-  Background,
-  Button,
-  Text,
-  Today,
-  ClubIntro,
-  ClubWrap,
-  MainBanner,
-  TodayTitle,
-} from "../styles/StyledSchool";
+import { Background, Today, MainBanner } from "../styles/StyledSchool";
 
 const School = () => {
   const [data, setData] = React.useState(null);
@@ -45,8 +35,11 @@ const School = () => {
 
   return (
     <Background>
-      <MainBanner></MainBanner>
-      <MainBanner></MainBanner>
+      <MainBanner>
+        <div>자가진단</div>
+        <div>Schedule</div>
+        <div>Online Class</div>
+      </MainBanner>
       <Today>
         {!data ? (
           <h2>loading</h2>

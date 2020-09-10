@@ -7,9 +7,6 @@ import {
   SubmitButton,
   Form,
   BlueText,
-  InputWrap,
-  Label,
-  Span,
 } from "../styles/StyledSignIn";
 
 const SignIn = () => {
@@ -25,19 +22,20 @@ const SignIn = () => {
     <PageWrap>
       <Title>Please sign in.</Title>
       <Form>
-        <InputWrap>
-          <Input type="text" name="name" autoComplete="off" required />
-          <Label for="name" className="label-name">
-            <Span className="content-name">Email or Phone Number</Span>
-          </Label>
-        </InputWrap>
-        <InputWrap>
-          <Input type="password" autocomplete="off" required name="password" />
-          <Label for="password" className="label-name">
-            <Span className="content-name">Password</Span>
-          </Label>
-        </InputWrap>
-
+        <Input
+          type="text"
+          name="name"
+          autoComplete="off"
+          required
+          placeholder="Email"
+        />
+        <Input
+          type="password"
+          autocomplete="off"
+          required
+          name="Password"
+          placeholder="Password"
+        />
         <SubmitButton>Sign In</SubmitButton>
         <BlueText>
           <Link to="/something">Forgot your ID or password?</Link>

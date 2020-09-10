@@ -13,7 +13,7 @@ const Nav = ({ main }) => {
         </Button>
         {values.menuList.map((value, index) => (
           <Button key={index}>
-            <Link to={"/" + value.link}>{value.name}</Link>
+            <Link to={"/r/" + value.link}>{value.name}</Link>
           </Button>
         ))}
         <Button>

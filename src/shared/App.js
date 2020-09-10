@@ -22,13 +22,12 @@ function App() {
       <Route path="/" component={Home} exact />
       <Route path="/Schedule" component={Schedule} />
       <Route path="/School" component={School} />
-      <Route path="/Club/:id" component={Club} />
-      <Route path="/Community" component={Community} exact />
-      <Route path="/Community/:clubname" component={Community} />
+      <Route path="/r/:category" component={Club} exact />
+      <Route path="/r/:category/:clubname" component={Community} exact />
       <Route path="/Write" component={Write} />
       <Route path="/Signin" component={SignIn} />
       <Route path="/Join" component={Join} />
-      <Route path="/Article/:clubname/:id" component={Article} />
+      <Route path="/r/:category/:clubname/:id" component={Article} exact />
     </div>
   );
 }

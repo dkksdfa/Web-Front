@@ -41,8 +41,8 @@ const Main = () => {
           <ClubWrap>
             {ClubExample.map((value, index) => {
               return (
-                <Link to={`/community/${value.link}`}>
-                  <ClubIntro key={index}>{value.name}</ClubIntro>
+                <Link to={`/community/${value.link}`} key={index}>
+                  <ClubIntro>{value.name}</ClubIntro>
                 </Link>
               );
             })}

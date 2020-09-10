@@ -15,19 +15,13 @@ const SubmitButton = styled.button`
   font-size: 1rem;
   border: none;
   border-radius: 10px;
+
   &:hover {
     background: #0077ed;
   }
 `;
 const Form = styled.div`
-  display: flex;
-  height: 60vh;
-  align-items: flex-start;
-  /* justify-content: space-around; */
-  flex-direction: column;
-
-  font-family: snas-serif;
-  /* width: 410px; */
+  // align-content: flex-start;
 `;
 const BlueText = styled.div`
   width: max-content;
@@ -46,71 +40,24 @@ const BlueText = styled.div`
 `;
 
 const Input = styled.input`
-  /* display: flex; */
-  /* font-size: 1.2rem; */
+  background: none;
   background: white;
+  border: 2px solid #d2d2d7;
+  border-radius: 10px;
   outline: none;
-  padding-top: 20px;
-  /* width: 396px; */
-  width: 100%;
-  height: 100%;
-  /* padding: 14px 0 4px; */
-  /* padding-left: 10px; */
-  /* border: 2px solid #d2d2d7;
-  border-radius: 10px; */
-  border: none;
-  /* &:focus {
-    border: 4px solid skyblue;
-    transition: 0.2s ease;
-  } */
-  :focus + .label-name::after,
-  :valid + .label-name::after {
-    transform: translateX(0%);
-  }
-  :focus + .label-name .content-name,
-  :valid + .label-name .content-name {
-    transform: translateY(-150%);
-    font-size: 14px;
-    color: #5fa8d3;
+  // padding-top: 20px;
+  width: 398px;
+  height: 44px;
+  font-size: 1.25rem;
+  display: flex;
+  padding-left: 10px;
+  margin-top: 20px;
+  :focus {
+    border: 3px solid skyblue;
+    width: 396px;
+    height: 40px;
+    transition: all 0.3s ease;
   }
 `;
-const InputWrap = styled.div`
-  width: 410px;
-  position: relative;
-  /* height: 44.4px; */
-  height: 50px;
-  margin-bottom: 15px;
-`;
-const Label = styled.label`
-  /* background: yellow; */
-  position: absolute;
-  bottom: 0px;
-  left: 0%;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  border-bottom: 1px solid black;
 
-  ::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-
-    border-bottom: 3px solid #5fa8d3;
-    left: 0px;
-    bottom: -1px;
-    transition: transform 0.3s ease;
-    transform: translateX(-100%);
-  }
-`;
-const Span = styled.span`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  bottom: 5px;
-  left: 0px;
-  transition: all 0.3s ease;
-`;
-
-export { Title, Input, SubmitButton, Form, BlueText, InputWrap, Label, Span };
+export { Title, Input, SubmitButton, Form, BlueText };

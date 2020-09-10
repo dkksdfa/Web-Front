@@ -5,19 +5,25 @@ import PageWrap from "./PageWrap";
 
 import { Title, ClubWrap, ClubIntro } from "../styles/StyledClub";
 const Club = ({ match }) => {
-  let result = values.clubs[match.params.id];
+  let result = values.clubs[match.params.category];
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <PageWrap>
-      <Title>{match.params.id} Club List</Title>
+      <Title>{match.params.category} Club List</Title>
       <ClubWrap>
         {result ? (
           result.map((value, index) => {
             return (
-              <Link to={`/community/${value.link}`}>
-                <ClubIntro key={index}>{value.name}</ClubIntro>
+              <Link
+                to={`/r/${match.params.category}/${value.link}`}
+                key={index}
+              >
+                <ClubIntro key={index} image={value.image}>
+                  {value.name}
+                </ClubIntro>
               </Link>
             );
           })

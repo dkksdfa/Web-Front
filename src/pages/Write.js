@@ -35,14 +35,14 @@ class Write extends Component {
   render() {
     const { contentState } = this.state;
     return (
-      <div>
+      <PageWrap>
         <Editor
           wrapperClassName="demo-wrapper"
           editorClassName="demo-editor"
           onContentStateChange={this.onContentStateChange}
         />
         <textarea disabled value={JSON.stringify(contentState, null, 4)} />
-      </div>
+      </PageWrap>
     );
   }
 }
