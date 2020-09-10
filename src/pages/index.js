@@ -6,3 +6,4 @@ export { default as Community } from "./Community";
 export { default as Write } from "./Write";
 export { default as SignIn } from "./SignIn";
 export { default as Join } from "./Join";
+export { default as Article } from "./Article";

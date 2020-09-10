@@ -2,25 +2,23 @@ import styled from "styled-components";
 
 const Background = styled.div`
   width: 100%;
-  height: 1200px;
+  height: 200vh;
   background: #444;
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
-  align-content: flex-start;
   text-align: center;
 `;
 const MainBanner = styled.div`
   width: 100%;
   height: 50%;
   top: 50px;
-  /* margin-top: 50px; */
-  background: url("image/background1.jpg") no-repeat;
+  background: url("image/background6.jpg") no-repeat;
   background-size: cover;
-  background-position: 0 -100px;
+  background-position: center;
 `;
 const Text = styled.p((props) => ({
   fontSize: `${props.size}rem`,
+  marginTop: `${props.margin && "200px"}`,
   color: "#eee",
   lineHeight: "1rem",
   fontWeight: "bold",
@@ -30,6 +28,7 @@ const Button = styled.button`
   border: none;
   width: 20%;
   height: 12%;
+  cursor: pointer;
   border-radius: 50px;
   color: black;
   font-size: 1.5rem;
@@ -46,17 +45,18 @@ const Button = styled.button`
 const Today = styled.div`
   height: 50%;
   margin: 0;
-  background: url("image/background6.jpg") no-repeat;
-  background-size: 100% auto;
-  background-position: 0 -400px;
+  background: url("image/background5.jpg") no-repeat;
+
+  background-size: cover;
+  background-position: center;
 `;
 
 const TodayTitle = styled.h1`
-  font-size: 3rem;
+  font-size: 5rem;
   color: #eee;
   font-weight: bold;
 
-  margin-top: 50px;
+  margin-top: 100px;
   margin-bottom: 50px;
 `;
 

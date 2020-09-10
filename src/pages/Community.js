@@ -2,14 +2,22 @@ import React from "react";
 import data from "../data.js";
 import { Link, Route } from "react-router-dom";
 import PageWrap from "./PageWrap";
-
-const Community = ({ match = "Just Talk" }) => {
+import values from "../values";
+const Community = ({ match }) => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   });
-  const clubName = match.params.clubname || match;
+  const parameter = match.params.clubname;
+  let clubname = null;
+  for (let i in values.clubs) {
+    values.clubs[i].forEach((index) => {
+      if (index.link === parameter) {
+        clubname = index.name;
+      }
+    });
+  }
+  // const index = values.clubs[]
   // console.log(match.params.clubname);
-
   // *********************************************************
   // There's a little problem
   // if fetched parameter after the "Community" don't exit
@@ -21,7 +29,9 @@ const Community = ({ match = "Just Talk" }) => {
       <tr key={e.name}>
         <td>{e.id}</td>
         <td>
-          <Link to={`${e.id}`}>{e.title}</Link>
+          <Link to={`/Article/${parameter}/${e.id}`} clubname={clubname}>
+            {e.title}
+          </Link>
         </td>
         <td>{e.name}</td>
         <td>{e.time}</td>
@@ -32,7 +42,7 @@ const Community = ({ match = "Just Talk" }) => {
   return (
     <PageWrap>
       <div>
-        <h2>{clubName}</h2>
+        <h2>{clubname} Community</h2>
         <div>
           <Link to="../Write">
             <button>글쓰기</button>

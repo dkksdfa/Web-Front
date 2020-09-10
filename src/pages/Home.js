@@ -23,13 +23,21 @@ const Main = () => {
     <>
       <Background>
         <MainBanner>
-          <Text size="5">2020 대경 매봉제</Text>
-          <Text size="2">2020. 09. 25</Text>
-          <Text size="3">Made By WebFront</Text>
-          <Button>제작 과정 보러가기</Button>
+          <Text size="5" margin={true}>
+            2020 대경 매봉제
+          </Text>
+          <Text size="2" margin={false}>
+            2020. 09. 25
+          </Text>
+          <Text size="3" margin={false}>
+            Made By WebFront
+          </Text>
+          <Link to="/Community/webfront">
+            <Button>제작 과정 보러가기</Button>
+          </Link>
         </MainBanner>
         <Today>
-          <TodayTitle size="2.4">Today's Top Communities</TodayTitle>
+          <TodayTitle>Today's Top Communities</TodayTitle>
           <ClubWrap>
             {ClubExample.map((value, index) => {
               return (

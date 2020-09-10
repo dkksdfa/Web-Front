@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PageWrap from "./PageWrap";
 
 import { Title, ClubWrap, ClubIntro } from "../styles/StyledClub";
-const Clubs = ({ match }) => {
+const Club = ({ match }) => {
   let result = values.clubs[match.params.id];
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,11 +22,13 @@ const Clubs = ({ match }) => {
             );
           })
         ) : (
-          <h1>hello</h1>
+          <h1>
+            <Link to="/">This url is wrong. Click to go to home.</Link>
+          </h1>
         )}
       </ClubWrap>
     </PageWrap>
   );
 };
 
-export default Clubs;
+export default Club;
