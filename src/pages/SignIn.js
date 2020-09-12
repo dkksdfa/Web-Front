@@ -1,7 +1,6 @@
 import React from "react";
 import PageWrap from "./PageWrap";
 import { Link } from "react-router-dom";
-import { GoogleAuthProvider } from "../firebase";
 import {
   Title,
   Input,
@@ -19,7 +18,6 @@ const SignIn = () => {
   // const getPassword = () => {
   //   console.log(password.current.value);
   // };
-  var provider = new GoogleAuthProvider();
   return (
     <PageWrap>
       <Title>Please sign in.</Title>
