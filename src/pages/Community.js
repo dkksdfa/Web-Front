@@ -66,7 +66,7 @@ const Community = ({ match }) => {
   }, []);
   return (
     <Body>
-      <Link to="../Write">
+      <Link to={`../Write/${match.params.category}`}>
         <button>글쓰기</button>
       </Link>
       <input type="text" placeholder="검색어 입력" />

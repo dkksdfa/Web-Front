@@ -1,0 +1,39 @@
+#container {
+  margin: 20vh 10vw;
+  padding: 5rem;
+  border: 1px solid #cecdce;
+}
+#titleLabel {
+  font-size: 1.5rem;
+}
+#title {
+  margin-left: 2rem;
+  font-size: 1.5rem;
+  max-width: 500px;
+  border: 1px solid #cecdce;
+}
+.wrapper {
+  margin-top: 30px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #cecdce;
+}
+.toolbar {
+  border-top: 1px solid black;
+  border-bottom: 1px solid #cecdce;
+}
+.editor {
+  height: 400px;
+}
+#sumitbar {
+  margin-top: 10px;
+  text-align: right;
+  padding-right: 1rem;
+}
+#sumit {
+  background-color: #ff9999;
+  padding: 0.5rem 2rem;
+  border: 1px solid #ff3399;
+  font-size: 1.5rem;
+  border-radius: 10px;
+}
