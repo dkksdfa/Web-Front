@@ -1,20 +1,35 @@
 import styled from "styled-components";
 
 const Background = styled.div`
-  width: 100%;
-  height: 300vh;
-  background: #444;
   display: flex;
   flex-direction: column;
-  text-align: center;
+  align-items: center;
+`;
+const Wrap = styled.div`
+  border: 1px solid black;
+  width: 80vw;
+  margin-top: 100px;
 `;
 const MainBanner = styled.div`
   width: 100%;
   height: 33.3%;
   top: 50px;
-  background: url("image/schedule.jpg") no-repeat;
-  background-size: cover;
-  background-position: center;
+  background-color: white;
+`;
+const Container = styled.div`
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-around;
+`;
+const Box = styled.div`
+  border: 1px solid black;
+`;
+const ImageTemplate = styled.div``;
+const Img = styled.img`
+  width: 400px;
+  height: 220px;
+  object-fit: cover;
 `;
 const Text = styled.p((props) => ({
   fontSize: `${props.size}rem`,
@@ -90,6 +105,11 @@ export {
   Today,
   ClubIntro,
   ClubWrap,
-  MainBanner,
+  Container,
   TodayTitle,
+  MainBanner,
+  Wrap,
+  Box,
+  ImageTemplate,
+  Img,
 };
