@@ -17,6 +17,7 @@ const School = () => {
 
     const getHtml = async () => {
       try {
+        throw "you have to think the weekend";
         const response = await axios.get(
           `http://daekyeong.sen.hs.kr/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId=${mlsvId}`
         );
@@ -25,6 +26,7 @@ const School = () => {
         const rawData = $bodyList.children[3].children[0].data;
         const result = rawData.slice(7, rawData.length - 6).split(",");
         setData(result);
+
         return response;
       } catch (error) {
         console.error(error);

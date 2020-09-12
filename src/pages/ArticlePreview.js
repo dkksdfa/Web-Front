@@ -9,6 +9,7 @@ import {
 } from "../styles/StyledArticlePreview";
 import { Link } from "react-router-dom";
 const ArticlePreview = ({ clubname, match, article }) => {
+  console.log(clubname, article);
   return (
     <Link
       to={`/r/${match.params.category}/${match.params.clubname}/${article.id}`}
@@ -17,10 +18,12 @@ const ArticlePreview = ({ clubname, match, article }) => {
         <Inner>
           <Writer>{article.name}</Writer>
           <Info>
-            • {clubname} {article.time}
+            • {clubname} {article.date}
           </Info>
           <Title>{article.title}</Title>
-          <Comment>{article.comments.length} Comments</Comment>
+          <Comment>
+            {/*Object.keys(article.comments).length || 0*/} Comments
+          </Comment>
         </Inner>
       </Body>
     </Link>
