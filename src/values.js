@@ -1,12 +1,4 @@
 export default {
-  menuList: [
-    { name: "School", link: "School" },
-    { name: "SW", link: "SW" },
-    { name: "Food", link: "Food" },
-    { name: "Finance", link: "Finance" },
-    { name: "Other", link: "Other" },
-    { name: "Community", link: "Community" },
-  ],
   clubs: {
     SW: [
       {
@@ -27,7 +19,7 @@ export default {
               {
                 id: 0,
                 content:
-                  "댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다.",
+                  "  댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다. 댓글입니다.",
                 name: "박민수",
                 time: Date(),
               },
