@@ -10,6 +10,9 @@ import {
   Box,
   ImageTemplate,
   Img,
+  TextTemplate,
+  Item,
+  Slide,
 } from "../styles/StyledSchool";
 const School = () => {
   const [data, setData] = React.useState(null);
@@ -52,35 +55,50 @@ const School = () => {
     <Background>
       <Wrap>
         <MainBanner>
-          <Container>
-            <Box>
-              <ImageTemplate>
-                <Img src={process.env.PUBLIC_URL + "/image/school.jpg"}></Img>
-              </ImageTemplate>
+          <Slide>
+            <Item>
+              <img src={process.env.PUBLIC_URL + "/image/school.jpg"} />
+            </Item>
+            <Item>
+              <img src={process.env.PUBLIC_URL + "/image/school.jpg"} />
+            </Item>
+            <Item>
+              <img src={process.env.PUBLIC_URL + "/image/school.jpg"} />
+            </Item>
+          </Slide>
+        </MainBanner>
+        <Container>
+          <Box>
+            <ImageTemplate>
+              <Img src={process.env.PUBLIC_URL + "/image/school.jpg"}></Img>
+            </ImageTemplate>
+            <TextTemplate>
               <a href={Diagnosis} target="_blank">
                 <div>학교홈페이지</div>
               </a>
-            </Box>
-            <Box>
-              <ImageTemplate>
-                <Img
-                  src={process.env.PUBLIC_URL + "/image/Diagnosis.jpg"}
-                ></Img>
-              </ImageTemplate>
+            </TextTemplate>
+          </Box>
+          <Box>
+            <ImageTemplate>
+              <Img src={process.env.PUBLIC_URL + "/image/Diagnosis.jpg"}></Img>
+            </ImageTemplate>
+            <TextTemplate>
               <a href={schedule} target="_blank">
                 <div>자가진단</div>
               </a>
-            </Box>
-            <Box>
-              <ImageTemplate>
-                <Img src={process.env.PUBLIC_URL + "/image/online.png"}></Img>
-              </ImageTemplate>
+            </TextTemplate>
+          </Box>
+          <Box>
+            <ImageTemplate>
+              <Img src={process.env.PUBLIC_URL + "/image/online.png"}></Img>
+            </ImageTemplate>
+            <TextTemplate>
               <a href={OnlineClass} target="_blank">
                 <div>온라인 클래스</div>
               </a>
-            </Box>
-          </Container>
-        </MainBanner>
+            </TextTemplate>
+          </Box>
+        </Container>
 
         <Today>
           {!data ? (
