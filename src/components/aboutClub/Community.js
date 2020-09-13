@@ -7,7 +7,10 @@ import { firestore } from "../../firebase";
 const Community = ({ match }) => {
   const [loading, setLoading] = useState(false);
   const [articles, setArticles] = useState([]);
+  const category = match.params.category;
+  const linkToWrite = `/write/${category}`;
   let clubname = null;
+  const clublink = match.params.clubname;
   const fetchData = useCallback(() => {
     setArticles([]);
     firestore
@@ -15,10 +18,8 @@ const Community = ({ match }) => {
       .doc("fast car")
       .get()
       .then((doc) => {
-        clubname = doc.data()[match.params.category][match.params.clubname]
-          .name;
-        const data = doc.data()[match.params.category][match.params.clubname]
-          .articles;
+        clubname = doc.data()[category][clublink].name;
+        const data = doc.data()[category][clublink].articles;
         setArticles(data);
       })
       .catch((error) => {
@@ -32,12 +33,9 @@ const Community = ({ match }) => {
     setLoading(false);
   }, [match, firestore]);
 
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   return (
     <Body>
-      <Link to={`/write/${match.params.category}`}>
+      <Link to={linkToWrite}>
         <button>글쓰기</button>
       </Link>
       <input type="text" placeholder="검색어 입력" />

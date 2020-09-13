@@ -8,12 +8,11 @@ import {
   Comment,
 } from "../../styles/StyledArticlePreview";
 import { Link } from "react-router-dom";
+
 const ArticlePreview = ({ clubname, match, article }) => {
-  console.log(clubname, article);
+  const articleLink = `/r/${match.params.category}/${match.params.clubname}/${article.id}`;
   return (
-    <Link
-      to={`/r/${match.params.category}/${match.params.clubname}/${article.id}`}
-    >
+    <Link to={articleLink}>
       <Body>
         <Inner>
           <Writer>{article.name}</Writer>

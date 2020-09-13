@@ -1,31 +1,27 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
-import PageWrap from "../PageWrap";
-import { firestore } from "../../firebase";
-import { Title, ClubWrap, ClubIntro } from "../../styles/StyledClub";
 
+import { firestore } from "../../firebase";
+import { sortByLink } from "../../library/functions.js";
+import RenderClub from "./RenderClub";
 const Club = ({ match }) => {
   const [clubs, setClubs] = useState([]);
   const [loading, setLoading] = useState(false);
-  const sortFunction = useCallback((a, b) => {
-    if (a.link > b.link) return 1;
-    if (a.link < b.link) return -1;
-    return 0;
-  }, []);
+  const category = match.params.category;
   const fetchData = useCallback(() => {
+    setLoading(true);
     setClubs([]);
     firestore
       .collection("clubs")
       .doc("fast car")
       .get()
       .then((doc) => {
-        const data = doc.data()[match.params.category];
+        const data = doc.data()[category];
         for (let club in data) {
           const newClub = { link: club, data: data[club] };
           setClubs((previousclubs) => {
             const next = JSON.parse(
               JSON.stringify(previousclubs.concat(newClub))
-            ).sort(sortFunction);
+            ).sort(sortByLink);
             return next;
           });
         }
@@ -33,37 +29,11 @@ const Club = ({ match }) => {
       .catch((error) => {
         throw error;
       });
-  }, [clubs, match]);
-
-  useEffect(() => {
-    setLoading(true);
-    fetchData();
     setLoading(false);
+  }, [clubs, match]);
+  useEffect(() => {
+    fetchData();
   }, [match, firestore]);
-
-  return !loading ? (
-    <PageWrap>
-      <Title>{match.params.category} Club List</Title>
-      <ClubWrap>
-        {clubs.map((value, index) => {
-          return (
-            <Link
-              to={`/club/${match.params.category}/${value.link}`}
-              key={index}
-            >
-              <ClubIntro key={index} image={value.image}>
-                {value.data.name}
-              </ClubIntro>
-            </Link>
-          );
-        })}
-      </ClubWrap>
-    </PageWrap>
-  ) : (
-    <PageWrap>
-      <h1>Loading...</h1>
-    </PageWrap>
-  );
+  return <RenderClub loading={loading} clubs={clubs} category={category} />;
 };
-
 export default Club;
