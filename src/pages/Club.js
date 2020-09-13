@@ -7,7 +7,6 @@ import { Title, ClubWrap, ClubIntro } from "../styles/StyledClub";
 const Club = ({ match }) => {
   const [clubs, setClubs] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const sortFunction = useCallback((a, b) => {
     if (a.link > b.link) return 1;
     if (a.link < b.link) return -1;

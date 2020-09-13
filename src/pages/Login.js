@@ -19,7 +19,6 @@ const Login = () => {
   });
   const [error, setErrors] = useState("");
   const Auth = useContext(AuthContext);
-
   const handleChange = useCallback(
     (e) => {
       setCredential({ ...credential, [e.target.name]: e.target.value });
