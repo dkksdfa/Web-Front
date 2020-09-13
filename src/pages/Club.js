@@ -15,7 +15,6 @@ const Club = ({ match }) => {
   }, []);
   const fetchData = useCallback(() => {
     setClubs([]);
-
     firestore
       .collection("clubs")
       .doc("fast car")
@@ -32,7 +31,6 @@ const Club = ({ match }) => {
           });
         }
       })
-
       .catch((error) => {
         throw error;
       });
@@ -50,7 +48,10 @@ const Club = ({ match }) => {
       <ClubWrap>
         {clubs.map((value, index) => {
           return (
-            <Link to={`/r/${match.params.category}/${value.link}`} key={index}>
+            <Link
+              to={`/club/${match.params.category}/${value.link}`}
+              key={index}
+            >
               <ClubIntro key={index} image={value.image}>
                 {value.data.name}
               </ClubIntro>

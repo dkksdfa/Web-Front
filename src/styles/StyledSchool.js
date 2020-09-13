@@ -6,7 +6,6 @@ const Background = styled.div`
   align-items: center;
 `;
 const Wrap = styled.div`
-  border: 1px solid black;
   width: 80vw;
   margin-top: 100px;
 `;

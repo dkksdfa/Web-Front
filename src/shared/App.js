@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import {
   Home,
@@ -7,7 +7,7 @@ import {
   Community,
   Club,
   Write,
-  SignIn,
+  Login,
   Join,
   Article,
 } from "../pages";
@@ -20,12 +20,16 @@ function App() {
       <Route path="/" component={Home} exact />
       <Route path="/Schedule" component={Schedule} />
       <Route path="/School" component={School} />
-      <Route path="/r/:category" component={Club} exact />
-      <Route path="/r/:category/:clubname" component={Community} exact />
-      <Route path="/Write/:category" component={Write} />
-      <Route path="/Signin" component={SignIn} />
-      <Route path="/Join" component={Join} />
-      <Route path="/r/:category/:clubname/:id" component={Article} exact />
+      <Route path="/clubs/:category" component={Club} exact />
+      <Route path="/club/:category/:clubname" component={Community} exact />
+      <Route path="/write/:category" component={Write} />
+      <Route
+        path="/article/:category/:clubname/:id"
+        component={Article}
+        exact
+      />
+      <Route path="/Join" render={() => <Join />} />
+      <Route path="/Login" render={() => <Login />} />
     </div>
   );
 }

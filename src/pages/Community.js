@@ -16,6 +16,8 @@ const Community = ({ match }) => {
       .get()
       .then((docs) => {
         docs.forEach((doc) => {
+          console.log(doc.data().SW);
+          console.log(match.params.category);
           const data = doc.data()[match.params.category][match.params.clubname];
           console.log(data.articles);
           throw "Error";
@@ -66,7 +68,7 @@ const Community = ({ match }) => {
   }, []);
   return (
     <Body>
-      <Link to={`../Write/${match.params.category}`}>
+      <Link to={`/write/${match.params.category}`}>
         <button>글쓰기</button>
       </Link>
       <input type="text" placeholder="검색어 입력" />
