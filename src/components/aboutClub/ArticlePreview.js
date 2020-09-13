@@ -6,7 +6,7 @@ import {
   Inner,
   Info,
   Comment,
-} from "../styles/StyledArticlePreview";
+} from "../../styles/StyledArticlePreview";
 import { Link } from "react-router-dom";
 const ArticlePreview = ({ clubname, match, article }) => {
   console.log(clubname, article);

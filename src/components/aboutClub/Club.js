@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import PageWrap from "./PageWrap";
-import { firestore } from "../firebase";
-import { Title, ClubWrap, ClubIntro } from "../styles/StyledClub";
+import PageWrap from "../PageWrap";
+import { firestore } from "../../firebase";
+import { Title, ClubWrap, ClubIntro } from "../../styles/StyledClub";
 
 const Club = ({ match }) => {
   const [clubs, setClubs] = useState([]);

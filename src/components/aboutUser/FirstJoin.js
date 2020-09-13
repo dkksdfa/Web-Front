@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Input, SubmitButton, Form } from "../styles/StyledJoin";
-import { firestore } from "../firebase";
+import { Input, SubmitButton, Form } from "../../styles/StyledJoin";
+import { firestore } from "../../firebase";
 
 const FirstJoin = ({ credential, handleChange, setStatus }) => {
   const [users, setUsers] = useState([]);

@@ -7,7 +7,7 @@ import {
   TitleWrap,
   Back,
   TitleBlur,
-} from "../styles/StyledJoin";
+} from "../../styles/StyledJoin";
 
 const SecondJoin = ({ handleChange }) => {
   return (

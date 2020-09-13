@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { ButtonPosition, Button, Navigation } from "../styles/StyledNav";
 // import logo from "../image/logo.png";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../pages";
+import { AuthContext } from "./";
 const Nav = ({ main }) => {
   const [isLoggedIn, setLoggedIn] = React.useState(false);
   return (
@@ -10,6 +10,9 @@ const Nav = ({ main }) => {
       <ButtonPosition>
         <Button>
           <Link to="/">Home</Link>
+        </Button>
+        <Button>
+          <Link to="/School">School</Link>
         </Button>
         <Button>
           <Link to="/clubs/SW">SW</Link>
@@ -23,7 +26,6 @@ const Nav = ({ main }) => {
         <Button>
           <Link to="/clubs/Other">Other</Link>
         </Button>
-
         <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
           {isLoggedIn ? (
             <>

@@ -1,10 +1,11 @@
-import PageWrap from "./PageWrap";
+import PageWrap from "../PageWrap";
 import React, { Component } from "react";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "../styles/Write.css";
+import "../../styles/Write.css";
+
 function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();

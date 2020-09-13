@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Title, TitleWrap, Back, TitleBlur } from "../styles/StyledJoin";
-import { firestore } from "../firebase";
+import { Title, TitleWrap, Back, TitleBlur } from "../../styles/StyledJoin";
 import FirstJoin from "./FirstJoin";
 import SecondJoin from "./SecondJoin";
 
@@ -21,18 +20,6 @@ const Join = () => {
     },
     [credential]
   );
-  const checkIntegrity = () => {
-    if (credential.email === "") {
-      return false;
-    }
-    if (credential.password === "") {
-      return false;
-    }
-    if (credential.password !== credential.confirmedPassword) {
-      return false;
-    }
-    return true;
-  };
 
   // const GoogleLogin = (e) => {
   //   e.preventDefault();
