@@ -6,29 +6,84 @@ const Background = styled.div`
   align-items: center;
 `;
 const Wrap = styled.div`
-  width: 80vw;
+  width: 90vw;
   margin-top: 100px;
+  padding: 0;
 `;
 const MainBanner = styled.div`
-  width: 100%;
-  height: 33.3%;
-  top: 50px;
-  background-color: white;
+  overflow: hidden;
+  height: 500px;
+  margin-bottom: 5rem;
+`;
+const Slide = styled.ul`
+  margin: 0;
+  height: 100%;
+  width: calc(100% * 3);
+  border: 1px solid black;
+  padding: 0;
+  display: flex;
+  animation: slide 8s infinite;
+  @keyframes slide {
+    0% {
+      margin-left: 0;
+    } /* 0 ~ 10  : 정지 */
+    10% {
+      margin-left: 0;
+    } /* 10 ~ 25 : 변이 */
+    25% {
+      margin-left: -100%;
+    } /* 25 ~ 35 : 정지 */
+    35% {
+      margin-left: -100%;
+    } /* 35 ~ 50 : 변이 */
+    50% {
+      margin-left: -100%;
+    }
+    60% {
+      margin-left: -200%;
+    }
+    75% {
+      margin-left: -200%;
+    }
+    85% {
+      margin-left: -200%;
+    }
+    100% {
+      margin-left: 0;
+    }
+  }
+`;
+const Item = styled.li`
+  width: calc(100% / 3);
+  height: 100%;
+  background-color: black;
+  display: inline-block;
+  color: #ffffff;
 `;
 const Container = styled.div`
-  font-size: 3rem;
-  font-weight: bold;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 const Box = styled.div`
-  border: 1px solid black;
+  width: 30%;
 `;
-const ImageTemplate = styled.div``;
+const ImageTemplate = styled.div`
+  cursor: pointer;
+`;
 const Img = styled.img`
-  width: 400px;
-  height: 220px;
+  width: 100%;
+  height: 250px;
   object-fit: cover;
+`;
+const TextTemplate = styled.div`
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  text-align: center;
+  color: #0066cc;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 const Text = styled.p((props) => ({
   fontSize: `${props.size}rem`,
@@ -57,11 +112,11 @@ const Button = styled.button`
   }
 `;
 const Today = styled.div`
-  height: 33.3%;
+  height: 500px;
   margin: 0;
-  background: url("image/background5.jpg") no-repeat;
-
-  background-size: cover;
+  text-align: center;
+  background: url("image/Restaurant.png") no-repeat;
+  background-size: 500px;
   background-position: center;
 `;
 
@@ -111,4 +166,7 @@ export {
   Box,
   ImageTemplate,
   Img,
+  TextTemplate,
+  Item,
+  Slide,
 };
