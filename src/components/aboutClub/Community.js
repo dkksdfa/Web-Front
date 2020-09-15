@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import ArticlePreview from "./ArticlePreview";
-import { Body } from "../../styles/StyledCommunity";
+import { Body, Top, Write, Search } from "../../styles/StyledCommunity";
 import { firestore } from "../../firebase";
 
 const Community = ({ match }) => {
@@ -18,36 +18,42 @@ const Community = ({ match }) => {
       .doc("fast car")
       .get()
       .then((doc) => {
-        clubname = doc.data()[category][clublink].name;
-        const data = doc.data()[category][clublink].articles;
-        setArticles(data);
+        if (doc.data()[category]) {
+          if (doc.data()[category][clublink]) {
+            clubname = doc.data()[category][clublink].name;
+            const data = doc.data()[category][clublink].articles;
+            setArticles(data);
+          }
+        }
       })
       .catch((error) => {
         throw error;
       });
   }, [articles, match]);
-
   React.useEffect(() => {
     setLoading(true);
     fetchData();
     setLoading(false);
   }, [match, firestore]);
-
   return (
-    <Body>
-      <Link to={linkToWrite}>
-        <button>글쓰기</button>
-      </Link>
-      <input type="text" placeholder="검색어 입력" />
-      {articles.map((article, index) => (
-        <ArticlePreview
-          clubname={clubname}
-          match={match}
-          article={article}
-          key={index}
-        />
-      ))}
-    </Body>
+    <div>
+      <Top>
+        <Search type="text" placeholder="Search..." />
+        <Link to={linkToWrite}>
+          <Write>글쓰기</Write>
+        </Link>
+      </Top>
+      <Body>
+        {articles.map((article, index) => (
+          <ArticlePreview
+            clubname={clubname}
+            match={match}
+            article={article}
+            key={index}
+          />
+        ))}
+      </Body>
+    </div>
   );
 };
 export default Community;

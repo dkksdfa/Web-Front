@@ -22,3 +22,15 @@ export function uploadImageCallBack(file) {
     });
   });
 }
+
+export const getDateDifference = () => {
+  const oneDay = 24 * 60 * 60 * 1000;
+  const firstDate = new Date(2020, 8, 9);
+  const secondDate = new Date();
+  secondDate.setMinutes(0);
+  secondDate.setHours(0);
+  secondDate.setSeconds(0);
+  const diffDays = Math.round(Math.abs((secondDate - firstDate) / oneDay));
+  const mlsvId = 1409338 + diffDays;
+  return mlsvId;
+};

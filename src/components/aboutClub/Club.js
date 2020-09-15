@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from "react";
-
 import { firestore } from "../../firebase";
 import { sortByLink } from "../../library/functions.js";
 import RenderClub from "./RenderClub";

@@ -11,6 +11,7 @@ import {
   Article,
 } from "./components";
 import Nav from "./components/Nav.js";
+import "./App.scss";
 
 function App() {
   return (

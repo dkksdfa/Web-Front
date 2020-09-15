@@ -11,7 +11,6 @@ const Join = () => {
     number: "",
     email: "",
     password: "",
-    confirmedPassword: "",
   });
   const [status, setStatus] = useState("nothing");
   const handleChange = React.useCallback(
