@@ -16,7 +16,6 @@ import {
 } from "../styles/StyledSchool";
 const School = () => {
   const [data, setData] = React.useState(null);
-  const login = true;
   const Diagnosis = "https://hcs.eduro.go.kr/#/loginHome";
   const schedule = "";
   const OnlineClass = "https://hoc23.ebssw.kr/";

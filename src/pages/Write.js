@@ -5,6 +5,8 @@ import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../styles/Write.css";
+import { firestore } from "../firebase";
+
 function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -23,27 +25,45 @@ function uploadImageCallBack(file) {
     });
   });
 }
+const sortFunction = (a, b) => {
+  if (a.link > b.link) return 1;
+  if (a.link < b.link) return -1;
+  return 0;
+};
+async function aa(post, clubname) {
+  console.log(post);
+  console.log(clubname);
+  await firestore
+    .collection("clubs")
+    .doc("fast car")
+    .collection("categorys")
+    .find((i) => i === post)
+    .find((i) => i === clubname)
+    .collection("articles")
+    .update({ 히히: "ss" });
+  // .then((aaa) => console.log(aaa));
+}
 
 class Write extends Component {
   state = {
     editorState: EditorState.createEmpty(),
   };
 
-  onEditorStateChange: Function = (editorState) => {
-    this.setState({
+  onEditorsetStStateChange: Function = (editorState) => {
+    this.ate({
       editorState,
     });
   };
-
   render() {
     const { editorState } = this.state;
     const post = this.props.match.params.category;
+    const clubname = this.props.match.params.clubname;
     return (
       <PageWrap>
         <div id="container">
           <div>{post}</div>
           <div>
-            <label for="title" id="titleLabel">
+            <label htmlFor="title" id="titleLabel">
               제목
             </label>
             <input id="title" type="text"></input>
@@ -66,7 +86,9 @@ class Write extends Component {
             }}
           />
           <div id="sumitbar">
-            <button id="sumit">등록</button>
+            <button id="sumit" onClick={() => aa(post, clubname)}>
+              등록
+            </button>
           </div>
           <textarea
             disabled

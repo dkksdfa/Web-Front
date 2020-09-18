@@ -6,7 +6,6 @@ import { AuthContext } from "../pages";
 const Nav = ({ main }) => {
   const [isLoggedIn, setLoggedIn] = React.useState(false);
   const menu = [
-    { name: "School", link: "School" },
     { name: "SW", link: "SW" },
     { name: "Food", link: "Food" },
     { name: "Finance", link: "Finance" },
@@ -17,6 +16,9 @@ const Nav = ({ main }) => {
       <ButtonPosition>
         <Button>
           <Link to="/">Home</Link>
+        </Button>
+        <Button>
+          <Link to="/School">School</Link>
         </Button>
         {menu.map((value, index) => (
           <Button key={index}>

@@ -22,7 +22,7 @@ function App() {
       <Route path="/School" component={School} />
       <Route path="/clubs/:category" component={Club} exact />
       <Route path="/club/:category/:clubname" component={Community} exact />
-      <Route path="/write/:category" component={Write} />
+      <Route path="/write/:category/:clubname" component={Write} />
       <Route
         path="/article/:category/:clubname/:id"
         component={Article}
