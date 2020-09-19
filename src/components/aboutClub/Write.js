@@ -1,4 +1,4 @@
-import PageWrap from "./PageWrap";
+import PageWrap from "../PageWrap";
 import React, { Component } from "react";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
@@ -8,6 +8,7 @@ import "../styles/Write.css";
 import { firestore } from "../firebase";
 import firebase from "firebase/app";
 
+//이미지처리
 function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -26,12 +27,8 @@ function uploadImageCallBack(file) {
     });
   });
 }
-const sortFunction = (a, b) => {
-  if (a.link > b.link) return 1;
-  if (a.link < b.link) return -1;
-  return 0;
-};
 
+//firestore add
 async function aa(post, clubname, title, concent) {
   console.log(title);
   await firestore
@@ -47,11 +44,11 @@ class Write extends Component {
     title: "",
   };
 
-  onEditorStateChange: Function = (editorState) => {
+  onEditorStateChange(editorState) {
     this.setState({
       editorState,
     });
-  };
+  }
   titleChange = (e) => {
     this.setState({
       title: e.target.value,

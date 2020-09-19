@@ -1,5 +1,5 @@
-import React, { useCallback, useState, useContext } from "react";
-import PageWrap from "./PageWrap";
+import React, { useCallback } from "react";
+import PageWrap from "../PageWrap";
 import { Link } from "react-router-dom";
 import {
   Title,
@@ -9,25 +9,18 @@ import {
   BlueText,
   Image,
   MarginBetweenInputAndButton,
-} from "../styles/StyledLogin";
-
-import { AuthContext } from "./index";
+} from "../../styles/StyledLogin";
 const Login = () => {
   const [credential, setCredential] = React.useState({
     email: "",
     password: "",
   });
-  const [error, setErrors] = useState("");
-  const Auth = useContext(AuthContext);
-
   const handleChange = useCallback(
     (e) => {
       setCredential({ ...credential, [e.target.name]: e.target.value });
     },
     [credential]
   );
-  console.log(credential);
-
   return (
     <PageWrap>
       <Title>Please sign in.</Title>

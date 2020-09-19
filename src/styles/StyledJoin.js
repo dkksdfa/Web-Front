@@ -13,7 +13,6 @@ const Title = styled.h1`
 `;
 const Input = styled.input`
   border: 2px solid #d2d2d7;
-  /* border: none; */
   border-radius: 10px;
   display: flex;
   font-size: 1.2rem;
@@ -41,7 +40,7 @@ const SubmitButton = styled.button`
     background: #0077ed;
   }
 `;
-const Form = styled.form`
+const Form = styled.div`
   width: 410px;
   margin: 0 auto;
 `;

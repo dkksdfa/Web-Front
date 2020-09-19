@@ -2,15 +2,9 @@ import React, { Fragment } from "react";
 import { ButtonPosition, Button, Navigation } from "../styles/StyledNav";
 // import logo from "../image/logo.png";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../pages";
-const Nav = ({ main }) => {
+import { LoginInfo } from "./";
+const Nav = () => {
   const [isLoggedIn, setLoggedIn] = React.useState(false);
-  const menu = [
-    { name: "SW", link: "SW" },
-    { name: "Food", link: "Food" },
-    { name: "Finance", link: "Finance" },
-    { name: "Other", link: "Other" },
-  ];
   return (
     <Navigation>
       <ButtonPosition>
@@ -20,12 +14,19 @@ const Nav = ({ main }) => {
         <Button>
           <Link to="/School">School</Link>
         </Button>
-        {menu.map((value, index) => (
-          <Button key={index}>
-            <Link to={"/clubs/" + value.link}>{value.name}</Link>
-          </Button>
-        ))}
-        <AuthContext.Provider value={{ isLoggedIn, setLoggedIn }}>
+        <Button>
+          <Link to="/clubs/SW">SW</Link>
+        </Button>
+        <Button>
+          <Link to="/clubs/Food">Food</Link>
+        </Button>
+        <Button>
+          <Link to="/clubs/Finance">Finance</Link>
+        </Button>
+        <Button>
+          <Link to="/clubs/Other">Other</Link>
+        </Button>
+        <LoginInfo.Provider value={{ isLoggedIn, setLoggedIn }}>
           {isLoggedIn ? (
             <>
               <Button>Logout</Button>
@@ -43,7 +44,7 @@ const Nav = ({ main }) => {
               </Button>
             </>
           )}
-        </AuthContext.Provider>
+        </LoginInfo.Provider>
       </ButtonPosition>
     </Navigation>
   );
