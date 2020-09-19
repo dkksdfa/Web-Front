@@ -7,17 +7,27 @@ import { firestore } from "../../firebase";
 const Community = ({ match }) => {
   const [loading, setLoading] = useState(false);
   const [articles, setArticles] = useState([]);
-  const category = match.params.category;
-  const linkToWrite = `/write/${category}`;
   let clubname = null;
+  const category = match.params.category;
   const clublink = match.params.clubname;
+  const linkToWrite = `/write/${category}/${clublink}`;
+
+  //포기... 왜 안되는지 모르겠네
   const fetchData = useCallback(() => {
     setArticles([]);
     firestore
       .collection("clubs")
-      .doc("fast car")
+      .doc(category)
+      .collection(clublink)
       .get()
-      .then((doc) => {
+      .then(
+        (doc) => {
+          doc.forEach((aa) => {
+            console.log(aa.data());
+            clubname = aa.data()["writer"];
+            setArticles(aa.data());
+          });
+        } /*{
         if (doc.data()[category]) {
           if (doc.data()[category][clublink]) {
             clubname = doc.data()[category][clublink].name;
@@ -25,7 +35,8 @@ const Community = ({ match }) => {
             setArticles(data);
           }
         }
-      })
+      }*/
+      )
       .catch((error) => {
         throw error;
       });
@@ -43,15 +54,16 @@ const Community = ({ match }) => {
           <Write>글쓰기</Write>
         </Link>
       </Top>
+      {category + "  /  " + clublink}
       <Body>
-        {articles.map((article, index) => (
+        {/*articles.map((article, index) => (
           <ArticlePreview
             clubname={clubname}
             match={match}
             article={article}
             key={index}
           />
-        ))}
+        ))*/}
       </Body>
     </div>
   );

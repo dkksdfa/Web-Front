@@ -8,16 +8,17 @@ import {
   Comment,
 } from "../../styles/StyledArticlePreview";
 import { Link } from "react-router-dom";
+import { firestore } from "../../firebase";
 
 const ArticlePreview = ({ clubname, match, article }) => {
-  const articleLink = `/r/${match.params.category}/${match.params.clubname}/${article.id}`;
+  const articleLink = `/r/${match.params.category}/${match.params.clubname}/${article.title}`;
   return (
     <Link to={articleLink}>
       <Body>
         <Inner>
-          <Writer>{article.name}</Writer>
+          <Writer>{article.writer}</Writer>
           <Info>
-            • {clubname} {article.date}
+            {clubname} {article.date}
           </Info>
           <Title>{article.title}</Title>
           <Comment>

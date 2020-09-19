@@ -9,12 +9,13 @@ const Club = ({ match }) => {
   const fetchData = useCallback(() => {
     setLoading(true);
     setClubs([]);
+
     firestore
       .collection("clubs")
-      .doc("fast car")
+      .doc(category)
       .get()
       .then((doc) => {
-        const data = doc.data()[category];
+        const data = doc.data()["club"];
         for (let club in data) {
           const newClub = { link: club, data: data[club] };
           setClubs((previousclubs) => {
@@ -25,6 +26,7 @@ const Club = ({ match }) => {
           });
         }
       })
+
       .catch((error) => {
         throw error;
       });
@@ -35,4 +37,5 @@ const Club = ({ match }) => {
   }, [match, firestore]);
   return <RenderClub loading={loading} clubs={clubs} category={category} />;
 };
+
 export default Club;

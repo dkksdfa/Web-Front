@@ -7,6 +7,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../styles/Write.css";
 import { firestore } from "../../firebase";
 import firebase from "firebase/app";
+import { Link } from "react-router-dom";
 
 function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
@@ -28,12 +29,20 @@ function uploadImageCallBack(file) {
 }
 
 async function aa(post, clubname, title, concent) {
-  console.log(title);
-  await firestore
+  const path = firestore
     .collection("clubs")
     .doc(post)
     .collection(clubname)
-    .add({ title: title, concent: concent });
+    .doc(title);
+  path.set({
+    title: title,
+    date: new Date(),
+    writer: "이성민",
+    conunt: 0,
+    views: 0,
+    concent: concent,
+    comments: [],
+  });
 }
 
 class Write extends Component {
@@ -42,11 +51,11 @@ class Write extends Component {
     title: "",
   };
 
-  onEditorStateChange(editorState) {
+  onEditorStateChange = (editorState) => {
     this.setState({
       editorState,
     });
-  }
+  };
   titleChange = (e) => {
     this.setState({
       title: e.target.value,
@@ -84,19 +93,21 @@ class Write extends Component {
             }}
           />
           <div id="sumitbar">
-            <button
-              id="sumit"
-              onClick={() =>
-                aa(
-                  post,
-                  clubname,
-                  this.state.title,
-                  draftToHtml(convertToRaw(editorState.getCurrentContent()))
-                )
-              }
-            >
-              등록
-            </button>
+            <Link to={`/club/${post}/${clubname}`}>
+              <button
+                id="sumit"
+                onClick={() =>
+                  aa(
+                    post,
+                    clubname,
+                    this.state.title,
+                    draftToHtml(convertToRaw(editorState.getCurrentContent()))
+                  )
+                }
+              >
+                등록
+              </button>
+            </Link>
           </div>
           <textarea
             disabled

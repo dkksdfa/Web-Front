@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { firestore } from "../../firebase";
 import JoinForm from "./JoinForm";
 import { LoginInfo } from "..";

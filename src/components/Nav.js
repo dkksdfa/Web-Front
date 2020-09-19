@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { ButtonPosition, Button, Navigation } from "../styles/StyledNav";
 // import logo from "../image/logo.png";
 import { Link } from "react-router-dom";
