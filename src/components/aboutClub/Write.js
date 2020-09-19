@@ -4,11 +4,10 @@ import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "../styles/Write.css";
-import { firestore } from "../firebase";
+import "../../styles/Write.css";
+import { firestore } from "../../firebase";
 import firebase from "firebase/app";
 
-//이미지처리
 function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -28,7 +27,6 @@ function uploadImageCallBack(file) {
   });
 }
 
-//firestore add
 async function aa(post, clubname, title, concent) {
   console.log(title);
   await firestore
