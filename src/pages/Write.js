@@ -6,6 +6,7 @@ import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../styles/Write.css";
 import { firestore } from "../firebase";
+import firebase from "firebase/app";
 
 function uploadImageCallBack(file) {
   return new Promise((resolve, reject) => {
@@ -30,28 +31,30 @@ const sortFunction = (a, b) => {
   if (a.link < b.link) return -1;
   return 0;
 };
-async function aa(post, clubname) {
-  console.log(post);
-  console.log(clubname);
+
+async function aa(post, clubname, title, concent) {
+  console.log(title);
   await firestore
     .collection("clubs")
-    .doc("fast car")
-    .collection("categorys")
-    .find((i) => i === post)
-    .find((i) => i === clubname)
-    .collection("articles")
-    .update({ 히히: "ss" });
-  // .then((aaa) => console.log(aaa));
+    .doc(post)
+    .collection(clubname)
+    .add({ title: title, concent: concent });
 }
 
 class Write extends Component {
   state = {
     editorState: EditorState.createEmpty(),
+    title: "",
   };
 
-  onEditorsetStStateChange: Function = (editorState) => {
-    this.ate({
+  onEditorStateChange: Function = (editorState) => {
+    this.setState({
       editorState,
+    });
+  };
+  titleChange = (e) => {
+    this.setState({
+      title: e.target.value,
     });
   };
   render() {
@@ -66,7 +69,7 @@ class Write extends Component {
             <label htmlFor="title" id="titleLabel">
               제목
             </label>
-            <input id="title" type="text"></input>
+            <input id="title" type="text" onChange={this.titleChange} />
           </div>
           <Editor
             editorState={editorState}
@@ -86,7 +89,17 @@ class Write extends Component {
             }}
           />
           <div id="sumitbar">
-            <button id="sumit" onClick={() => aa(post, clubname)}>
+            <button
+              id="sumit"
+              onClick={() =>
+                aa(
+                  post,
+                  clubname,
+                  this.state.title,
+                  draftToHtml(convertToRaw(editorState.getCurrentContent()))
+                )
+              }
+            >
               등록
             </button>
           </div>
