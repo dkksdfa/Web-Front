@@ -7,18 +7,17 @@ import {
 } from "../../styles/StyledSchool";
 
 const Content = ({ imagePath, label, link }) => {
-  console.log(process.env.PUBLIC_URL);
+  console.log(link);
   return (
     <Box>
       <ImageTemplate>
-        {" "}
-        <a href={link} target="_blank">
-          <Img imagePath={imagePath} />{" "}
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          <Img imagePath={imagePath} />
         </a>
       </ImageTemplate>
       <TextTemplate>
         <a href={link} target="_blank">
-          {label}{" "}
+          {label}
         </a>
       </TextTemplate>
     </Box>

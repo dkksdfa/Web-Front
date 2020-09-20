@@ -1,7 +1,12 @@
 export const sortByLink = (a, b) => {
-  if (a.link > b.link) return 1;
-  if (a.link < b.link) return -1;
+  if (a.name > b.name) return 1;
+  if (a.name < b.name) return -1;
   return 0;
+};
+export const sortFunction = (previousValue, addedValue) => {
+  return JSON.parse(JSON.stringify(previousValue))
+    .concat(addedValue)
+    .sort(sortByLink);
 };
 
 export function uploadImageCallBack(file) {

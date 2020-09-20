@@ -1,5 +1,6 @@
 /** Declare some variables **/
-$primary: #007bff;
+// $primary: #007bff;
+$primary: white;
 // Password strength meter color for the different levels
 $strength-colors: (darkred, orangered, orange, yellowgreen, green);
 // Gap width between strength meter bars
@@ -24,6 +25,11 @@ $strength-gap: 6px;
   padding: 30px;
   border: 1px solid #ddd;
   border-radius: 10px;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
 }
 .description {
   color: #aaa;

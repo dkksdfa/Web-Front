@@ -73,15 +73,15 @@ const Today = styled.div`
   margin: 0;
   text-align: center;
 
-  width: 100vw;
-  height: 80vh;
-  text-align: left;
-  color: red;
+  width: 60vw;
+  height: 75vh;
+  /* text-align: left; */
+  margin-bottom: 100px;
+
+  border: 2px solid gray;
+  color: gray;
   font-weight: bold;
   font-size: 1.5rem;
-  background: url("image/vegetables.jpg") no-repeat;
-  background-size: cover;
-  background-position: center;
 `;
 
 export {

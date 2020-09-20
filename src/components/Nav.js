@@ -1,52 +1,54 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { ButtonPosition, Button, Navigation } from "../styles/StyledNav";
-// import logo from "../image/logo.png";
 import { Link } from "react-router-dom";
-import { LoginInfo } from "./";
+import { Userinfo } from "./";
+import { authService } from "../firebase";
+
 const Nav = () => {
-  const [isLoggedIn, setLoggedIn] = React.useState(false);
+  const menulist = (login) => [
+    { title: "Home", link: "/" },
+    { title: "School", link: "/School" },
+    { title: "SW", link: "/clubs/SW" },
+    { title: "Food", link: "/clubs/Food" },
+    { title: "Finance", link: "/clubs/Finance" },
+    { title: "Other", link: "/clubs/Other" },
+    login === true
+      ? {
+          title: "Modify",
+          link: "/Modify",
+        }
+      : { title: "Join", link: "/Join" },
+  ];
+
+  const onClick = () => authService.signOut();
   return (
-    <Navigation>
-      <ButtonPosition>
-        <Button>
-          <Link to="/">Home</Link>
-        </Button>
-        <Button>
-          <Link to="/School">School</Link>
-        </Button>
-        <Button>
-          <Link to="/clubs/SW">SW</Link>
-        </Button>
-        <Button>
-          <Link to="/clubs/Food">Food</Link>
-        </Button>
-        <Button>
-          <Link to="/clubs/Finance">Finance</Link>
-        </Button>
-        <Button>
-          <Link to="/clubs/Other">Other</Link>
-        </Button>
-        <LoginInfo.Provider value={{ isLoggedIn, setLoggedIn }}>
-          {isLoggedIn ? (
-            <>
-              <Button>Logout</Button>
-              <Button>
-                <Link to="/Modify">Modify</Link>
+    <Userinfo.Consumer>
+      {({ isLoggedIn }) => (
+        <Navigation>
+          <ButtonPosition>
+            {menulist(isLoggedIn).map((val, i) => (
+              <Button key={i}>
+                <Link
+                  to={val.link}
+                  style={{
+                    color: "unset",
+                  }}
+                >
+                  {val.title}
+                </Link>
               </Button>
-            </>
-          ) : (
-            <>
+            ))}
+            {isLoggedIn ? (
+              <Button onClick={onClick}>Logout</Button>
+            ) : (
               <Button>
-                <Link to="/Login">Login</Link>
+                <Link to="/login">Login</Link>
               </Button>
-              <Button>
-                <Link to="/Join">Join</Link>
-              </Button>
-            </>
-          )}
-        </LoginInfo.Provider>
-      </ButtonPosition>
-    </Navigation>
+            )}
+          </ButtonPosition>
+        </Navigation>
+      )}
+    </Userinfo.Consumer>
   );
 };
 

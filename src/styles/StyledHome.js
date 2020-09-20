@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Background = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 200vh;
   background: #444;
   display: flex;

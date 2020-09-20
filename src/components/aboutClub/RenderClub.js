@@ -17,11 +17,10 @@ const RenderClub = ({ loading, category, clubs }) => {
         <ClubWrap>
           {clubs.map((value, index) => {
             const clubLink = `/club/${category}/${value.link}`;
-
             return (
               <Link to={clubLink} key={index}>
                 <ClubIntro key={index} image={value.image}>
-                  {value.data.name}
+                  {value.name}
                 </ClubIntro>
               </Link>
             );

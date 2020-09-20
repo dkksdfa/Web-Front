@@ -1,57 +1,67 @@
 import React, { useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ArticlePreview from "./ArticlePreview";
 import { Body, Top, Write, Search } from "../../styles/StyledCommunity";
 import { firestore } from "../../firebase";
+import { Userinfo } from "..";
 
 const Community = ({ match }) => {
   const [loading, setLoading] = useState(false);
   const [articles, setArticles] = useState([]);
   const category = match.params.category;
-  const linkToWrite = `/write/${category}`;
-  let clubname = null;
   const clublink = match.params.clubname;
+  const linkToWrite = `/write/${category}/${clublink}`;
+
   const fetchData = useCallback(() => {
     setArticles([]);
     firestore
       .collection("clubs")
-      .doc("fast car")
+      .doc(category)
       .get()
       .then((doc) => {
-        if (doc.data()[category]) {
-          if (doc.data()[category][clublink]) {
-            clubname = doc.data()[category][clublink].name;
-            const data = doc.data()[category][clublink].articles;
-            setArticles(data);
-          }
-        }
+        setArticles(doc.data()[clublink].articles);
       })
       .catch((error) => {
         throw error;
       });
-  }, [articles, match]);
+  }, [firestore, match]);
   React.useEffect(() => {
     setLoading(true);
     fetchData();
     setLoading(false);
   }, [match, firestore]);
+  const history = useHistory();
+  const userinfo = React.useContext(Userinfo);
+  const onClick = (e) => {
+    if (!userinfo.isLoggedIn) {
+      alert("로그인을 해주세요.");
+      history.push("/login");
+    } else history.push(linkToWrite);
+  };
   return (
     <div>
       <Top>
         <Search type="text" placeholder="Search..." />
-        <Link to={linkToWrite}>
-          <Write>글쓰기</Write>
-        </Link>
+
+        <Write onClick={onClick}>글쓰기</Write>
       </Top>
       <Body>
-        {articles.map((article, index) => (
-          <ArticlePreview
-            clubname={clubname}
-            match={match}
-            article={article}
-            key={index}
-          />
-        ))}
+        {JSON.parse(JSON.stringify(articles))
+          .reverse()
+          .map((article, index) => {
+            return (
+              <ArticlePreview
+                clublink={clublink}
+                category={category}
+                article={article}
+                key={index}
+                index={index}
+                isOwner={
+                  userinfo.userObj && userinfo.userObj.uid === article.uid
+                }
+              />
+            );
+          })}
       </Body>
     </div>
   );
