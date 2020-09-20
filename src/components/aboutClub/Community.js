@@ -23,9 +23,7 @@ const Community = ({ match }) => {
       .then(
         (doc) => {
           doc.forEach((aa) => {
-            console.log(aa.data());
-            clubname = aa.data()["writer"];
-            setArticles(aa.data());
+            setArticles([...articles, aa.data()]);
           });
         } /*{
         if (doc.data()[category]) {
@@ -46,6 +44,7 @@ const Community = ({ match }) => {
     fetchData();
     setLoading(false);
   }, [match, firestore]);
+  console.log(articles);
   return (
     <div>
       <Top>

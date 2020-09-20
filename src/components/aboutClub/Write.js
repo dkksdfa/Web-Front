@@ -29,12 +29,8 @@ function uploadImageCallBack(file) {
 }
 
 async function aa(post, clubname, title, concent) {
-  const path = firestore
-    .collection("clubs")
-    .doc(post)
-    .collection(clubname)
-    .doc(title);
-  path.set({
+  const path = firestore.collection("clubs").doc(post).collection(clubname);
+  path.doc(title).set({
     title: title,
     date: new Date(),
     writer: "이성민",

@@ -26,7 +26,6 @@ const Club = ({ match }) => {
           });
         }
       })
-
       .catch((error) => {
         throw error;
       });
