@@ -15,7 +15,8 @@ const Club = ({ match }) => {
       .doc(category)
       .get()
       .then((doc) => {
-        const data = doc.data()["club"];
+        const data = doc.data();
+        console.log(doc.data());
         for (let club in data) {
           const newClub = { link: club, data: data[club] };
           setClubs((previousclubs) => {
