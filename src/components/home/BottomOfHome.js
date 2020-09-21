@@ -15,10 +15,6 @@ const BottomOfHome = () => {
     { name: "젤예쁜손", category: "SW", link: "jell" },
   ];
 
-  console.error(
-    "Above club examples are 'example'. Thus replace it real top communities."
-  );
-
   const clubs = ClubExample.map((value, index) => {
     return (
       <Link to={`/club/${value.category}/${value.link}`} key={index}>

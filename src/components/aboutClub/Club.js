@@ -8,24 +8,21 @@ const Club = ({ match }) => {
   const category = match.params.category;
   const fetchData = async () => {
     setLoading(true);
+    setClubs([]);
 
-    await firestore
+    firestore
       .collection("clubs")
-      .doc(match.params.category)
+      .doc(category)
       .get()
       .then((doc) => {
-        setClubs([]);
-        return doc;
-      })
-      .then((docs) => {
-        for (let i in docs.data()) {
-          setClubs((previous) =>
-            sortFunction(previous, {
-              link: i,
-              name: docs.data()[i].name,
-              articles: docs.data()[i].articles,
-            })
-          );
+        const data = doc.data();
+        for (let club in data) {
+          const newClub = { link: club, data: data[club] };
+
+          setClubs((previousclubs) => {
+            const next = sortFunction(previousclubs, newClub);
+            return next;
+          });
         }
       })
       .catch((error) => {
@@ -35,9 +32,9 @@ const Club = ({ match }) => {
   };
   React.useEffect(() => {
     fetchData();
-    console.log("done");
   }, [match, firestore]);
 
   return <RenderClub loading={loading} clubs={clubs} category={category} />;
 };
+
 export default Club;

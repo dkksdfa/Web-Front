@@ -45,6 +45,7 @@ const Community = ({ match }) => {
 
         <Write onClick={onClick}>글쓰기</Write>
       </Top>
+      {category + "  /  " + clublink}
       <Body>
         {JSON.parse(JSON.stringify(articles))
           .reverse()

@@ -3,7 +3,6 @@ import styled from "styled-components";
 const Background = styled.div`
   width: 100vw;
   height: 200vh;
-  background: #444;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -43,7 +42,8 @@ const Button = styled.button`
   }
 `;
 const Today = styled.div`
-  height: 50%;
+  height: 100vh;
+  width: 100vw;
   margin: 0;
   background: url("image/background5.jpg") no-repeat;
 

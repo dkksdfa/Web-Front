@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authService as auth } from "../../../firebase";
+import PageWrap from "../../PageWrap";
 export default ({ isLoggedIn, setLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +34,8 @@ export default ({ isLoggedIn, setLoggedIn }) => {
   };
 
   return (
-    <>
+    <PageWrap>
+      <h1>login page</h1>
       <form onSubmit={onSubmit}>
         <input type="email" name="email" value={email} onChange={onChange} />
         <input
@@ -47,6 +49,6 @@ export default ({ isLoggedIn, setLoggedIn }) => {
 
       <button>google login</button>
       <p>create id</p>
-    </>
+    </PageWrap>
   );
 };

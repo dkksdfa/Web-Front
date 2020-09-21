@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authService as auth, firestore } from "../../../firebase";
-import { Userinfo } from "../../";
+
 export default () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -9,27 +9,28 @@ export default () => {
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(null);
   const [classnumber, setClass] = useState(null);
-  const [userObj, setUserObj] = useState(null);
   const history = useHistory();
   const onSubmit = async (e) => {
     e.preventDefault();
-    let userData;
-    try {
-      await auth.createUserWithEmailAndPassword(email, password);
-      await auth.onAuthStateChanged((user) => {
-        if (user) {
-          userData = user.uid;
-        }
-      });
-      history.push("/");
-    } catch (error) {
-      console.log("error : ", error);
-      alert(error.message);
+    if (password !== conformPassword) {
+      alert("The password must be matched with conform password.");
+    } else {
+      let userData;
+      try {
+        await auth.createUserWithEmailAndPassword(email, password);
+        await auth.onAuthStateChanged((user) => {
+          if (user) {
+            userData = user.uid;
+          }
+        });
+        history.push("/");
+      } catch (error) {
+        console.log("error : ", error);
+        alert(error.message);
+      }
+      const object = { name, grade, classnumber, uid: userData };
+      firestore.collection("additional userinfo").doc(object.uid).set(object);
     }
-
-    const object = { name, grade, classnumber, uid: userData };
-    console.log({ object });
-    firestore.collection("additional userinfo").doc(object.uid).set(object);
   };
 
   const onChange = (e) => {

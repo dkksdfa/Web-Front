@@ -4,6 +4,7 @@ import { Title, ClubWrap, ClubIntro } from "../../styles/StyledClub";
 import { Link } from "react-router-dom";
 
 const RenderClub = ({ loading, category, clubs }) => {
+  console.log({ clubs });
   if (loading)
     return (
       <PageWrap>
@@ -19,8 +20,8 @@ const RenderClub = ({ loading, category, clubs }) => {
             const clubLink = `/club/${category}/${value.link}`;
             return (
               <Link to={clubLink} key={index}>
-                <ClubIntro key={index} image={value.image}>
-                  {value.name}
+                <ClubIntro key={index} image={value.link}>
+                  {value.data.name}
                 </ClubIntro>
               </Link>
             );
