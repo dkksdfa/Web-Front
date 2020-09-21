@@ -8,13 +8,12 @@ const Club = ({ match }) => {
   const category = match.params.category;
   const fetchData = async () => {
     setLoading(true);
-    setClubs([]);
-
     firestore
       .collection("clubs")
       .doc(category)
       .get()
       .then((doc) => {
+        setClubs([]);
         const data = doc.data();
         for (let club in data) {
           const newClub = { link: club, data: data[club] };

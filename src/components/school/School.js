@@ -35,6 +35,7 @@ const School = () => {
     };
     getHtml();
   }, []);
+
   const userinfo = React.useContext(Userinfo);
   let infoInFirestore;
   const getUserinfo = () => {

@@ -88,7 +88,7 @@ const ClubIntro = styled.div`
   font-weight: bold;
   line-height: 350px;
   background: ${(prop) =>
-    `url(${process.env.PUBLIC_URL}/image/clubbackground/${prop.image})`};
+    `url(${process.env.PUBLIC_URL}/image/clubbackground/${prop.image}.png)`};
   background-size: cover;
   color: rgb(204, 204, 204);
   &:hover {
