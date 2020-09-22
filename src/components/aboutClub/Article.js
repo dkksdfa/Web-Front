@@ -1,25 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
-import {} from "../../styles/StyledArticle";
+// import {} from "../../styles/StyledArticle";
+import { firestore } from "../../firebase";
 const Article = ({ match }) => {
-  const category = match.params.category;
-  const id = match.params.id;
-  const clubname = match.params.clubname;
-  // following code used values.js but values.js have been deleted and we should alternate values.js with firebase's collection
-  // ---------------------------------------------------------------
-  // console.log(id, clubname);
-  // const data = values.clubs[category]
-  //   .find((club) => club.link === clubname)
-  //   .articles.find((article) => article.id === Number(id));
-  // const { title, content, views, time } = data;
-  // ---------------------------------------------------------------
+  const [article, setArticle] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const {
+    params: { category, id, clublink },
+  } = match;
+  console.log(id);
+
+  useEffect(() => {
+    setLoading(true);
+    const getArticle = async () => {
+      const rawData = await firestore.collection("clubs").doc(category).get();
+      const articles = rawData.data()[clublink].articles;
+      const article = articles[articles.length - 1 - id];
+      setArticle(article);
+      setLoading(false);
+    };
+    getArticle();
+  }, [category, clublink]);
+
   return (
     <PageWrap>
-      {/* <h1>{title}</h1>
-      <span>
-        {time} | views : {views}
-      </span>
-      <div>{content}</div> */}
+      {loading ? (
+        <h1>loading...</h1>
+      ) : (
+        <>
+          <h1>{article.title}</h1>
+          <span>
+            {article.date} | views : {article.views}
+          </span>
+          <div>{article.content}</div>
+        </>
+      )}
     </PageWrap>
   );
 };

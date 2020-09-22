@@ -1,5 +1,5 @@
 import PageWrap from "../PageWrap";
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import "../../styles/Write.css";
 import { firestore, firebase } from "../../firebase";
 import { Userinfo } from "..";
@@ -9,9 +9,9 @@ const Write = ({ match }) => {
   const { clublink, category } = match.params;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState([]);
-  const views = 0;
-  const count = 0;
+  // const [image, setImage] = useState([]);
+  // const views = 0;
+  // const count = 0;
 
   const userinfo = React.useContext(Userinfo);
   const history = useHistory();
