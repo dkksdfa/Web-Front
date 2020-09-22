@@ -32,6 +32,7 @@ const School = () => {
     };
     getHtml();
   }, []);
+
   const userinfo = React.useContext(Userinfo);
 
   // React.useEffect(() => {}, []);

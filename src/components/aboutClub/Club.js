@@ -6,7 +6,6 @@ const Club = ({ match }) => {
   const [clubs, setClubs] = useState([]);
   const [loading, setLoading] = useState(false);
   const category = match.params.category;
-
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
