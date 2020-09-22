@@ -46,8 +46,7 @@ const Today = styled.div`
   width: 100vw;
   margin: 0;
   background: url("image/background5.jpg") no-repeat;
-
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
 `;
 

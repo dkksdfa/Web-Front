@@ -7,7 +7,6 @@ const Background = styled.div`
 `;
 const Wrap = styled.div`
   width: 90vw;
-  height: 70vh;
   margin-top: 100px;
   padding: 0;
 `;
@@ -15,6 +14,10 @@ const Wrap = styled.div`
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  @media all and (max-width: 1300px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const Box = styled.div`
   width: 30%;
@@ -33,6 +36,7 @@ const Img = styled.div`
   background: ${(props) => `url("image/${props.imagePath}")`} no-repeat;
   background-size: 100% 100%;
 `;
+
 const TextTemplate = styled.div`
   font-size: 1.4rem;
   font-weight: bold;
@@ -72,12 +76,8 @@ const Button = styled.button`
 const Today = styled.div`
   margin: 0;
   text-align: center;
-
   width: 60vw;
-  height: 75vh;
-  /* text-align: left; */
   margin-bottom: 100px;
-
   border: 2px solid gray;
   color: gray;
   font-weight: bold;

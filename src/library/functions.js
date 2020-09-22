@@ -29,32 +29,31 @@ export function uploadImageCallBack(file) {
 }
 
 export const getDateDifference = () => {
-  let firstDate = new Date(2020, 9, 7);
-  let secondDate = new Date();
-  let mot = 9;
-  let date = 7;
-  let mlsvId = 1409336;
-  secondDate.setMinutes(0);
-  secondDate.setHours(0);
-  secondDate.setSeconds(0);
-  secondDate.setMilliseconds(0);
-  while (secondDate - firstDate > 1) {
-    if (isLastDay(firstDate)) {
-      mot += 1;
-    } else {
-      date += 1;
-    }
-    firstDate = new Date(2020, mot, date);
-
-    if (firstDate.getDay() > 0) {
-      if (firstDate.getDay() < 6) {
-        mlsvId += 1;
-      }
-    }
+  function isLastDay(dt) {
+    var test = new Date(dt.getTime());
+    test.setDate(test.getDate() + 1);
+    return test.getDate() === 1;
   }
-  console.log(mlsvId);
+  const oneDay = 24 * 60 * 60 * 1000;
+  const firstDate = new Date(2020, 9, 7);
+  const secondDate = new Date();
+  let mlsvId = 1409336;
+  const difference = Math.round(Math.abs((secondDate - firstDate) / oneDay));
+  const a = difference % 7; //나머지
+  const b = (difference - a) / 7; //나머지를 뺸 나눈거
+  mlsvId += b * 5;
+  if (a < 6) {
+    mlsvId += a;
+  } else if (a === 6) {
+    mlsvId += a - 1;
+  } else if (a === 7) {
+    mlsvId += a - 2;
+  }
+  console.log({ a, b, mlsvId });
   return mlsvId;
-  /*
+};
+
+/*
   const oneDay = 24 * 60 * 60 * 1000;
   const firstDate = new Date(2020, 9, 7);
   const secondDate = new Date();
@@ -65,10 +64,3 @@ export const getDateDifference = () => {
   
   const mlsvId = 1409336 + diffDays;
   return mlsvId;*/
-};
-
-function isLastDay(dt) {
-  var test = new Date(dt.getTime());
-  test.setDate(test.getDate() + 1);
-  return test.getDate() === 1;
-}

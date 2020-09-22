@@ -20,12 +20,22 @@ const School = () => {
     const getHtml = async () => {
       try {
         console.error("you have to think the weekend");
+        // const response = await axios.get(
+        //   `http://daekyeong.sen.hs.kr/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId=${getDateDifference()}`
+        // );
         const response = await axios.get(
-          `http://daekyeong.sen.hs.kr/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId=${getDateDifference()}`
+          `http://daekyeong.sen.hs.kr/70633/subMenu.do`
         );
         const $ = cheerio.load(response.data);
-        const $bodyList = $("table tbody").children("tr")[3];
-        const rawData = $bodyList.children[3].children[0].data;
+        const $bodyList = $("td.today")[0].children[1].children[1].children[1]
+          .attribs.onclick;
+        const rResult = $bodyList.replace(/[^0-9]/g, "");
+        const sponse = await axios.get(
+          `http://daekyeong.sen.hs.kr/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId=${rResult}`
+        );
+        const op = cheerio.load(sponse.data);
+        const $tableList = op("table tbody").children("tr")[3];
+        const rawData = $tableList.children[3].children[0].data;
         const result = rawData.slice(7, rawData.length - 6).split(",");
         setData(result);
         return response;
