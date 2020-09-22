@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authService as auth } from "../../../firebase";
-import PageWrap from "../../PageWrap";
-export default ({ isLoggedIn, setLoggedIn }) => {
+import { authService as auth } from "../../firebase";
+import PageWrap from "../PageWrap";
+export default () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();

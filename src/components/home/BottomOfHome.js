@@ -9,16 +9,16 @@ import { Link } from "react-router-dom";
 const BottomOfHome = () => {
   const ClubExample = [
     { name: "웹프론트반", category: "SW", link: "webfront" },
-    { name: "너튜브크리에이터반", category: "SW", link: "youtubecreator" },
-    { name: "마인드스톰EV3코딩반", category: "SW", link: "ev3" },
-    { name: "슈즈디자인반", category: "SW", link: "shoes" },
-    { name: "젤예쁜손", category: "SW", link: "jell" },
+    { name: "밴드반", category: "Other", link: "band" },
+    { name: "골목식당반", category: "Food", link: "streetrestaurant" },
+    { name: "슈즈디자인반", category: "SW", link: "shoesdesign" },
+    { name: "언더라이팅반", category: "Finance", link: "underwriting" },
   ];
 
   const clubs = ClubExample.map((value, index) => {
     return (
       <Link to={`/club/${value.category}/${value.link}`} key={index}>
-        <ClubIntro>{value.name}</ClubIntro>
+        <ClubIntro image={value.link} />
       </Link>
     );
   });

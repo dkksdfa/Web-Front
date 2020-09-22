@@ -8,6 +8,7 @@ import {
   Write,
   Login,
   Join,
+  Modify,
   Article,
   Userinfo,
 } from "./components";
@@ -32,25 +33,28 @@ function App() {
   }, []);
   return (
     <div className="container">
-      <Userinfo.Provider value={{ isLoggedIn, setLoggedIn, userObj }}>
-        <Nav />
-        <Route path="/" exact>
-          <Home isLoggedIn={isLoggedIn} />
-        </Route>
-        <Route path="/School" component={School} />
-        <Route path="/clubs/:category" exact component={Club} />
-        <Route path="/club/:category/:clubname" exact component={Community} />
-        <Route path="/write/:category/:clublink" component={Write} />
-        <Route
-          path="/article/:category/:clubname/:id"
-          exact
-          component={Article}
-        />
-        <Route path="/Join" component={Join} />
-        <Route path="/Login">
-          <Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
-        </Route>
-      </Userinfo.Provider>
+      {init && (
+        <Userinfo.Provider value={{ isLoggedIn, setLoggedIn, userObj }}>
+          <Nav />
+          <Route path="/" exact>
+            <Home isLoggedIn={isLoggedIn} />
+          </Route>
+          <Route path="/School" component={School} />
+          <Route path="/clubs/:category" exact component={Club} />
+          <Route path="/club/:category/:clubname" exact component={Community} />
+          <Route path="/write/:category/:clublink" component={Write} />
+          <Route
+            path="/article/:category/:clublink/:id"
+            exact
+            component={Article}
+          />
+          <Route path="/Join" component={Join} />
+          <Route path="/Modify" component={Modify} />
+          <Route path="/Login">
+            <Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+          </Route>
+        </Userinfo.Provider>
+      )}
     </div>
   );
 }

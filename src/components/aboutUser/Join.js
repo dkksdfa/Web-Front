@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authService as auth, firestore } from "../../../firebase";
+import { authService as auth, firestore } from "../../firebase";
+import PageWrap from "../PageWrap";
 
-export default () => {
+const Join = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [conformPassword, setConformPassword] = useState("");
@@ -28,25 +29,24 @@ export default () => {
         console.log("error : ", error);
         alert(error.message);
       }
-      const object = { name, grade, classnumber, uid: userData };
-      firestore.collection("additional userinfo").doc(object.uid).set(object);
+      const object = { name, grade, classnumber };
+      firestore.collection("additional userinfo").doc(userData).set(object);
     }
   };
-
   const onChange = (e) => {
     const {
       target: { value, name },
     } = e;
-
     if (name === "email") setEmail(value);
     if (name === "password") setPassword(value);
     if (name === "conformPassword") setConformPassword(value);
     if (e.target.name === "name") setName(e.target.value);
-    if (e.target.name === "grade") setGrade(parseInt(e.target.value, 10));
-    if (e.target.name === "classnumber") setClass(parseInt(e.target.value, 10));
+    if (e.target.name === "grade") setGrade(e.target.value);
+    if (e.target.name === "classnumber") setClass(e.target.value);
   };
   return (
-    <>
+    <PageWrap>
+      <h1>Join page</h1>
       <form onSubmit={onSubmit}>
         <input
           type="email"
@@ -98,6 +98,8 @@ export default () => {
         </select>
         <input value="Join!" type="submit" />
       </form>
-    </>
+    </PageWrap>
   );
 };
+
+export default Join;

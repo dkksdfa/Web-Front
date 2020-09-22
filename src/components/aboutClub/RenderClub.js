@@ -20,7 +20,7 @@ const RenderClub = ({ loading, category, clubs }) => {
             const clubLink = `/club/${category}/${value.link}`;
             return (
               <Link to={clubLink} key={index}>
-                <ClubIntro key={index} image={value.link}></ClubIntro>
+                <ClubIntro key={index} image={value.link} />
               </Link>
             );
           })}

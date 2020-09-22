@@ -1,6 +1,6 @@
 export const sortByLink = (a, b) => {
-  if (a.name > b.name) return 1;
-  if (a.name < b.name) return -1;
+  if (a.link > b.link) return 1;
+  if (a.link < b.link) return -1;
   return 0;
 };
 export const sortFunction = (previousValue, addedValue) => {
@@ -27,40 +27,3 @@ export function uploadImageCallBack(file) {
     });
   });
 }
-
-export const getDateDifference = () => {
-  function isLastDay(dt) {
-    var test = new Date(dt.getTime());
-    test.setDate(test.getDate() + 1);
-    return test.getDate() === 1;
-  }
-  const oneDay = 24 * 60 * 60 * 1000;
-  const firstDate = new Date(2020, 9, 7);
-  const secondDate = new Date();
-  let mlsvId = 1409336;
-  const difference = Math.round(Math.abs((secondDate - firstDate) / oneDay));
-  const a = difference % 7; //나머지
-  const b = (difference - a) / 7; //나머지를 뺸 나눈거
-  mlsvId += b * 5;
-  if (a < 6) {
-    mlsvId += a;
-  } else if (a === 6) {
-    mlsvId += a - 1;
-  } else if (a === 7) {
-    mlsvId += a - 2;
-  }
-  console.log({ a, b, mlsvId });
-  return mlsvId;
-};
-
-/*
-  const oneDay = 24 * 60 * 60 * 1000;
-  const firstDate = new Date(2020, 9, 7);
-  const secondDate = new Date();
-  secondDate.setMinutes(0);
-  secondDate.setHours(0);
-  secondDate.setSeconds(0);
-  const diffDays = Math.round(Math.abs((secondDate - firstDate) / oneDay));
-  
-  const mlsvId = 1409336 + diffDays;
-  return mlsvId;*/

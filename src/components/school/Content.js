@@ -7,7 +7,6 @@ import {
 } from "../../styles/StyledSchool";
 
 const Content = ({ imagePath, label, link }) => {
-  console.log(link);
   return (
     <Box>
       <ImageTemplate>

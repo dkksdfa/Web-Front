@@ -16,7 +16,7 @@ const ArticlePreview = ({ clublink, category, article, index, isOwner }) => {
   const onEditClick = () => {};
   const onDeleteClick = () => {
     const ok = window.confirm("정말로 이 글을 지우시겠습니까?");
-    console.log(ok);
+    // console.log(ok);
     if (ok) {
       firestore
         .collection("clubs")
@@ -29,9 +29,9 @@ const ArticlePreview = ({ clublink, category, article, index, isOwner }) => {
   };
 
   // const dateString = Date(article.date).toString();
-  console.log(new Date(article.date));
+  // console.log(new Date(article.date));
   // console.log(firebase.firestore.Timestamp.toDate(article.date));
-  const articleLink = `/r/${category}/${clublink}/${index}`;
+  const articleLink = `/article/${category}/${clublink}/${index}`;
   return (
     <>
       <Link to={articleLink}>

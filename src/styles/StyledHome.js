@@ -72,7 +72,7 @@ const ClubIntro = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
   line-height: 350px;
-  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png");
+  background: ${(props) => `url(/image/clubbackground/${props.image}.png)`};
   background-size: cover;
   color: rgb(204, 204, 204);
   &:hover {

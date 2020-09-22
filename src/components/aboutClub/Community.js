@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ArticlePreview from "./ArticlePreview";
 import { Body, Top, Write, Search } from "../../styles/StyledCommunity";
 import { firestore } from "../../firebase";
@@ -14,6 +14,7 @@ const Community = ({ match }) => {
 
   const fetchData = useCallback(() => {
     setArticles([]);
+    setLoading(true);
     firestore
       .collection("clubs")
       .doc(category)
@@ -21,15 +22,16 @@ const Community = ({ match }) => {
       .then((doc) => {
         setArticles(doc.data()[clublink].articles);
       })
+      .then(() => {
+        setLoading(false);
+      })
       .catch((error) => {
         throw error;
       });
-  }, [firestore, match]);
+  }, [category, clublink]);
   React.useEffect(() => {
-    setLoading(true);
     fetchData();
-    setLoading(false);
-  }, [match, firestore]);
+  }, [match, fetchData]);
   const history = useHistory();
   const userinfo = React.useContext(Userinfo);
   const onClick = (e) => {
@@ -39,32 +41,38 @@ const Community = ({ match }) => {
     } else history.push(linkToWrite);
   };
   return (
-    <div>
-      <Top>
-        <Search type="text" placeholder="Search..." />
+    <>
+      {loading ? (
+        <h1>loading ...</h1>
+      ) : (
+        <>
+          <Top>
+            <Search type="text" placeholder="Search..." />
 
-        <Write onClick={onClick}>글쓰기</Write>
-      </Top>
-      {category + "  /  " + clublink}
-      <Body>
-        {JSON.parse(JSON.stringify(articles))
-          .reverse()
-          .map((article, index) => {
-            return (
-              <ArticlePreview
-                clublink={clublink}
-                category={category}
-                article={article}
-                key={index}
-                index={index}
-                isOwner={
-                  userinfo.userObj && userinfo.userObj.uid === article.uid
-                }
-              />
-            );
-          })}
-      </Body>
-    </div>
+            <Write onClick={onClick}>글쓰기</Write>
+          </Top>
+          <Body>
+            <h1>{category + "  /  " + clublink}</h1>
+            {JSON.parse(JSON.stringify(articles))
+              .reverse()
+              .map((article, index) => {
+                return (
+                  <ArticlePreview
+                    clublink={clublink}
+                    category={category}
+                    article={article}
+                    key={index}
+                    index={index}
+                    isOwner={
+                      userinfo.userObj && userinfo.userObj.uid === article.uid
+                    }
+                  />
+                );
+              })}
+          </Body>{" "}
+        </>
+      )}
+    </>
   );
 };
 export default Community;
