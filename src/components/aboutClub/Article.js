@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
 // import {} from "../../styles/StyledArticle";
-import { firestore } from "../../firebase";
+import { firestore, firebase } from "../../firebase";
 import { Link, RichText, Date } from "prismic-reactjs";
 
 import { load } from "cheerio";
@@ -17,7 +17,8 @@ const Article = ({ match }) => {
       console.log("hello");
       const rawData = await firestore.collection("clubs").doc(category).get();
       const articles = rawData.data()[clublink].articles;
-      const DBarticle = articles[articles.length - 1 - id];
+      const DbIndex = articles.length - 1 - id;
+      const DBarticle = articles[DbIndex];
       const {
         views,
         name,
@@ -47,6 +48,22 @@ const Article = ({ match }) => {
   const onSubmit = (e) => {
     e.preventDefault();
   };
+
+  const Delete = async () => {
+    alert("준비되지 않는 기능입니다.");
+    /*
+    await firestore
+      .collection("clubs")
+      .doc(category)
+      .update({
+        ["aaaa".art]: firebase.firestore.FieldValue.arrayRemove(),
+        // [`${clublink}.articles`]: firebase.firestore.FieldValue.arrayRemove(
+        //   article
+        // ),
+      });
+      */
+  };
+
   return (
     <PageWrap>
       {loading ? (
@@ -59,8 +76,8 @@ const Article = ({ match }) => {
             {article.count}
           </span>
           <div>{article.content}</div>
-          <button>Delete</button>
-          <button>Edit</button>
+          <button onClick={Delete}>Delete</button>
+          <button onClick={Delete}>Edit</button>
           <form onSubmit={onSubmit}>
             <input placeholder="Enter new comment here..." />
             <button>add comment</button>

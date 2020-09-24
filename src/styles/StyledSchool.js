@@ -34,7 +34,7 @@ const Img = styled.div`
   height: 300px;
   margin: 0 auto;
   background: ${(props) => `url("image/${props.imagePath}")`} no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 `;
 
 const TextTemplate = styled.div`

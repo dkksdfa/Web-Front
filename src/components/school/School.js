@@ -15,6 +15,7 @@ const School = () => {
   React.useEffect(() => {
     const getHtml = async () => {
       try {
+        let result = "lodding";
         console.error("you have to think the weekend");
         const response = await axios.get(
           `http://daekyeong.sen.hs.kr/70633/subMenu.do`
@@ -22,16 +23,20 @@ const School = () => {
         const $ = cheerio.load(response.data);
         const $bodyList = $("td.today")[0].children[1].children[1].children[1]
           .attribs.onclick;
-        const rResult = $bodyList.replace(/[^0-9]/g, "");
-        const sponse = await axios.get(
-          `http://daekyeong.sen.hs.kr/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId=${rResult}`
-        );
-        const op = cheerio.load(sponse.data);
-        const $tableList = op("table tbody").children("tr")[3];
-        const rawData = $tableList.children[3].children[0].data;
-        const result = rawData.slice(7, rawData.length - 6).split(",");
+        if ($bodyList) {
+          const rResult = $bodyList.replace(/[^0-9]/g, "");
+          const sponse = await axios.get(
+            `http://daekyeong.sen.hs.kr/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId=${rResult}`
+          );
+          const op = cheerio.load(sponse.data);
+          const $tableList = op("table tbody").children("tr")[3];
+          const rawData = $tableList.children[3].children[0].data;
+          result = rawData.slice(7, rawData.length - 6).split(",");
+        } else {
+          result = "주말이라 급식 정보가 없습니다.";
+        }
         setData(result);
-        return response;
+        return result;
       } catch (error) {
         console.error(error);
       }
