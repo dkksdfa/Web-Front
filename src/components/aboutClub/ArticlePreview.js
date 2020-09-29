@@ -10,9 +10,6 @@ import { firebase, firestore } from "../../firebase";
 // } from "../../styles/StyledArticlePreview";
 
 import { Link } from "react-router-dom";
-import { Date } from "prismic-reactjs";
-import { Userinfo } from "..";
-
 const ArticlePreview = ({ clublink, category, article, index, isOwner }) => {
   const onEditClick = () => {};
   const onDeleteClick = () => {

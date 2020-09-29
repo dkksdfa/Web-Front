@@ -10,9 +10,11 @@ const Join = () => {
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(null);
   const [classnumber, setClass] = useState(null);
+
   const history = useHistory();
   const onSubmit = async (e) => {
     e.preventDefault();
+
     if (password !== conformPassword) {
       alert("The password must be matched with conform password.");
     } else {
@@ -24,14 +26,12 @@ const Join = () => {
             userData = user.uid;
           }
         });
+        const object = { name, grade, classnumber };
+        firestore.collection("additional userinfo").doc(userData).set(object);
         history.push("/");
       } catch (error) {
-        console.log("error : ", error);
         alert(error.message);
       }
-      const object = { name, grade, classnumber };
-      console.log({ object });
-      firestore.collection("additional userinfo").doc(userData).set(object);
     }
   };
   const onChange = (e) => {
@@ -77,17 +77,11 @@ const Join = () => {
           name="name"
         />
         <select name="grade" onChange={onChange}>
-          <option value="" selected disabled hidden>
-            학년
-          </option>
           <option value="1">1학년</option>
           <option value="2">2학년</option>
           <option value="3">3학년</option>
         </select>
         <select name="classnumber" onChange={onChange}>
-          <option value="" selected disabled hidden>
-            반
-          </option>
           <option value="1">1반</option>
           <option value="2">2반</option>
           <option value="3">3반</option>

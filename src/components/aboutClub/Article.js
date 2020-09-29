@@ -2,85 +2,42 @@ import React, { useContext, useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
 // import {} from "../../styles/StyledArticle";
 import { firestore } from "../../firebase";
-import { Link, RichText, Date } from "prismic-reactjs";
 import { Userinfo } from "../index";
-import { load } from "cheerio";
 import { useHistory } from "react-router-dom";
-import { firebase } from "../../firebase";
-import { isCompositeComponent } from "react-dom/test-utils";
+
 const Article = ({ match }) => {
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [commentContent, setCommentContent] = useState("");
   const [edit, setEdit] = useState(false);
-  const [editText, setEditText] = useState("");
+  const [editText, setEditText] = useState(null);
+  const [error, setError] = useState(false);
+
   const {
-    params: { category, id, clublink },
+    params: { category, articleId, clublink },
   } = match;
-  const { articleId } = match.params;
-  const userinfo = useContext(Userinfo);
+
+  const { userObj } = useContext(Userinfo);
   const history = useHistory();
 
-  useEffect(() => {
+  const getArticle = async () => {
     setLoading(true);
-    const getArticle = async () => {
-      const rawData = await firestore
-        .collection("articles")
-        .where("articleId", "==", articleId)
+    const rawData = await firestore.collection("articles").doc(articleId).get();
+    const realArticle = rawData.data();
+    if (realArticle) {
+      const dbUser = await firestore
+        .collection("additional userinfo")
+        .doc(realArticle.creatorId)
         .get();
-      rawData.forEach((dbArticle) => {
-        setArticle(dbArticle.data());
-        setEditText(dbArticle.data().content);
-      });
-      setLoading(false);
-    };
-    getArticle();
-  }, [category, clublink]);
+      const creatorName = dbUser.data().name;
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (!userinfo.isLoggedIn) {
-      alert("로그인을 해주세요.");
-      history.push("/login");
+      setArticle({ ...realArticle, creatorName });
+      setEditText(realArticle.content);
     } else {
-      const uid = userinfo.userObj.uid;
-      try {
-        const DBUserdata = await firestore
-          .collection("additional userinfo")
-          .doc(uid)
-          .get()
-          .catch((error) => {
-            throw error;
-          });
-        const commentObj = {
-          content: commentContent,
-          count: 0,
-          date: new Date(),
-          name: DBUserdata.data().name,
-          uid,
-        };
-        const rawData = await firestore.collection("clubs").doc(category).get();
-        const articles = rawData.data()[clublink].articles;
-        const DBarticleIndex = articles.length - 1 - id;
-        const DBComments = await firestore
-          .collection("clubs")
-          .doc(category)
-          .get();
-
-        let JSONdata = JSON.parse(JSON.stringify(DBComments.data()));
-        JSONdata[clublink].articles[DBarticleIndex].comments.unshift(
-          commentObj
-        );
-        setCommentContent("");
-        console.log(JSONdata);
-        await firestore.collection("clubs").doc(category).set(JSONdata);
-      } catch (error) {
-        console.error(error);
-      }
+      setError(true);
     }
-  };
-  const commentChange = (e) => {
-    setCommentContent(e.target.value);
+
+    setLoading(false);
   };
   const onDelete = async () => {
     const lastCheck = window.confirm(
@@ -91,54 +48,71 @@ const Article = ({ match }) => {
       history.push(`/club/${category}/${clublink}`);
     }
   };
+
   const onEditToggle = () => {
     setEdit((prev) => !prev);
   };
-
-  const submitChange = (e) => {
+  const submitChange = async (e) => {
     e.preventDefault();
+    console.log("clicked");
+    await firestore
+      .doc(`articles/${article.articleId}`)
+      .update({ content: editText });
+    setEdit(false);
+    setArticle((prev) => ({ ...prev, content: editText }));
   };
   const onEditValueChange = (e) => {
     setEditText(e.target.value);
   };
+  useEffect(() => {
+    getArticle();
+  }, []);
 
   return (
     <PageWrap>
       {loading ? (
         <h1>loading...</h1>
+      ) : error ? (
+        <h1>Url Error!</h1>
       ) : (
         <>
           <h1>{article.title}</h1>
           <span>
-            {Date(new Date(article.date.seconds * 1000)).toString()} | views :{" "}
-            {article.views} | {article.creatorName} | count : {article.count}
+            {Date(new Date(article.date.seconds * 1000)).toString()} |{" "}
+            {article.creatorName} | count : {article.count}
           </span>
-          {edit ? (
-            <form onSubmit={submitChange}>
-              <input
-                value={editText}
-                onChange={onEditValueChange}
-                placeholder="Edit content"
-              />
-              <button onClick={onEditToggle}>Cancle</button>
-              <input type="submit" value="Edit" />
-            </form>
-          ) : (
+          {userObj && (
             <>
-              <div>{article.content}</div>
-              <button onClick={onEditToggle}>Edit</button>{" "}
-              <button onClick={onDelete}>Delete</button>
+              {userObj.uid === article.creatorId && (
+                <>
+                  {edit ? (
+                    <form onSubmit={submitChange}>
+                      <input
+                        value={editText}
+                        onChange={onEditValueChange}
+                        placeholder="Edit content"
+                      />
+                      <button onClick={onEditToggle}>Cancle</button>
+                      <input type="submit" value="Edit" />
+                    </form>
+                  ) : (
+                    <>
+                      <div>{article.content}</div>
+                      <button onClick={onEditToggle}>Edit</button>{" "}
+                      <button onClick={onDelete}>Delete</button>
+                    </>
+                  )}
+                </>
+              )}
+              <form>
+                <input
+                  placeholder="Enter new comment here..."
+                  name="commentContent"
+                />
+                <input type="submit" value="add comment" />
+              </form>
             </>
           )}
-          <form onSubmit={onSubmit}>
-            <input
-              placeholder="Enter new comment here..."
-              value={commentContent}
-              onChange={commentChange}
-              name="commentContent"
-            />
-            <input type="submit" value="add comment" />
-          </form>
         </>
       )}
     </PageWrap>

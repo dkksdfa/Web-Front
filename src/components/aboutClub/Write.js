@@ -12,7 +12,7 @@ const Write = ({ match }) => {
   const [content, setContent] = useState("");
   const [isRegisterd, setRegisterd] = useState(false);
   // const [image, setImage] = useState([]);
-  // const views = 0;
+
   // const count = 0;
   const userinfo = React.useContext(Userinfo);
   const history = useHistory();
@@ -26,18 +26,12 @@ const Write = ({ match }) => {
       if (!isRegisterd) {
         setRegisterd(true);
         const uid = userinfo.userObj.uid;
-        const user = await firestore
-          .collection("additional userinfo")
-          .doc(uid)
-          .get();
         const newObj = {
           title,
           content,
           count: 0,
-          views: 0,
           articleId: uuidv4(),
           date: new Date(),
-          creatorName: user.data().name,
           creatorId: uid,
           club: clublink,
         };
