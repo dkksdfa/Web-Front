@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import cheerio from "cheerio";
 import { getDateDifference } from "../../library/functions";
-import { Background, Today, Container, Wrap } from "../../styles/StyledSchool";
+// import { Background, Today, Container, Wrap } from "../../styles/StyledSchool";
 import Content from "./Content";
 import { Userinfo } from "..";
 import { firestore } from "../../firebase";
@@ -63,9 +63,9 @@ const School = () => {
     getUserinfo();
   }, [userinfo]);
   return (
-    <Background>
-      <Wrap>
-        <Container>
+    <div>
+      <div>
+        <div>
           <Content
             imagePath="/school.jpg"
             label="학교 홈페이지가기"
@@ -81,9 +81,9 @@ const School = () => {
             label="온라인 클래스로"
             link={onlineClass}
           />
-        </Container>
-      </Wrap>
-      <Today>
+        </div>
+      </div>
+      <div>
         <h2>오늘의 급식</h2>
         <h2>-----------------------------</h2>
         {!data ? (
@@ -96,8 +96,8 @@ const School = () => {
           ))
         )}
         <h2>-----------------------------</h2>
-      </Today>
-    </Background>
+      </div>
+    </div>
   );
 };
 export default School;

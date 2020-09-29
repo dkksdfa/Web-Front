@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authService as auth } from "../../firebase";
+import { authService as auth, firebase } from "../../firebase";
 import PageWrap from "../PageWrap";
 export default () => {
   const [email, setEmail] = useState("");
@@ -33,6 +33,11 @@ export default () => {
     if (name === "password") setPassword(value);
   };
 
+  const onGoogle = async () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    await auth.signInWithPopup(provider);
+    history.push("/");
+  };
   return (
     <PageWrap>
       <h1>login page</h1>
@@ -47,7 +52,7 @@ export default () => {
         <input type="submit" value="login" />
       </form>
 
-      <button>google login</button>
+      <button onClick={onGoogle}>google login</button>
       <p>create id</p>
     </PageWrap>
   );

@@ -1,6 +1,7 @@
 import PageWrap from "../PageWrap";
 import React, { useState } from "react";
-import "../../styles/Write.css";
+// import "../../styles/Write.css";
+import { v4 as uuidv4 } from "uuid";
 import { firestore, firebase } from "../../firebase";
 import { Userinfo } from "..";
 import { useHistory } from "react-router-dom";
@@ -9,10 +10,10 @@ const Write = ({ match }) => {
   const { clublink, category } = match.params;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isRegisterd, setRegisterd] = useState(false);
   // const [image, setImage] = useState([]);
   // const views = 0;
   // const count = 0;
-
   const userinfo = React.useContext(Userinfo);
   const history = useHistory();
 
@@ -22,34 +23,30 @@ const Write = ({ match }) => {
       alert("로그인을 해주세요.");
       history.push("/login");
     } else {
-      const uid = userinfo.userObj.uid;
-      const obj = await firestore
-        .collection("additional userinfo")
-        .doc(uid)
-        .get()
-        .then((doc) => doc.data().name)
-        .then((name) => ({
+      if (!isRegisterd) {
+        setRegisterd(true);
+        const uid = userinfo.userObj.uid;
+        const user = await firestore
+          .collection("additional userinfo")
+          .doc(uid)
+          .get();
+        const newObj = {
           title,
           content,
           count: 0,
           views: 0,
+          articleId: uuidv4(),
           date: new Date(),
-          comments: [],
-          name,
-          uid,
-        }))
-        .catch((error) => {
-          throw error;
-        });
-      await firestore
-        .collection("clubs")
-        .doc(category)
-        .update({
-          [`${clublink}.articles`]: firebase.firestore.FieldValue.arrayUnion(
-            obj
-          ),
-        });
-      history.push(`/club/${match.params.category}/${match.params.clublink}`);
+          creatorName: user.data().name,
+          creatorId: uid,
+          club: clublink,
+        };
+        await firestore
+          .collection("articles")
+          .doc(newObj.articleId)
+          .set(newObj);
+        history.push(`/club/${match.params.category}/${match.params.clublink}`);
+      }
     }
   };
 

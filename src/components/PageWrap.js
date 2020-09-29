@@ -1,11 +1,11 @@
 import React from "react";
-import { ContentJustify, ContentTemplate } from "../styles/StyledPageWrap";
+// import { ContentJustify, ContentTemplate } from "../styles/StyledPageWrap";
 
 const PageWrap = ({ children }) => {
   return (
-    <ContentTemplate>
-      <ContentJustify>{children}</ContentJustify>
-    </ContentTemplate>
+    <div>
+      <div>{children}</div>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import PageWrap from "../PageWrap";
-import { Title, ClubWrap, ClubIntro } from "../../styles/StyledClub";
+// import { Title, ClubWrap, ClubIntro } from "../../styles/StyledClub";
 import { Link } from "react-router-dom";
 
 const RenderClub = ({ loading, category, clubs }) => {
@@ -14,17 +14,18 @@ const RenderClub = ({ loading, category, clubs }) => {
   else
     return (
       <PageWrap>
-        <Title>{category} Club List</Title>
-        <ClubWrap>
+        <div>{category} Club List</div>
+        <div>
           {clubs.map((value, index) => {
             const clubLink = `/club/${category}/${value.link}`;
             return (
               <Link to={clubLink} key={index}>
-                <ClubIntro key={index} image={value.link} />
+                {/* <ClubIntro key={index} image={value.link} /> */}
+                <div key={index}>{value.link}</div>
               </Link>
             );
           })}
-        </ClubWrap>
+        </div>
       </PageWrap>
     );
 };

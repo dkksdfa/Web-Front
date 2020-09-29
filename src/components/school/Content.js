@@ -1,25 +1,25 @@
 import React from "react";
-import {
-  Box,
-  ImageTemplate,
-  Img,
-  TextTemplate,
-} from "../../styles/StyledSchool";
+// import {
+//   Box,
+//   ImageTemplate,
+//   Img,
+//   TextTemplate,
+// } from "../../styles/StyledSchool";
 
 const Content = ({ imagePath, label, link }) => {
   return (
-    <Box>
-      <ImageTemplate>
+    <div>
+      <div>
         <a href={link} target="_blank" rel="noopener noreferrer">
-          <Img imagePath={imagePath} />
+          {/* <Img imagePath={imagePath} /> */}
         </a>
-      </ImageTemplate>
-      <TextTemplate>
+      </div>
+      <div>
         <a href={link} target="_blank" rel="noopener noreferrer">
           {label}
         </a>
-      </TextTemplate>
-    </Box>
+      </div>
+    </div>
   );
 };
 

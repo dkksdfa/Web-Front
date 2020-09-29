@@ -30,6 +30,7 @@ const Join = () => {
         alert(error.message);
       }
       const object = { name, grade, classnumber };
+      console.log({ object });
       firestore.collection("additional userinfo").doc(userData).set(object);
     }
   };

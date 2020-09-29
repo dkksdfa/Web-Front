@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonPosition, Button, Navigation } from "../styles/StyledNav";
+// import { ButtonPosition, Button, Navigation } from "../styles/StyledNav";
 import { Link } from "react-router-dom";
 import { Userinfo } from "./";
 import { authService } from "../firebase";
@@ -24,10 +24,10 @@ const Nav = () => {
   return (
     <Userinfo.Consumer>
       {({ isLoggedIn }) => (
-        <Navigation>
-          <ButtonPosition>
+        <nav>
+          <div>
             {menulist(isLoggedIn).map((val, i) => (
-              <Button key={i}>
+              <button key={i}>
                 <Link
                   to={val.link}
                   style={{
@@ -36,17 +36,17 @@ const Nav = () => {
                 >
                   {val.title}
                 </Link>
-              </Button>
+              </button>
             ))}
             {isLoggedIn ? (
-              <Button onClick={onClick}>Logout</Button>
+              <button onClick={onClick}>Logout</button>
             ) : (
-              <Button>
+              <button>
                 <Link to="/login">Login</Link>
-              </Button>
+              </button>
             )}
-          </ButtonPosition>
-        </Navigation>
+          </div>
+        </nav>
       )}
     </Userinfo.Consumer>
   );

@@ -20,6 +20,7 @@ function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
+
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
@@ -34,17 +35,23 @@ function App() {
   return (
     <div className="container">
       {init && (
-        <Userinfo.Provider value={{ isLoggedIn, setLoggedIn, userObj }}>
+        <Userinfo.Provider
+          value={{
+            isLoggedIn,
+            setLoggedIn,
+            userObj,
+          }}
+        >
           <Nav />
           <Route path="/" exact>
             <Home isLoggedIn={isLoggedIn} />
           </Route>
           <Route path="/School" component={School} />
           <Route path="/clubs/:category" exact component={Club} />
-          <Route path="/club/:category/:clubname" exact component={Community} />
+          <Route path="/club/:category/:clublink" exact component={Community} />
           <Route path="/write/:category/:clublink" component={Write} />
           <Route
-            path="/article/:category/:clublink/:id"
+            path="/article/:category/:clublink/:articleId"
             exact
             component={Article}
           />
