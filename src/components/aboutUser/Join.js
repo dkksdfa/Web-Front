@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authService as auth, firestore } from "../../firebase";
 import PageWrap from "../PageWrap";
+import GoogleLogin from "./GoogleLogin";
 
 const Join = () => {
   const [email, setEmail] = useState("");
@@ -93,6 +94,9 @@ const Join = () => {
         </select>
         <input value="Join!" type="submit" />
       </form>
+      <hr />
+      <h1>Login with google</h1>
+      <GoogleLogin />
     </PageWrap>
   );
 };

@@ -1,12 +1,13 @@
 import React from "react";
 import axios from "axios";
 import cheerio from "cheerio";
-import { getDateDifference } from "../../library/functions";
-// import { Background, Today, Container, Wrap } from "../../styles/StyledSchool";
+// import { getDateDifference } from "../../library/functions";
+import { Background, Today, Container, Wrap } from "../../styles/StyledSchool";
 import Content from "./Content";
-import { Userinfo } from "..";
+import { Userinfo } from "../../App";
 import { firestore } from "../../firebase";
 const School = () => {
+  console.error("School Feed Information Error");
   const [data, setData] = React.useState(null);
   const Diagnosis = "https://hcs.eduro.go.kr/#/loginHome";
   const homePage = "http://daekyeong.sen.hs.kr/index.do";
@@ -33,11 +34,11 @@ const School = () => {
           const $tableList = op("table tbody").children("tr")[3];
           const rawData = $tableList.children[3].children[0].data;
           result = rawData.slice(7, rawData.length - 6).split(",");
+          setData(result);
         } else {
           result = "주말이라 급식 정보가 없습니다.";
+          setData(result);
         }
-        setData(result);
-        return result;
       } catch (error) {
         console.error(error);
       }
@@ -49,25 +50,23 @@ const School = () => {
 
   // React.useEffect(() => {}, []);
   React.useEffect(() => {
-    const getUserinfo = () => {
+    const getUserinfo = async () => {
       if (userinfo.isLoggedIn) {
         for (let i in userinfo.userObj) {
           if (i === "uid") {
-            firestore
+            const userData = await firestore
               .collection("additional userinfo")
               .doc(userinfo.userObj[i])
-              .get()
-              .then((doc) => {
-                console.log("set!");
-                setOnlineClass(
-                  `https://hoc23.ebssw.kr/20dk${doc.data().grade}${
-                    doc.data().classnumber
-                  }`
-                );
-              })
-              .catch((error) => {
-                throw error;
-              });
+              .get();
+
+            if (userData) {
+              console.log(userData);
+              setOnlineClass(
+                `https://hoc23.ebssw.kr/20dk${userData.data().grade}${
+                  userData.data().classnumber
+                }`
+              );
+            }
           }
         }
       }

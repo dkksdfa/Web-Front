@@ -1,10 +1,47 @@
 import { createContext } from "react";
 
 export const clublist = {
-  SW: ["webfront", "ev3", "youtube"],
-  Food: ["someclub1", "someclub2"],
-  Finance: ["someclub1", "someclub2"],
-  Other: ["someclub1", "someclub2"],
+  SW: [
+    "webfront",
+    "ev3",
+    "youtube",
+    "basicdesign",
+    "ev3",
+    "jewelry",
+    "mural",
+    "shoesdesign",
+    "practicaldesign",
+  ],
+  Food: ["cookingmedia", "dalbodre", "streetrestaurant", "sugar"],
+  Finance: [
+    "analyzeeconomy",
+    "financialvillage",
+    "practicalaccounting",
+    "underwriting",
+  ],
+  Other: [
+    "band",
+    "billiards",
+    "boardgame",
+    "broadcast",
+    "cheer",
+    "chinese",
+    "dance",
+    "ddobagi",
+    "employment",
+    "handicraft",
+    "hanyang",
+    "nailart",
+    "plamodel",
+    "portfolio",
+    "promotion1",
+    "promotion2",
+    "promotion3",
+    "promotionvideo",
+    "puzzle",
+    "screenseller",
+    "talent",
+  ],
 };
 
 export { default as Home } from "./home/Home";
@@ -16,5 +53,3 @@ export { default as Login } from "./aboutUser/Login.js";
 export { default as Join } from "./aboutUser/Join.js";
 export { default as Modify } from "./aboutUser/Modify.js";
 export { default as Article } from "./aboutClub/Article";
-
-export const Userinfo = createContext();

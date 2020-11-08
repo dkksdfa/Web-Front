@@ -1,10 +1,10 @@
 import React from "react";
-// import {
-//   Today,
-//   ClubIntro,
-//   ClubWrap,
-//   TodayTitle,
-// } from "../../styles/StyledHome";
+import {
+  Today,
+  ClubIntro,
+  ClubWrap,
+  TodayTitle,
+} from "../../styles/StyledHome";
 import { Link } from "react-router-dom";
 const BottomOfHome = () => {
   const ClubExample = [
@@ -18,16 +18,15 @@ const BottomOfHome = () => {
   const clubs = ClubExample.map((value, index) => {
     return (
       <Link to={`/club/${value.category}/${value.link}`} key={index}>
-        {/* <ClubIntro image={value.link} /> */}
-        {value.link}
+        <ClubIntro image={`${value.category}/${value.link}`} />
       </Link>
     );
   });
   return (
-    <div>
-      <div>Today's Top Communities</div>
-      <div>{clubs}</div>
-    </div>
+    <Today>
+      <TodayTitle>Today's Top Communities</TodayTitle>
+      <ClubWrap>{clubs}</ClubWrap>
+    </Today>
   );
 };
 

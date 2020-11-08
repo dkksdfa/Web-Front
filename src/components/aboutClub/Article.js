@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
-// import {} from "../../styles/StyledArticle";
+import {} from "../../styles/StyledArticle";
 import { firestore } from "../../firebase";
-import { Userinfo } from "../index";
+import { Userinfo } from "../../App";
 import { useHistory } from "react-router-dom";
 
 const Article = ({ match }) => {

@@ -2,8 +2,8 @@ import PageWrap from "../PageWrap";
 import React, { useState } from "react";
 // import "../../styles/Write.css";
 import { v4 as uuidv4 } from "uuid";
-import { firestore, firebase } from "../../firebase";
-import { Userinfo } from "..";
+import { firestore } from "../../firebase";
+import { Userinfo } from "../../App";
 import { useHistory } from "react-router-dom";
 
 const Write = ({ match }) => {

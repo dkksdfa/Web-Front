@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authService as auth, firebase } from "../../firebase";
+import { authService as auth } from "../../firebase";
 import PageWrap from "../PageWrap";
-export default () => {
+import GoogleLogin from "./GoogleLogin";
+export default ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -13,9 +14,8 @@ export default () => {
         .signInWithEmailAndPassword(email, password)
         .then(() => history.push("/"));
     } catch (error) {
-      // if error occurred
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      const errorCode = error.code;
+      const errorMessage = error.message;
       if (errorCode === "auth/weak-password") {
         alert("The password is too weak.");
       } else {
@@ -33,11 +33,6 @@ export default () => {
     if (name === "password") setPassword(value);
   };
 
-  const onGoogle = async () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    await auth.signInWithPopup(provider);
-    history.push("/");
-  };
   return (
     <PageWrap>
       <h1>login page</h1>
@@ -52,7 +47,12 @@ export default () => {
         <input type="submit" value="login" />
       </form>
 
-      <button onClick={onGoogle}>google login</button>
+      <GoogleLogin
+        isLoggedIn={isLoggedIn}
+        setLoggedIn={setLoggedIn}
+        userObj={userObj}
+        setUserObj={setUserObj}
+      />
       <p>create id</p>
     </PageWrap>
   );

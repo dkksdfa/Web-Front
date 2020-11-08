@@ -1,54 +1,64 @@
-import React from "react";
-import { firebase, firestore } from "../../firebase";
-// import {
-//   Body,
-//   Title,
-//   Writer,
-//   Inner,
-//   Info,
-//   Comment,
-// } from "../../styles/StyledArticlePreview";
+import React, { useEffect, useState } from "react";
+import { firestore } from "../../firebase";
+import {
+  Body,
+  Title,
+  Writer,
+  Inner,
+  Info,
+  Comment,
+} from "../../styles/StyledArticlePreview";
 
 import { Link } from "react-router-dom";
-const ArticlePreview = ({ clublink, category, article, index, isOwner }) => {
+const ArticlePreview = ({ clublink, category, article, isOwner }) => {
+  const [creatorName, setCreatorName] = useState("");
+
+  const setInit = async () => {
+    const dbUser = await firestore
+      .collection("additional userinfo")
+      .doc(article.creatorId)
+      .get();
+    setCreatorName(dbUser.data().name);
+  };
+  useEffect(() => {
+    setInit();
+  }, []);
   const onEditClick = () => {};
-  const onDeleteClick = () => {
-    const ok = window.confirm("정말로 이 글을 지우시겠습니까?");
-    // console.log(ok);
-    if (ok) {
-      firestore
-        .collection("clubs")
-        .doc(category)
-        .get()
-        .then((data) => {
-          firebase.firestore.FieldValue.arrayRemove({ date: article.date });
-        });
+
+  const onDeleteClick = async () => {
+    const lastCheck = window.confirm(
+      "Are you sure that you delete this article?"
+    );
+    if (lastCheck) {
+      await firestore.collection("articles").doc(article.articleId).delete();
     }
   };
 
-  console.log({ isOwner });
   const articleLink = `/article/${category}/${clublink}/${article.articleId}`;
   return (
-    <>
+    <Body>
       <Link to={articleLink}>
-        <div>
+        <Inner>
           <div>
-            <div>{article.name}</div>
-            <div>
-              • {clublink} {/* dateString */}
-            </div>
-            <div>{article.title}</div>
-            <div>{/*Object.keys(article.comments).length || 0*/} Comments </div>
+            <Writer>{creatorName}</Writer>
+            <Info>
+              {Date(new Date(article.date.seconds * 1000)).toString()} | count :{" "}
+              {article.count}
+            </Info>
+            <Title>{article.title}</Title>
+            <Comment>
+              {/*Object.keys(article.comments).length || 0*/} Comments{" "}
+            </Comment>{" "}
+            {isOwner && (
+              <>
+                <span onClick={onDeleteClick}>Delete</span>{" "}
+                <span onClick={onEditClick}>Edit</span>
+              </>
+            )}
           </div>
-        </div>
+        </Inner>
       </Link>
-      {isOwner && (
-        <>
-          <span onClick={onDeleteClick}>Delete</span>{" "}
-          <span onClick={onEditClick}>Edit</span>
-        </>
-      )}
-    </>
+    </Body>
   );
 };
 export default ArticlePreview;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Route } from "react-router-dom";
 import {
   Home,
@@ -10,12 +10,11 @@ import {
   Join,
   Modify,
   Article,
-  Userinfo,
 } from "./components";
 import Nav from "./components/Nav.js";
 import "./App.scss";
 import { authService } from "./firebase";
-
+export const Userinfo = createContext();
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -25,7 +24,7 @@ function App() {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setLoggedIn(true);
-        setUserObj({ uid: user.uid });
+        setUserObj({ uid: user.uid, displayName: user.displayName });
       } else {
         setLoggedIn(false);
       }
@@ -40,6 +39,7 @@ function App() {
             isLoggedIn,
             setLoggedIn,
             userObj,
+            setUserObj,
           }}
         >
           <Nav />
@@ -58,7 +58,12 @@ function App() {
           <Route path="/Join" component={Join} />
           <Route path="/Modify" component={Modify} />
           <Route path="/Login">
-            <Login isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
+            <Login
+              isLoggedIn={isLoggedIn}
+              setLoggedIn={setLoggedIn}
+              userObj={userObj}
+              setUserObj={setUserObj}
+            />
           </Route>
         </Userinfo.Provider>
       )}

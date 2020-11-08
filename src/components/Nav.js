@@ -1,7 +1,7 @@
 import React from "react";
-// import { ButtonPosition, Button, Navigation } from "../styles/StyledNav";
+import { ButtonPosition, Button, Navigation } from "../styles/StyledNav";
 import { Link } from "react-router-dom";
-import { Userinfo } from "./";
+import { Userinfo } from "../App";
 import { authService } from "../firebase";
 
 const Nav = () => {
@@ -20,14 +20,16 @@ const Nav = () => {
       : { title: "Join", link: "/Join" },
   ];
 
-  const onClick = () => authService.signOut();
+  const onClick = () => {
+    authService.signOut();
+  };
   return (
     <Userinfo.Consumer>
       {({ isLoggedIn }) => (
-        <nav>
-          <div>
+        <Navigation>
+          <ButtonPosition>
             {menulist(isLoggedIn).map((val, i) => (
-              <button key={i}>
+              <Button key={i}>
                 <Link
                   to={val.link}
                   style={{
@@ -36,17 +38,19 @@ const Nav = () => {
                 >
                   {val.title}
                 </Link>
-              </button>
+              </Button>
             ))}
             {isLoggedIn ? (
-              <button onClick={onClick}>Logout</button>
+              <Button onClick={onClick}>
+                <Link to="/">Logout</Link>
+              </Button>
             ) : (
-              <button>
+              <Button>
                 <Link to="/login">Login</Link>
-              </button>
+              </Button>
             )}
-          </div>
-        </nav>
+          </ButtonPosition>
+        </Navigation>
       )}
     </Userinfo.Consumer>
   );

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
 import { useHistory } from "react-router-dom";
 import { authService, firestore, firebase } from "../../firebase";
+
 export default () => {
   const history = useHistory();
   const [init, setInit] = useState(false);
@@ -35,6 +36,7 @@ export default () => {
   const onClick = async () => {
     const uid = await getUid();
     firestore.collection("additional userinfo").doc(uid).set(userinfo);
+    alert("You success to modify.");
   };
   const onChange = (e) => {
     const {
