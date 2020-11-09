@@ -28,11 +28,6 @@ function App() {
           uid: user.uid,
           displayName: user.displayName || "default name",
         });
-        console.log("changed");
-        console.log({
-          uid: user.uid,
-          displayName: user.displayName || "name is undefined",
-        });
       } else {
         setLoggedIn(false);
       }
