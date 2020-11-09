@@ -24,7 +24,15 @@ function App() {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setLoggedIn(true);
-        setUserObj({ uid: user.uid, displayName: user.displayName });
+        setUserObj({
+          uid: user.uid,
+          displayName: user.displayName || "default name",
+        });
+        console.log("changed");
+        console.log({
+          uid: user.uid,
+          displayName: user.displayName || "name is undefined",
+        });
       } else {
         setLoggedIn(false);
       }
@@ -55,7 +63,14 @@ function App() {
             exact
             component={Article}
           />
-          <Route path="/Join" component={Join} />
+          <Route path="/Join">
+            <Join
+              isLoggedIn={isLoggedIn}
+              setLoggedIn={setLoggedIn}
+              userObj={userObj}
+              setUserObj={setUserObj}
+            />
+          </Route>
           <Route path="/Modify" component={Modify} />
           <Route path="/Login">
             <Login

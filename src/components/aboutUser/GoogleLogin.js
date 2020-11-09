@@ -16,7 +16,7 @@ const GoogleLogin = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
     await authService.onAuthStateChanged(async (user) => {
       if (user) {
         setDbUser({ displayName: user.displayName, uid: user.uid });
-        setUserObj({ displayName: user.displayName, uid: user.uid });
+
         console.log({ displayName: user.displayName, uid: user.uid });
         const check = await firestore
           .collection("additional userinfo")
@@ -42,14 +42,12 @@ const GoogleLogin = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
         grade: "1",
         classnumber: "1",
       });
-
-      setLoggedIn(true);
       // alert("Set your grade and class");
       // history.push("/Modify");
     }
   };
 
-  return <button onClick={onClick}>google login</button>;
+  return <button onClick={onClick}>Login with google</button>;
 };
 
 export default GoogleLogin;

@@ -4,7 +4,7 @@ import { authService as auth, firestore } from "../../firebase";
 import PageWrap from "../PageWrap";
 import GoogleLogin from "./GoogleLogin";
 
-const Join = () => {
+const Join = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [conformPassword, setConformPassword] = useState("");
@@ -29,6 +29,7 @@ const Join = () => {
         });
         const object = { name, grade, classnumber };
         firestore.collection("additional userinfo").doc(userData).set(object);
+
         history.push("/");
       } catch (error) {
         alert(error.message);
@@ -46,6 +47,18 @@ const Join = () => {
     if (e.target.name === "grade") setGrade(e.target.value);
     if (e.target.name === "classnumber") setClass(e.target.value);
   };
+
+  if (isLoggedIn) {
+    const toHome = () => {
+      history.push("/");
+    };
+    return (
+      <>
+        <h1>You are already loggedIn. </h1>
+        <button onClick={toHome}>Go to home</button>
+      </>
+    );
+  }
   return (
     <PageWrap>
       <h1>Join page</h1>
@@ -95,7 +108,7 @@ const Join = () => {
         <input value="Join!" type="submit" />
       </form>
       <hr />
-      <h1>Login with google</h1>
+
       <GoogleLogin />
     </PageWrap>
   );
