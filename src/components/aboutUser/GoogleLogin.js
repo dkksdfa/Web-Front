@@ -16,7 +16,6 @@ const GoogleLogin = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
     await authService.onAuthStateChanged(async (user) => {
       if (user) {
         setDbUser({ displayName: user.displayName, uid: user.uid });
-
         console.log({ displayName: user.displayName, uid: user.uid });
         const check = await firestore
           .collection("additional userinfo")
@@ -24,7 +23,14 @@ const GoogleLogin = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
           .get();
         if (check.data()) {
           setIsExist(true);
-        } else setIsExist(false);
+        } else {
+          setIsExist(false);
+          await firestore.collection("additional userinfo").doc(user.uid).set({
+            name: user.displayName,
+            grade: "1",
+            classnumber: "1",
+          });
+        }
       }
     });
   };
@@ -37,13 +43,6 @@ const GoogleLogin = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
     if (isLoggedIn) {
       history.push("/");
     } else {
-      await firestore.collection("additional userinfo").doc(userObj.uid).set({
-        name: userObj.displayName,
-        grade: "1",
-        classnumber: "1",
-      });
-      // alert("Set your grade and class");
-      // history.push("/Modify");
     }
   };
 

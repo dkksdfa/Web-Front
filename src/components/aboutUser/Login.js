@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { authService as auth } from "../../firebase";
 import PageWrap from "../PageWrap";
 import GoogleLogin from "./GoogleLogin";
@@ -32,6 +32,17 @@ export default ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
     if (name === "email") setEmail(value);
     if (name === "password") setPassword(value);
   };
+  if (isLoggedIn) {
+    const toHome = () => {
+      history.push("/");
+    };
+    return (
+      <>
+        <h1>You are already loggedIn. </h1>
+        <button onClick={toHome}>Go to home</button>
+      </>
+    );
+  }
 
   return (
     <PageWrap>
@@ -53,7 +64,7 @@ export default ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
         userObj={userObj}
         setUserObj={setUserObj}
       />
-      <p>create id</p>
+      <Link to="/join">create id</Link>
     </PageWrap>
   );
 };
