@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
-import {} from "../../styles/StyledArticle";
+// import {} from "../../styles/StyledArticle";
 import { firestore } from "../../firebase";
 import { Userinfo } from "../../App";
 import { useHistory } from "react-router-dom";
+import Comment from "./Comment";
 
 const Article = ({ match }) => {
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [commentContent, setCommentContent] = useState("");
   const [edit, setEdit] = useState(false);
   const [editText, setEditText] = useState(null);
   const [error, setError] = useState(false);
@@ -104,15 +104,10 @@ const Article = ({ match }) => {
                   )}
                 </>
               )}
-              <form>
-                <input
-                  placeholder="Enter new comment here..."
-                  name="commentContent"
-                />
-                <input type="submit" value="add comment" />
-              </form>
             </>
           )}
+
+          <Comment userObj={userObj} />
         </>
       )}
     </PageWrap>

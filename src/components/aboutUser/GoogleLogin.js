@@ -4,9 +4,7 @@ import { authService, firebase, firestore } from "../../firebase";
 
 const GoogleLogin = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
   const history = useHistory();
-  const [dbUser, setDbUser] = useState(null);
   const [clicked, setClicked] = useState(false);
-  const [isExist, setIsExist] = useState(false);
 
   const onGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -15,16 +13,11 @@ const GoogleLogin = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
   const getData = async () => {
     await authService.onAuthStateChanged(async (user) => {
       if (user) {
-        setDbUser({ displayName: user.displayName, uid: user.uid });
-        console.log({ displayName: user.displayName, uid: user.uid });
         const check = await firestore
           .collection("additional userinfo")
           .doc(user.uid)
           .get();
-        if (check.data()) {
-          setIsExist(true);
-        } else {
-          setIsExist(false);
+        if (!check.data()) {
           await firestore.collection("additional userinfo").doc(user.uid).set({
             name: user.displayName,
             grade: "1",
