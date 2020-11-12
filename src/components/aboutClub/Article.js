@@ -4,7 +4,8 @@ import PageWrap from "../PageWrap";
 import { firestore } from "../../firebase";
 import { Userinfo } from "../../App";
 import { useHistory } from "react-router-dom";
-import Comment from "./Comment";
+import AddComment from "./AddComment";
+import CommentList from "./CommentList";
 
 const Article = ({ match }) => {
   const [article, setArticle] = useState(null);
@@ -17,7 +18,7 @@ const Article = ({ match }) => {
     params: { category, articleId, clublink },
   } = match;
 
-  const { userObj } = useContext(Userinfo);
+  const { userObj, isLoggedIn } = useContext(Userinfo);
   const history = useHistory();
 
   const getArticle = async () => {
@@ -107,7 +108,13 @@ const Article = ({ match }) => {
             </>
           )}
 
-          <Comment userObj={userObj} />
+          <AddComment
+            userObj={userObj}
+            clublink={clublink}
+            category={category}
+            isLoggedIn={isLoggedIn}
+          />
+          <CommentList clublink={clublink} />
         </>
       )}
     </PageWrap>
