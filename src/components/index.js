@@ -1,5 +1,3 @@
-import { createContext } from "react";
-
 export const clublist = {
   SW: [
     "webfront",

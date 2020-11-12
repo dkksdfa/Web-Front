@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 // import { sortFunction } from "../../library/functions.js";
 import RenderClub from "./RenderClub";
 import { clublist } from "../index";
