@@ -18,11 +18,13 @@ const AddComment = ({ userObj, clublink, category, isLoggedIn }) => {
       club: clublink,
       category,
     };
+    setNewComment("");
     try {
-      await firestore
-        .collection("comments")
-        .doc(newCommentObject.commentId)
-        .set(newCommentObject);
+      if (newComment)
+        await firestore
+          .collection("comments")
+          .doc(newCommentObject.commentId)
+          .set(newCommentObject);
     } catch (error) {
       throw error;
     }
@@ -30,7 +32,11 @@ const AddComment = ({ userObj, clublink, category, isLoggedIn }) => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <input placeholder="Enter new comment here..." onChange={onChange} />
+        <input
+          placeholder="Enter new comment here..."
+          onChange={onChange}
+          value={newComment}
+        />
         <input type="submit" value="add comment" />
       </form>
     </>

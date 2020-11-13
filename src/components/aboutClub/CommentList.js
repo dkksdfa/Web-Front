@@ -1,22 +1,39 @@
-import { firestore } from "firebase";
+import { firestore } from "../../firebase";
 import React, { useCallback, useEffect, useState } from "react";
 
 const CommentList = ({ clublink }) => {
   const [loading, setLoading] = useState(false);
+  const [comments, setComments] = useState([]);
   const fetchData = useCallback(async () => {
     setLoading(true);
-    const comments = await firestore
+
+    const dbComments = await firestore
       .collection("comments")
       .where("club", "==", clublink)
       .orderBy("date", "asc")
       .get();
-    console.log({ comments });
+    let newComments = [];
+    dbComments.forEach((comment) => {
+      newComments.push(comment.data());
+    });
+    console.log({ newComments });
+    setComments(newComments);
     setLoading(false);
   }, [clublink]);
   useEffect(() => {
     fetchData();
   }, [fetchData]);
-  return "hello";
+  if (loading) return "Loading...";
+  if (!loading && !comments) return "";
+  return (
+    <div>
+      <ul>
+        {comments.map((val, i) => (
+          <li key={i}>{val.content}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default CommentList;
