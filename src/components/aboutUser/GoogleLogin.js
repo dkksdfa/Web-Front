@@ -9,6 +9,7 @@ const GoogleLogin = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
   const onGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     await authService.signInWithPopup(provider);
+    history.goBack();
   };
   const getData = async () => {
     await authService.onAuthStateChanged(async (user) => {
@@ -33,10 +34,6 @@ const GoogleLogin = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
   const onClick = async () => {
     onGoogle();
     setClicked(true);
-    if (isLoggedIn) {
-      history.push("/");
-    } else {
-    }
   };
 
   return <button onClick={onClick}>Login with google</button>;

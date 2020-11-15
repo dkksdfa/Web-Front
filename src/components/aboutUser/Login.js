@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { authService as auth } from "../../firebase";
 import PageWrap from "../PageWrap";
 import GoogleLogin from "./GoogleLogin";
+
 export default ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +13,7 @@ export default ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
     try {
       await auth
         .signInWithEmailAndPassword(email, password)
-        .then(() => history.push("/"));
+        .then(() => history.goBack());
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -21,7 +22,7 @@ export default ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
       } else {
         alert(errorMessage);
       }
-      console.log(error);
+      throw error;
     }
   };
   const onChange = (e) => {

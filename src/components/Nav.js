@@ -41,9 +41,7 @@ const Nav = () => {
               </Button>
             ))}
             {isLoggedIn ? (
-              <Button onClick={onClick}>
-                <Link to="/">Logout</Link>
-              </Button>
+              <Button onClick={onClick}>Logout</Button>
             ) : (
               <Button>
                 <Link to="/login">Login</Link>
