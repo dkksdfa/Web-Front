@@ -1,47 +1,35 @@
 import { firestore } from "../../firebase";
-import React, { useCallback, useEffect, useState } from "react";
-import Comment from "./Comment";
+import React, { useEffect, useState } from "react";
+import RenderComment from "./RenderComment";
 
-const CommentList = ({ clublink }) => {
-  const [loading, setLoading] = useState(false);
+const CommentList = ({ clublink, setDone }) => {
   const [comments, setComments] = useState([]);
-  // const [names, setNames] = useState([]);
-  const fetchData = async () => {
-    setLoading(true);
-
-    // let newNames = [];
-
-    const dbComments = await firestore
+  useEffect(() => {
+    setDone(false);
+    setComments([]);
+    firestore
       .collection("comments")
       .where("club", "==", clublink)
-      .orderBy("date", "desc")
-      .get();
-    dbComments.forEach(async (comment) => {
-      // result.push(comment.data());
-      setComments((prev) => prev.concat(comment.data()));
-    });
-
-    // setComments()
-    // setNames(newNames);
-    setLoading(false);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+      .onSnapshot((snapshot) => {
+        console.log(snapshot.docs);
+        const commentArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setComments(commentArray);
+        setDone(true);
+      });
+  }, [setDone, clublink]);
   return (
-    <>
-      {loading
-        ? "Loading"
-        : comments !== [] && (
-            <div>
-              {comments.map((val, i) => {
-                console.log("dddddddd");
-                return <Comment comment={val} key={i}></Comment>;
-              })}
-            </div>
-          )}
-    </>
+    <div>
+      {comments !== [] && (
+        <div>
+          {comments.map((val, i) => {
+            return <RenderComment comment={val} key={i}></RenderComment>;
+          })}
+        </div>
+      )}
+    </div>
   );
 };
 

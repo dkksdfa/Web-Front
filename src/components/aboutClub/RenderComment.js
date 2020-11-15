@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { firestore } from "../../firebase";
 
 const Comment = ({ comment }) => {
-  console.log({ comment });
-  console.log("dd");
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState("");
   const fetchData = useCallback(async () => {
@@ -14,15 +12,15 @@ const Comment = ({ comment }) => {
       .get();
     setUsername(dbUser.data().name);
     setLoading(false);
-  }, []);
+  }, [comment.creatorId]);
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
   return (
     <>
       {!loading && username && (
         <div>
-          {comment.content} | {username}
+          {comment.content} | {username} | {comment.category}/{comment.club}
         </div>
       )}
     </>

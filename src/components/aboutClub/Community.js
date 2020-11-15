@@ -23,10 +23,10 @@ const Community = ({ match }) => {
       setArticles((prev) => [...prev, article.data()]);
     });
     setLoading(false);
-  }, []);
+  }, [clublink]);
   React.useEffect(() => {
     fetchData();
-  }, [match]);
+  }, [fetchData]);
   const history = useHistory();
   const userinfo = React.useContext(Userinfo);
   const onClick = (e) => {
@@ -35,7 +35,6 @@ const Community = ({ match }) => {
       history.push("/login");
     } else history.push(linkToWrite);
   };
-  console.log(articles);
   return (
     <>
       {" "}

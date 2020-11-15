@@ -19,7 +19,6 @@ function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
-
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {

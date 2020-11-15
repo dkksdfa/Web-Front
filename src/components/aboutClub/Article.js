@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
 // import {} from "../../styles/StyledArticle";
 import { firestore } from "../../firebase";
 import { Userinfo } from "../../App";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AddComment from "./AddComment";
 import CommentList from "./CommentList";
 
@@ -13,6 +13,7 @@ const Article = ({ match }) => {
   const [edit, setEdit] = useState(false);
   const [editText, setEditText] = useState(null);
   const [error, setError] = useState(false);
+  const [done, setDone] = useState(false);
 
   const {
     params: { category, articleId, clublink },
@@ -21,7 +22,7 @@ const Article = ({ match }) => {
   const { userObj, isLoggedIn } = useContext(Userinfo);
   const history = useHistory();
 
-  const getArticle = async () => {
+  const getArticle = useCallback(async () => {
     setLoading(true);
     const rawData = await firestore.collection("articles").doc(articleId).get();
     const realArticle = rawData.data();
@@ -31,15 +32,13 @@ const Article = ({ match }) => {
         .doc(realArticle.creatorId)
         .get();
       const creatorName = dbUser.data().name;
-
       setArticle({ ...realArticle, creatorName });
       setEditText(realArticle.content);
     } else {
       setError(true);
     }
-
     setLoading(false);
-  };
+  }, [articleId]);
   const onDelete = async () => {
     const lastCheck = window.confirm(
       "Are you sure that you delete this article?"
@@ -55,7 +54,6 @@ const Article = ({ match }) => {
   };
   const submitChange = async (e) => {
     e.preventDefault();
-    console.log("clicked");
     await firestore
       .doc(`articles/${article.articleId}`)
       .update({ content: editText });
@@ -67,15 +65,27 @@ const Article = ({ match }) => {
   };
   useEffect(() => {
     getArticle();
-  }, []);
+  }, [getArticle]);
 
+  if (loading)
+    return (
+      <PageWrap>
+        <h1>loading...</h1>
+      </PageWrap>
+    );
+  if (error) {
+    return (
+      <PageWrap>
+        <h1>Error!</h1>
+        <Link to="/">Go to home</Link>
+      </PageWrap>
+    );
+  }
   return (
     <PageWrap>
-      {loading ? (
-        <h1>loading...</h1>
-      ) : error ? (
-        <h1>Url Error!</h1>
-      ) : (
+      {/* {loading && <h1>loading...</h1>} */}
+      {error && <h1>Url Error!</h1>}
+      {!loading && done && (
         <>
           <h1>{article.title}</h1>
           <span>
@@ -114,9 +124,9 @@ const Article = ({ match }) => {
             category={category}
             isLoggedIn={isLoggedIn}
           />
-          <CommentList clublink={clublink} />
         </>
       )}
+      <CommentList clublink={clublink} setDone={setDone} />
     </PageWrap>
   );
 };

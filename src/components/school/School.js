@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import cheerio from "cheerio";
 // import { getDateDifference } from "../../library/functions";
-import { Background, Today, Container, Wrap } from "../../styles/StyledSchool";
+// import { Background, Today, Container, Wrap } from "../../styles/StyledSchool";
 import Content from "./Content";
 import { Userinfo } from "../../App";
 import { firestore } from "../../firebase";

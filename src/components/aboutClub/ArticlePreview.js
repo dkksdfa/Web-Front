@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { firestore } from "../../firebase";
 import {
   Body,
@@ -12,17 +12,16 @@ import {
 import { Link } from "react-router-dom";
 const ArticlePreview = ({ clublink, category, article, isOwner }) => {
   const [creatorName, setCreatorName] = useState("");
-
-  const setInit = async () => {
+  const setInit = useCallback(async () => {
     const dbUser = await firestore
       .collection("additional userinfo")
       .doc(article.creatorId)
       .get();
     setCreatorName(dbUser.data().name);
-  };
+  }, [article]);
   useEffect(() => {
     setInit();
-  }, []);
+  }, [setInit]);
   const onEditClick = () => {};
 
   const onDeleteClick = async () => {
