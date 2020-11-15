@@ -10,8 +10,8 @@ const CommentList = ({ clublink, setDone }) => {
     firestore
       .collection("comments")
       .where("club", "==", clublink)
+      .orderBy("date", "desc")
       .onSnapshot((snapshot) => {
-        console.log(snapshot.docs);
         const commentArray = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),

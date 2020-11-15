@@ -4,6 +4,7 @@ import { firestore } from "../../firebase";
 const Comment = ({ comment }) => {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState("");
+  console.log({ comment });
   const fetchData = useCallback(async () => {
     setLoading(true);
     const dbUser = await firestore
@@ -21,6 +22,8 @@ const Comment = ({ comment }) => {
       {!loading && username && (
         <div>
           {comment.content} | {username} | {comment.category}/{comment.club}
+          <button>delete</button>
+          <button>edit</button>
         </div>
       )}
     </>
