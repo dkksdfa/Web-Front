@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+
 import { firestore } from "../../firebase";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, isOwner }) => {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState("");
-  console.log({ comment });
+
+  console.log({ isOwner });
   const fetchData = useCallback(async () => {
     setLoading(true);
     const dbUser = await firestore
@@ -13,17 +15,27 @@ const Comment = ({ comment }) => {
       .get();
     setUsername(dbUser.data().name);
     setLoading(false);
-  }, [comment.creatorId]);
+  }, [comment]);
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+  const onDelete = async () => {
+    const sure = window.confirm("Are you sure?");
+    if (sure) {
+      await firestore.collection("comments").doc(comment.id).delete();
+    }
+  };
   return (
     <>
       {!loading && username && (
         <div>
           {comment.content} | {username} | {comment.category}/{comment.club}
-          <button>delete</button>
-          <button>edit</button>
+          {isOwner && (
+            <>
+              <button onClick={onDelete}>delete</button>
+              <button>edit</button>
+            </>
+          )}
         </div>
       )}
     </>

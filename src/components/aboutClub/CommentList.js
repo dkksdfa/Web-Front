@@ -1,9 +1,11 @@
 import { firestore } from "../../firebase";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RenderComment from "./RenderComment";
+import { Userinfo } from "../../App";
 
 const CommentList = ({ clublink, setDone }) => {
   const [comments, setComments] = useState([]);
+  const userinfo = useContext(Userinfo);
   useEffect(() => {
     setDone(false);
     setComments([]);
@@ -25,7 +27,15 @@ const CommentList = ({ clublink, setDone }) => {
       {comments !== [] && (
         <div>
           {comments.map((val, i) => {
-            return <RenderComment comment={val} key={i}></RenderComment>;
+            return (
+              <RenderComment
+                comment={val}
+                isOwner={
+                  userinfo.isLoggedIn && val.creatorId === userinfo.userObj.uid
+                }
+                key={i}
+              ></RenderComment>
+            );
           })}
         </div>
       )}
