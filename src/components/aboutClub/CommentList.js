@@ -1,47 +1,28 @@
 import { firestore } from "../../firebase";
 import React, { useCallback, useEffect, useState } from "react";
+import Comment from "./Comment";
 
 const CommentList = ({ clublink }) => {
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState([]);
-  const [names, setNames] = useState([]);
-  const [error, setError] = useState(null);
+  // const [names, setNames] = useState([]);
   const fetchData = async () => {
     setLoading(true);
 
-    let newNames = [];
-    const getComments = async () => {
-      const result = [];
-      const dbComments = await firestore
-        .collection("comments")
-        .where("club", "==", clublink)
-        .orderBy("date", "asc")
-        .get();
-      dbComments.forEach(async (comment) => {
-        result.push(comment.data());
-      });
+    // let newNames = [];
 
-      return result;
-    };
-    const getUserName = async (uid) => {
-      const dbUser = await firestore
-        .collection("additional userinfo")
-        .doc(uid)
-        .get();
-      const creatorName = dbUser.data().name;
-      return creatorName;
-    };
-    try {
-      const dbComments = getComments();
-      dbComments.forEach((val) => {
-        const creatorName = getUserName(val.creatorId);
-        newNames.push(creatorName);
-      });
-      setComments(dbComments);
-    } catch (e) {
-      setError(e);
-    }
-    setNames(newNames);
+    const dbComments = await firestore
+      .collection("comments")
+      .where("club", "==", clublink)
+      .orderBy("date", "desc")
+      .get();
+    dbComments.forEach(async (comment) => {
+      // result.push(comment.data());
+      setComments((prev) => prev.concat(comment.data()));
+    });
+
+    // setComments()
+    // setNames(newNames);
     setLoading(false);
   };
   useEffect(() => {
@@ -50,20 +31,14 @@ const CommentList = ({ clublink }) => {
 
   return (
     <>
-      {error && <div>{error}</div>}
       {loading
         ? "Loading"
         : comments !== [] && (
             <div>
-              <ul>
-                {comments.map((val, i) => {
-                  return (
-                    <li key={i}>
-                      {val.content} | {names[i]}
-                    </li>
-                  );
-                })}
-              </ul>
+              {comments.map((val, i) => {
+                console.log("dddddddd");
+                return <Comment comment={val} key={i}></Comment>;
+              })}
             </div>
           )}
     </>
