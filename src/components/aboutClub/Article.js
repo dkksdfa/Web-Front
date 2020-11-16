@@ -106,8 +106,8 @@ const Article = ({ match }) => {
                   ) : (
                     <>
                       <div>{article.content}</div>
-                      <button onClick={onEditToggle}>Edit</button>{" "}
                       <button onClick={onDelete}>Delete</button>
+                      <button onClick={onEditToggle}>Edit</button>
                     </>
                   )}
                 </>

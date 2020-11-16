@@ -5,6 +5,7 @@ import { Userinfo } from "../../App";
 
 const CommentList = ({ clublink, setDone, articleId }) => {
   const [comments, setComments] = useState([]);
+  const [editing, setEditing] = useState(false);
   const userinfo = useContext(Userinfo);
   useEffect(() => {
     setDone(false);
@@ -34,6 +35,8 @@ const CommentList = ({ clublink, setDone, articleId }) => {
                   userinfo.isLoggedIn && val.creatorId === userinfo.userObj.uid
                 }
                 key={i}
+                editing={editing}
+                setEditing={setEditing}
               ></RenderComment>
             );
           })}
