@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import RenderComment from "./RenderComment";
 import { Userinfo } from "../../App";
 
-const CommentList = ({ clublink, setDone }) => {
+const CommentList = ({ clublink, setDone, articleId }) => {
   const [comments, setComments] = useState([]);
   const userinfo = useContext(Userinfo);
   useEffect(() => {
@@ -11,7 +11,7 @@ const CommentList = ({ clublink, setDone }) => {
     setComments([]);
     firestore
       .collection("comments")
-      .where("club", "==", clublink)
+      .where("articleId", "==", articleId)
       .orderBy("date", "desc")
       .onSnapshot((snapshot) => {
         const commentArray = snapshot.docs.map((doc) => ({
@@ -21,7 +21,7 @@ const CommentList = ({ clublink, setDone }) => {
         setComments(commentArray);
         setDone(true);
       });
-  }, [setDone, clublink]);
+  }, [setDone, articleId]);
   return (
     <div>
       {comments !== [] && (

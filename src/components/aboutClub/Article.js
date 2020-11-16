@@ -48,7 +48,6 @@ const Article = ({ match }) => {
       history.push(`/club/${category}/${clublink}`);
     }
   };
-
   const onEditToggle = () => {
     setEdit((prev) => !prev);
   };
@@ -83,8 +82,6 @@ const Article = ({ match }) => {
   }
   return (
     <PageWrap>
-      {/* {loading && <h1>loading...</h1>} */}
-      {error && <h1>Url Error!</h1>}
       {!loading && done && (
         <>
           <h1>{article.title}</h1>
@@ -117,16 +114,20 @@ const Article = ({ match }) => {
               )}
             </>
           )}
-
           <AddComment
             userObj={userObj}
             clublink={clublink}
             category={category}
             isLoggedIn={isLoggedIn}
+            articleId={articleId}
           />
         </>
       )}
-      <CommentList clublink={clublink} setDone={setDone} />
+      <CommentList
+        clublink={clublink}
+        setDone={setDone}
+        articleId={articleId}
+      />
     </PageWrap>
   );
 };

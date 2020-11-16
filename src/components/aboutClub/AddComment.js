@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { firestore } from "../../firebase";
 
-const AddComment = ({ userObj, clublink, category, isLoggedIn }) => {
+const AddComment = ({ userObj, clublink, category, isLoggedIn, articleId }) => {
   const [newComment, setNewComment] = useState("");
   const onChange = (e) => {
     setNewComment(e.target.value);
   };
+  const history = useHistory();
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (!isLoggedIn) {
+      alert("Please Login.");
+      history.push("/login");
+      return;
+    }
     const newCommentObject = {
       content: newComment,
       date: new Date(),
@@ -17,6 +24,7 @@ const AddComment = ({ userObj, clublink, category, isLoggedIn }) => {
       commentId: uuidv4(),
       club: clublink,
       category,
+      articleId,
     };
     setNewComment("");
     try {
