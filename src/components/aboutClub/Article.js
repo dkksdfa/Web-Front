@@ -15,6 +15,9 @@ const Article = ({ match }) => {
   const [editText, setEditText] = useState(null);
   const [error, setError] = useState(false);
   const [done, setDone] = useState(false);
+  const [date, setDate] = useState(null);
+
+  // Will display time in 10:30:23 format
 
   const {
     params: { category, articleId, clublink },
@@ -34,6 +37,32 @@ const Article = ({ match }) => {
         .get();
       const creatorName = dbUser.data().name;
       setArticle({ ...realArticle, creatorName });
+      const articleDate = new Date(realArticle.date.seconds * 1000);
+      var months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      setDate({
+        formmatedDate: `${articleDate.getDate()} ${
+          months[articleDate.getMonth()]
+        } ${articleDate.getFullYear()}`,
+        originaldate: Date(
+          `${articleDate.getFullYear()}-${
+            articleDate.getMonth() - 1
+          }-${articleDate.getDate()} ${articleDate.getHours()}:${articleDate.getMinutes()}:${articleDate.getSeconds()}`
+        ),
+      });
+
       setEditText(realArticle.content);
     } else {
       setError(true);
@@ -41,9 +70,7 @@ const Article = ({ match }) => {
     setLoading(false);
   }, [articleId]);
   const onDelete = async () => {
-    const lastCheck = window.confirm(
-      "Are you sure that you delete this article?"
-    );
+    const lastCheck = window.confirm("Are you sure to delete this article?");
     if (lastCheck) {
       await firestore.collection("articles").doc(article.articleId).delete();
       history.push(`/club/${category}/${clublink}`);
@@ -87,8 +114,8 @@ const Article = ({ match }) => {
         <>
           <h1 className="title">{article.title}</h1>
           <span>
-            {Date(new Date(article.date.seconds * 1000)).toString()} |{" "}
-            {article.creatorName} | count : {article.count}
+            {date.formmatedDate} | {article.creatorName} | count :{" "}
+            {article.count}
           </span>
           {userObj && (
             <>

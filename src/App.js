@@ -58,21 +58,11 @@ function App() {
             component={Article}
           />
           <Route path="/Join">
-            <Join
-              isLoggedIn={isLoggedIn}
-              setLoggedIn={setLoggedIn}
-              userObj={userObj}
-              setUserObj={setUserObj}
-            />
+            <Join isLoggedIn={isLoggedIn} />
           </Route>
           <Route path="/Modify" component={Modify} />
           <Route path="/Login">
-            <Login
-              isLoggedIn={isLoggedIn}
-              setLoggedIn={setLoggedIn}
-              userObj={userObj}
-              setUserObj={setUserObj}
-            />
+            <Login isLoggedIn={isLoggedIn} />
           </Route>
         </Userinfo.Provider>
       )}

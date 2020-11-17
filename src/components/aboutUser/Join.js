@@ -4,7 +4,7 @@ import { authService as auth, firestore } from "../../firebase";
 import PageWrap from "../PageWrap";
 import GoogleLogin from "./GoogleLogin";
 
-const Join = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
+const Join = ({ isLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [conformPassword, setConformPassword] = useState("");
@@ -13,6 +13,16 @@ const Join = ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
   const [classnumber, setClass] = useState(null);
 
   const history = useHistory();
+  // const Fun = async () => {
+  //   const storageRef = storage.ref();
+  //   const normalImage = storageRef.child("images/normal.png");
+  //   // const imageData = await normalImage.getMetadata();
+  //   console.log(imageData);
+  // };
+  // useEffect(() => {
+  //   Fun();
+  // }, []);
+
   const onSubmit = async (e) => {
     e.preventDefault();
 

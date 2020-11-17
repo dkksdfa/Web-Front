@@ -4,7 +4,7 @@ import { authService as auth } from "../../firebase";
 import PageWrap from "../PageWrap";
 import GoogleLogin from "./GoogleLogin";
 
-export default ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
+export default ({ isLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -59,12 +59,7 @@ export default ({ isLoggedIn, setLoggedIn, userObj, setUserObj }) => {
         <input type="submit" value="login" />
       </form>
 
-      <GoogleLogin
-        isLoggedIn={isLoggedIn}
-        setLoggedIn={setLoggedIn}
-        userObj={userObj}
-        setUserObj={setUserObj}
-      />
+      <GoogleLogin />
       <Link to="/join">create id</Link>
     </PageWrap>
   );
