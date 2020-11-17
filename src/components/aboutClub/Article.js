@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
-// import {} from "../../styles/StyledArticle";
+// import {  } from "../../styles/StyledArticle";
+import "../../styles/Article.css";
 import { firestore } from "../../firebase";
 import { Userinfo } from "../../App";
 import { Link, useHistory } from "react-router-dom";
@@ -69,13 +70,13 @@ const Article = ({ match }) => {
   if (loading)
     return (
       <PageWrap>
-        <h1>loading...</h1>
+        <h1 className="title">loading...</h1>
       </PageWrap>
     );
   if (error) {
     return (
       <PageWrap>
-        <h1>Error!</h1>
+        <h1 className="title">Error!</h1>
         <Link to="/">Go to home</Link>
       </PageWrap>
     );
@@ -84,7 +85,7 @@ const Article = ({ match }) => {
     <PageWrap>
       {!loading && done && (
         <>
-          <h1>{article.title}</h1>
+          <h1 className="title">{article.title}</h1>
           <span>
             {Date(new Date(article.date.seconds * 1000)).toString()} |{" "}
             {article.creatorName} | count : {article.count}
