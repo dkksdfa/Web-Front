@@ -7,6 +7,8 @@ import { Userinfo } from "../../App";
 import { Link, useHistory } from "react-router-dom";
 import AddComment from "./AddComment";
 import CommentList from "./CommentList";
+import { BsTrash } from "react-icons/bs";
+import { BiEditAlt } from "react-icons/bi";
 
 const Article = ({ match }) => {
   const [article, setArticle] = useState(null);
@@ -17,15 +19,11 @@ const Article = ({ match }) => {
   const [done, setDone] = useState(false);
   const [date, setDate] = useState(null);
 
-  // Will display time in 10:30:23 format
-
   const {
     params: { category, articleId, clublink },
   } = match;
-
   const { userObj, isLoggedIn } = useContext(Userinfo);
   const history = useHistory();
-
   const getArticle = useCallback(async () => {
     setLoading(true);
     const rawData = await firestore.collection("articles").doc(articleId).get();
@@ -53,9 +51,9 @@ const Article = ({ match }) => {
         "Dec",
       ];
       setDate({
-        formmatedDate: `${articleDate.getDate()} ${
+        formmatedDate: `${
           months[articleDate.getMonth()]
-        } ${articleDate.getFullYear()}`,
+        } ${articleDate.getDate()}, ${articleDate.getFullYear()}`,
         originaldate: Date(
           `${articleDate.getFullYear()}-${
             articleDate.getMonth() - 1
@@ -113,35 +111,43 @@ const Article = ({ match }) => {
       {!loading && done && (
         <>
           <h1 className="title">{article.title}</h1>
-          <span>
-            {date.formmatedDate} | {article.creatorName} | count :{" "}
-            {article.count}
-          </span>
-          {userObj && (
-            <>
-              {userObj.uid === article.creatorId && (
-                <>
-                  {edit ? (
-                    <form onSubmit={submitChange}>
-                      <input
-                        value={editText}
-                        onChange={onEditValueChange}
-                        placeholder="Edit content"
-                      />
-                      <button onClick={onEditToggle}>Cancle</button>
-                      <input type="submit" value="Edit" />
-                    </form>
-                  ) : (
-                    <>
-                      <div>{article.content}</div>
-                      <button onClick={onDelete}>Delete</button>
-                      <button onClick={onEditToggle}>Edit</button>
-                    </>
-                  )}
-                </>
-              )}
-            </>
-          )}
+          <div className="subInfoTemplate">
+            <span className="creator">{article.creatorName}</span>
+            <span className="subInfo">{date.formmatedDate}</span>
+            {userObj && userObj.uid === article.creatorId && (
+              <>
+                <span className="subInfo">
+                  <BiEditAlt onClick={onEditToggle}></BiEditAlt>
+                </span>
+                <span className="subInfo">
+                  <BsTrash onClick={onDelete}>Delete</BsTrash>
+                </span>
+              </>
+            )}
+          </div>
+          {userObj &&
+            userObj.uid === article.creatorId &&
+            (edit ? (
+              <form onSubmit={submitChange}>
+                <input
+                  value={editText}
+                  onChange={onEditValueChange}
+                  placeholder="Edit content"
+                />
+                <button onClick={onEditToggle}>Cancle</button>
+                <input type="submit" value="Edit" />
+              </form>
+            ) : (
+              <>
+                <div id="content">{article.content}</div>
+              </>
+            ))}
+          <div className="buttonTemplate">
+            <button className="countButton">▲</button>
+            <span className="countNumber">{article.count}</span>
+            <button className="countButton">▼</button>
+          </div>
+
           <AddComment
             userObj={userObj}
             clublink={clublink}

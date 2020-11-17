@@ -4,7 +4,7 @@ const ContentTemplate = styled.div`
   /* width: 100%; */
   /* padding-top: 3%; */
   /* height: 100vh; */
-  margin: 4%;
+  margin: 1rem 2rem;
   @media only screen and (min-height: 101vh) {
     height: 100%;
     margin: 0 auto;
@@ -13,7 +13,7 @@ const ContentTemplate = styled.div`
 
 const ContentJustify = styled.div`
   width: 90%;
-  margin: 5vh auto;
+  margin: 2vh auto;
   /* background: mintcream; */
   background: white;
   border-radius: 10px;
