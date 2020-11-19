@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authService, firebase, firestore } from "../../firebase";
 import { GoogleButton } from "../../styles/StyledLogin";
-import { Button } from "../../styles/StyledPageWrap";
 
 const GoogleLogin = () => {
   const history = useHistory();

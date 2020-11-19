@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authService as auth, firestore } from "../../firebase";
 import PageWrap from "../PageWrap";
-import GoogleLogin from "./GoogleLogin";
 
 const Join = ({ isLoggedIn }) => {
   const [email, setEmail] = useState("");

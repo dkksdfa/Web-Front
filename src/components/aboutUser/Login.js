@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { authService as auth } from "../../firebase";
 import { StyledTitle, Input } from "../../styles/StyledPageWrap";
 import PageWrap from "../PageWrap";

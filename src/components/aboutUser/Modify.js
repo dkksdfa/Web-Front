@@ -10,7 +10,6 @@ import {
 } from "../../styles/StyledMoodify.js";
 import { useHistory } from "react-router-dom";
 import { StyledTitle } from "../../styles/StyledPageWrap";
-import { Button } from "../../styles/StyledPageWrap";
 
 export default () => {
   const history = useHistory();
