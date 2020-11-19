@@ -37,7 +37,6 @@ const Community = ({ match }) => {
   };
   return (
     <>
-      {" "}
       <Top>
         <Search type="text" placeholder="Search..." />
         <Write onClick={onClick}>글쓰기</Write>

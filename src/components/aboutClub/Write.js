@@ -64,6 +64,7 @@ const Write = ({ match }) => {
             id="title"
             type="text"
             name="title"
+            autoComplete="off"
             value={title}
             onChange={onChange}
           />
@@ -72,6 +73,7 @@ const Write = ({ match }) => {
           <input
             type="text"
             value={content}
+            autoComplete="off"
             name="content"
             onChange={onChange}
           />

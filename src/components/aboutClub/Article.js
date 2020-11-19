@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
-// import {  } from "../../styles/StyledArticle";
 import "../../styles/Article.css";
 import { firestore } from "../../firebase";
 import { Userinfo } from "../../App";

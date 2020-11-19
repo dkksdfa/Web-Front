@@ -17,10 +17,10 @@ const MainBanner = styled.div`
 `;
 const Text = styled.p((props) => ({
   fontSize: `${props.size}rem`,
+  // fontWeight: "300",
   marginTop: `${props.margin && "200px"}`,
   color: "#eee",
   lineHeight: "1rem",
-  fontWeight: "bold",
 }));
 const Button = styled.button`
   background: #cfb783;
@@ -30,8 +30,9 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 50px;
   color: black;
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-top: 4rem;
+
   font-weight: 600;
   &:hover {
     background: #e2d4b5;

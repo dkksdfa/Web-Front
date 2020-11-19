@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authService, firebase, firestore } from "../../firebase";
+import { GoogleButton } from "../../styles/StyledLogin";
+import { Button } from "../../styles/StyledPageWrap";
 
 const GoogleLogin = () => {
   const history = useHistory();
@@ -36,7 +38,16 @@ const GoogleLogin = () => {
     setClicked(true);
   };
 
-  return <button onClick={onClick}>Login with google</button>;
+  return (
+    <GoogleButton onClick={onClick}>
+      <span style={{ color: "blue" }}>G</span>
+      <span style={{ color: "red" }}>o</span>
+      <span style={{ color: "yellow" }}>o</span>
+      <span style={{ color: "blue" }}>g</span>
+      <span style={{ color: "green" }}>l</span>
+      <span style={{ color: "red" }}>e</span>
+    </GoogleButton>
+  );
 };
 
 export default GoogleLogin;

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { authService as auth } from "../../firebase";
+import { StyledTitle, Input } from "../../styles/StyledPageWrap";
 import PageWrap from "../PageWrap";
+import {
+  InputTitle,
+  JoinButton,
+  LoginButton,
+  LoginDiv,
+} from "../../styles/StyledLogin";
 import GoogleLogin from "./GoogleLogin";
 
 export default ({ isLoggedIn }) => {
@@ -44,23 +51,36 @@ export default ({ isLoggedIn }) => {
       </>
     );
   }
+  const goToJoin = () => {
+    history.push("/join");
+  };
 
   return (
     <PageWrap>
-      <h1>login page</h1>
+      <StyledTitle>login page</StyledTitle>
       <form onSubmit={onSubmit}>
-        <input type="email" name="email" value={email} onChange={onChange} />
-        <input
+        <InputTitle>Email</InputTitle>
+        <Input
+          type="email"
+          name="email"
+          autoComplete="off"
+          value={email}
+          onChange={onChange}
+        />
+        <InputTitle>Password</InputTitle>
+        <Input
           type="password"
           name="password"
           value={password}
           onChange={onChange}
         />
-        <input type="submit" value="login" />
-      </form>
 
-      <GoogleLogin />
-      <Link to="/join">create id</Link>
+        <LoginDiv>
+          <LoginButton type="submit">login</LoginButton>
+          <JoinButton onClick={goToJoin}>join</JoinButton>
+          <GoogleLogin />
+        </LoginDiv>
+      </form>
     </PageWrap>
   );
 };
