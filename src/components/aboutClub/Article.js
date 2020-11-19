@@ -142,12 +142,6 @@ const Article = ({ match }) => {
                 <div id="content">{article.content}</div>
               </>
             ))}
-          <div className="buttonTemplate">
-            <button className="countButton">▲</button>
-            <span className="countNumber">{article.count}</span>
-            <button className="countButton">▼</button>
-          </div>
-
           <AddComment
             userObj={userObj}
             clublink={clublink}

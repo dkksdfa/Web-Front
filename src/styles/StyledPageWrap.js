@@ -17,7 +17,12 @@ const ContentJustify = styled.div`
   /* background: mintcream; */
   background: white;
   border-radius: 10px;
-  border: 1px solid #d7d9d9;
+  border: 2px solid #d7d9d9;
 `;
-// efe
-export { ContentJustify, ContentTemplate };
+const StyledTitle = styled.h1`
+  font-weight: bolder;
+  font-size: 5rem;
+  margin: 0;
+`;
+
+export { ContentJustify, ContentTemplate, StyledTitle };
