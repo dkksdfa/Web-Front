@@ -19,5 +19,5 @@ const ContentJustify = styled.div`
   border-radius: 10px;
   border: 1px solid #d7d9d9;
 `;
-
+// efe
 export { ContentJustify, ContentTemplate };
