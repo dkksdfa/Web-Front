@@ -118,8 +118,6 @@ const Join = ({ isLoggedIn }) => {
         <input value="Join!" type="submit" />
       </form>
       <hr />
-
-      <GoogleLogin />
     </PageWrap>
   );
 };
