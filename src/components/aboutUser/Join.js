@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authService as auth, firestore } from "../../firebase";
+import { InputTitle } from "../../styles/StyledLogin";
+import {
+  StyledSelect,
+  SubmitButton,
+  SumbitDiv,
+} from "../../styles/StyledMoodify";
+import { Input, StyledTitle } from "../../styles/StyledPageWrap";
 import PageWrap from "../PageWrap";
 
 const Join = ({ isLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [conformPassword, setConformPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(null);
   const [classnumber, setClass] = useState(null);
@@ -25,7 +32,7 @@ const Join = ({ isLoggedIn }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== conformPassword) {
+    if (password !== confirmPassword) {
       alert("The password must be matched with conform password.");
     } else {
       let userData;
@@ -51,7 +58,7 @@ const Join = ({ isLoggedIn }) => {
     } = e;
     if (name === "email") setEmail(value);
     if (name === "password") setPassword(value);
-    if (name === "conformPassword") setConformPassword(value);
+    if (name === "confirmPassword") setConfirmPassword(value);
     if (e.target.name === "name") setName(e.target.value);
     if (e.target.name === "grade") setGrade(e.target.value);
     if (e.target.name === "classnumber") setClass(e.target.value);
@@ -70,41 +77,47 @@ const Join = ({ isLoggedIn }) => {
   }
   return (
     <PageWrap>
-      <h1>Join page</h1>
+      <StyledTitle>Join page</StyledTitle>
       <form onSubmit={onSubmit}>
-        <input
+        <InputTitle>Email</InputTitle>
+        <Input
           type="email"
           name="email"
-          placeholder="email"
+          autoComplete="off"
           value={email}
           onChange={onChange}
         />
-        <input
+        <InputTitle>Password</InputTitle>
+        <Input
           type="password"
           name="password"
-          placeholder="password"
+          autoComplete="off"
           value={password}
           onChange={onChange}
         />
-        <input
+        <InputTitle>Confirm password</InputTitle>
+        <Input
           type="password"
-          name="conformPassword"
-          placeholder="conformPassword"
-          value={conformPassword}
+          name="confirmPassword"
+          autoComplete="off"
+          value={confirmPassword}
           onChange={onChange}
-        />{" "}
-        <input
-          placeholder="name"
+        />
+        <InputTitle>name</InputTitle>
+        <Input
           onChange={onChange}
+          autoComplete="off"
           value={name}
           name="name"
         />
-        <select name="grade" onChange={onChange}>
+        <InputTitle>Years</InputTitle>
+        <StyledSelect name="grade" onChange={onChange}>
           <option value="1">1학년</option>
           <option value="2">2학년</option>
           <option value="3">3학년</option>
-        </select>
-        <select name="classnumber" onChange={onChange}>
+        </StyledSelect>
+        <InputTitle>Class</InputTitle>
+        <StyledSelect name="classnumber" onChange={onChange}>
           <option value="1">1반</option>
           <option value="2">2반</option>
           <option value="3">3반</option>
@@ -113,10 +126,11 @@ const Join = ({ isLoggedIn }) => {
           <option value="6">6반</option>
           <option value="7">7반</option>
           <option value="8">8반</option>
-        </select>
-        <input value="Join!" type="submit" />
+        </StyledSelect>
+        <SumbitDiv>
+          <SubmitButton type="submit">join!</SubmitButton>
+        </SumbitDiv>
       </form>
-      <hr />
     </PageWrap>
   );
 };
