@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
 import { firestore } from "../../firebase";
 import {
@@ -11,32 +11,39 @@ import {
 import { useHistory } from "react-router-dom";
 import { StyledTitle } from "../../styles/StyledPageWrap";
 
-const Modify = ({ isLoggedIn, userObj, setUserObj }) => {
+const Modify = ({ isLoggedIn, userObj }) => {
   const [init, setInit] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
-  const getUserData = async () => {
+  const getUserData = useCallback(async () => {
+    const dbUserinfo = await firestore
+      .collection("additional userinfo")
+      .doc(userObj.uid)
+      .get();
+    setUserinfo(dbUserinfo.data());
     setInit(true);
-  };
+  }, [userObj]);
   useEffect(() => {
-    if (!isLoggedIn) {
-      history.push("/login");
-    }
     getUserData();
-  }, [isLoggedIn]);
+    return () => {
+      if (!isLoggedIn) {
+        history.push("/login");
+      }
+    };
+  }, [isLoggedIn, history, getUserData]);
 
   const onClick = async () => {
     await firestore
       .collection("additional userinfo")
       .doc(userObj.uid)
-      .set(userObj);
+      .set(userinfo);
     history.go(0);
   };
   const onChange = (e) => {
     const {
       target: { value, name },
     } = e;
-    setUserObj((prev) => ({ ...prev, [name]: value }));
+    setUserinfo((prev) => ({ ...prev, [name]: value }));
   };
   return (
     <PageWrap>
@@ -47,7 +54,7 @@ const Modify = ({ isLoggedIn, userObj, setUserObj }) => {
             <StyledInputName>Name</StyledInputName>
             <StyledName
               name="displayName"
-              value={userObj.displayName}
+              value={userinfo.displayName}
               onChange={onChange}
             />
           </div>
@@ -56,7 +63,7 @@ const Modify = ({ isLoggedIn, userObj, setUserObj }) => {
             <StyledSelect
               name="grade"
               onChange={onChange}
-              value={userObj.grade}
+              value={userinfo.grade}
             >
               <option value="1">1학년</option>
               <option value="2">2학년</option>
@@ -68,7 +75,7 @@ const Modify = ({ isLoggedIn, userObj, setUserObj }) => {
             <StyledSelect
               name="classNumber"
               onChange={onChange}
-              value={userObj.displayName}
+              value={userinfo.classNumber}
             >
               <option value="1">1반</option>
               <option value="2">2반</option>

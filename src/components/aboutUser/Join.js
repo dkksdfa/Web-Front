@@ -15,8 +15,8 @@ const Join = ({ isLoggedIn }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
-  const [grade, setGrade] = useState(null);
-  const [classnumber, setClass] = useState(null);
+  const [grade, setGrade] = useState("1");
+  const [classnumber, setClass] = useState("1");
 
   const history = useHistory();
   // const Fun = async () => {
@@ -44,7 +44,6 @@ const Join = ({ isLoggedIn }) => {
           }
         });
         const object = {
-          uid: userData,
           displayName: name,
           grade,
           classNumber: classnumber,

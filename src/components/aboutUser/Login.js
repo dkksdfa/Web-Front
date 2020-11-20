@@ -24,9 +24,8 @@ export default ({ isLoggedIn }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await auth
-        .signInWithEmailAndPassword(email, password)
-        .then(() => history.goBack());
+      await auth.signInWithEmailAndPassword(email, password);
+      history.push("/");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -54,29 +53,28 @@ export default ({ isLoggedIn }) => {
   return (
     <PageWrap>
       <StyledTitle>login page</StyledTitle>
-      <form onSubmit={onSubmit}>
-        <InputTitle>Email</InputTitle>
-        <Input
-          type="email"
-          name="email"
-          autoComplete="off"
-          value={email}
-          onChange={onChange}
-        />
-        <InputTitle>Password</InputTitle>
-        <Input
-          type="password"
-          name="password"
-          value={password}
-          onChange={onChange}
-        />
 
-        <LoginDiv>
-          <LoginButton type="submit">login</LoginButton>
-          <JoinButton onClick={goToJoin}>join</JoinButton>
-          <GoogleLogin />
-        </LoginDiv>
-      </form>
+      <InputTitle>Email</InputTitle>
+      <Input
+        type="email"
+        name="email"
+        autoComplete="off"
+        value={email}
+        onChange={onChange}
+      />
+      <InputTitle>Password</InputTitle>
+      <Input
+        type="password"
+        name="password"
+        value={password}
+        onChange={onChange}
+      />
+
+      <LoginDiv>
+        <LoginButton onClick={onSubmit}>login</LoginButton>
+        <JoinButton onClick={goToJoin}>join</JoinButton>
+        <GoogleLogin />
+      </LoginDiv>
     </PageWrap>
   );
 };

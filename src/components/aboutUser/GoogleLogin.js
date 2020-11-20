@@ -21,7 +21,6 @@ const GoogleLogin = () => {
           .get();
         if (!check.data()) {
           await firestore.collection("additional userinfo").doc(user.uid).set({
-            uid: user.uid,
             displayName: user.displayName,
             grade: "1",
             classNumber: "1",
