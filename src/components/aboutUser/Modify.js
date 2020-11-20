@@ -16,13 +16,17 @@ const Modify = ({ isLoggedIn, userObj }) => {
   const [userinfo, setUserinfo] = useState(null);
   const history = useHistory();
   const getUserData = useCallback(async () => {
-    const dbUserinfo = await firestore
-      .collection("additional userinfo")
-      .doc(userObj.uid)
-      .get();
-    setUserinfo(dbUserinfo.data());
-    setInit(true);
-  }, [userObj]);
+    if (!isLoggedIn) {
+      history.push("/login");
+    } else {
+      const dbUserinfo = await firestore
+        .collection("additional userinfo")
+        .doc(userObj.uid)
+        .get();
+      setUserinfo(dbUserinfo.data());
+      setInit(true);
+    }
+  }, [userObj, isLoggedIn, history]);
   useEffect(() => {
     getUserData();
     return () => {

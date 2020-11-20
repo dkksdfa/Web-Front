@@ -1,10 +1,11 @@
 import React from "react";
 import { ButtonPosition, Button, Navigation } from "../styles/StyledNav";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Userinfo } from "../App";
 import { authService } from "../firebase";
 
 const Nav = () => {
+  const history = useHistory();
   const menulist = (login) => [
     { title: "Home", link: "/" },
     { title: "School", link: "/School" },
@@ -22,6 +23,7 @@ const Nav = () => {
 
   const onClick = () => {
     authService.signOut();
+    history.go(0);
   };
   return (
     <Userinfo.Consumer>
