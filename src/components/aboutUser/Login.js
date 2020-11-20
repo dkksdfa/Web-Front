@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { authService as auth } from "../../firebase";
 import { StyledTitle, Input } from "../../styles/StyledPageWrap";
@@ -15,6 +15,12 @@ export default ({ isLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push("/");
+    }
+  }, []);
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -40,17 +46,7 @@ export default ({ isLoggedIn }) => {
     if (name === "email") setEmail(value);
     if (name === "password") setPassword(value);
   };
-  if (isLoggedIn) {
-    const toHome = () => {
-      history.push("/");
-    };
-    return (
-      <>
-        <h1>You are already loggedIn. </h1>
-        <button onClick={toHome}>Go to home</button>
-      </>
-    );
-  }
+
   const goToJoin = () => {
     history.push("/join");
   };

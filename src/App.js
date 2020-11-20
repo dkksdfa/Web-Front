@@ -13,19 +13,25 @@ import {
 } from "./components";
 import Nav from "./components/Nav.js";
 import "./App.scss";
-import { authService } from "./firebase";
+import { authService, firestore } from "./firebase";
 export const Userinfo = createContext();
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   useEffect(() => {
-    authService.onAuthStateChanged((user) => {
+    authService.onAuthStateChanged(async (user) => {
       if (user) {
         setLoggedIn(true);
+        const additionalInfo = await firestore
+          .collection("additional userinfo")
+          .doc(user.uid)
+          .get();
         setUserObj({
           uid: user.uid,
           displayName: user.displayName || "default name",
+          grade: additionalInfo.data().grade,
+          classNumber: additionalInfo.data().classNumber,
         });
       } else {
         setLoggedIn(false);
@@ -60,7 +66,13 @@ function App() {
           <Route path="/Join">
             <Join isLoggedIn={isLoggedIn} />
           </Route>
-          <Route path="/Modify" component={Modify} />
+          <Route path="/Modify">
+            <Modify
+              isLoggedIn={isLoggedIn}
+              userObj={userObj}
+              setUserObj={setUserObj}
+            />
+          </Route>
           <Route path="/Login">
             <Login isLoggedIn={isLoggedIn} />
           </Route>

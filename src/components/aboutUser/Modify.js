@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
-import { authService, firestore, firebase } from "../../firebase";
+import { firestore } from "../../firebase";
 import {
   StyledInputName,
   StyledName,
@@ -11,46 +11,32 @@ import {
 import { useHistory } from "react-router-dom";
 import { StyledTitle } from "../../styles/StyledPageWrap";
 
-export default () => {
-  const history = useHistory();
+const Modify = ({ isLoggedIn, userObj, setUserObj }) => {
   const [init, setInit] = useState(false);
   const [userinfo, setUserinfo] = useState(null);
-  const getUid = useCallback(async () => {
-    const decodedToken = await firebase.auth().currentUser.getIdTokenResult();
-    return decodedToken.claims.user_id;
-  }, []);
-
+  const history = useHistory();
+  const getUserData = async () => {
+    setInit(true);
+  };
   useEffect(() => {
-    const getUserData = async () => {
-      const uid = await getUid();
-      const user = await firestore
-        .collection("additional userinfo")
-        .doc(uid)
-        .get();
-      setUserinfo(user.data());
-      setInit(true);
-    };
-    authService.onAuthStateChanged((user) => {
-      if (user) {
-        getUserData();
-      } else {
-        alert("please login");
-        history.push("/login");
-        setInit(true);
-      }
-    });
-  }, [history, getUid]);
+    if (!isLoggedIn) {
+      history.push("/login");
+    }
+    getUserData();
+  }, [isLoggedIn]);
 
   const onClick = async () => {
-    const uid = await getUid();
-    firestore.collection("additional userinfo").doc(uid).set(userinfo);
-    alert("You success to modify.");
+    await firestore
+      .collection("additional userinfo")
+      .doc(userObj.uid)
+      .set(userObj);
+    history.go(0);
   };
   const onChange = (e) => {
     const {
       target: { value, name },
     } = e;
-    setUserinfo((prev) => ({ ...prev, [name]: value }));
+    setUserObj((prev) => ({ ...prev, [name]: value }));
   };
   return (
     <PageWrap>
@@ -59,14 +45,18 @@ export default () => {
           <StyledTitle>Modify</StyledTitle>
           <div>
             <StyledInputName>Name</StyledInputName>
-            <StyledName name="name" value={userinfo.name} onChange={onChange} />
+            <StyledName
+              name="displayName"
+              value={userObj.displayName}
+              onChange={onChange}
+            />
           </div>
           <div>
             <StyledInputName>Years</StyledInputName>
             <StyledSelect
               name="grade"
               onChange={onChange}
-              value={userinfo.grade}
+              value={userObj.grade}
             >
               <option value="1">1학년</option>
               <option value="2">2학년</option>
@@ -76,9 +66,9 @@ export default () => {
           <div>
             <StyledInputName>Class</StyledInputName>
             <StyledSelect
-              name="classnumber"
+              name="classNumber"
               onChange={onChange}
-              value={userinfo.classnumber}
+              value={userObj.displayName}
             >
               <option value="1">1반</option>
               <option value="2">2반</option>
@@ -100,3 +90,5 @@ export default () => {
     </PageWrap>
   );
 };
+
+export default Modify;

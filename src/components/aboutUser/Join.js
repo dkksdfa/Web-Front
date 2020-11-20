@@ -43,9 +43,13 @@ const Join = ({ isLoggedIn }) => {
             userData = user.uid;
           }
         });
-        const object = { name, grade, classnumber };
+        const object = {
+          uid: userData,
+          displayName: name,
+          grade,
+          classNumber: classnumber,
+        };
         firestore.collection("additional userinfo").doc(userData).set(object);
-
         history.push("/");
       } catch (error) {
         alert(error.message);

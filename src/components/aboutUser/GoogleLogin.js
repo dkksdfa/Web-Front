@@ -10,7 +10,7 @@ const GoogleLogin = () => {
   const onGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     await authService.signInWithPopup(provider);
-    history.goBack();
+    history.push("/");
   };
   const getData = async () => {
     await authService.onAuthStateChanged(async (user) => {
@@ -21,9 +21,10 @@ const GoogleLogin = () => {
           .get();
         if (!check.data()) {
           await firestore.collection("additional userinfo").doc(user.uid).set({
-            name: user.displayName,
+            uid: user.uid,
+            displayName: user.displayName,
             grade: "1",
-            classnumber: "1",
+            classNumber: "1",
           });
         }
       }
