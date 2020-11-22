@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, ImageTemplate, TextTemplate } from "../../styles/StyledSchool";
+import { Box, ImageTemplate, TextSpan } from "../../styles/StyledSchool";
 
 const Content = ({ imagePath, label, link }) => {
   return (
@@ -7,8 +7,7 @@ const Content = ({ imagePath, label, link }) => {
       <a href={link} target="_blank" rel="noopener noreferrer">
         <ImageTemplate imagePath={imagePath} />
       </a>
-
-      <TextTemplate>
+      <TextSpan>
         <a
           style={{
             fontFamily:
@@ -20,7 +19,7 @@ const Content = ({ imagePath, label, link }) => {
         >
           {label}
         </a>
-      </TextTemplate>
+      </TextSpan>
     </Box>
   );
 };

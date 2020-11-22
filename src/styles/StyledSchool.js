@@ -32,18 +32,16 @@ const ImageTemplate = styled.div`
   background-size: 100% 100%;
 `;
 
-const TextTemplate = styled.span`
+const TextSpan = styled.span`
   font-size: 1.4rem;
   font-weight: bold;
   margin: 0 auto;
   margin-top: 0.5rem;
   text-align: center;
   color: #0066cc;
-  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   &:hover {
     text-decoration: underline;
   }
 `;
 
-export { Box, ImageTemplate, TextTemplate, Template, Justify, WhatIsProblem };
+export { Box, ImageTemplate, TextSpan, Template, Justify, WhatIsProblem };
