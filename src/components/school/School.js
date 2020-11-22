@@ -4,7 +4,7 @@ import cheerio from "cheerio";
 import Content from "./Content";
 import { firestore } from "../../firebase";
 import PageWrap from "../PageWrap";
-import { Justify, Template } from "../../styles/StyledSchool";
+import { Justify, Template, WhatIsProblem } from "../../styles/StyledSchool";
 const School = ({ userObj }) => {
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = useState(false);
@@ -46,7 +46,6 @@ const School = ({ userObj }) => {
     };
     getHtml();
   }, []);
-
   React.useEffect(() => {
     const getUserinfo = async () => {
       if (userObj) {
@@ -66,22 +65,23 @@ const School = ({ userObj }) => {
   return (
     <Justify>
       <Template>
-        <Content
-          imagePath="/school.jpg"
-          label="학교 홈페이지가기"
-          link={homePage}
-        />
-        <Content
-          imagePath="/Diagnosis.png"
-          label="자가진단 하러가기"
-          link={Diagnosis}
-        />
-        <Content
-          imagePath="/online.png"
-          label="온라인 클래스로"
-          link={onlineClass}
-        />
-
+        <WhatIsProblem>
+          <Content
+            imagePath="/school.jpg"
+            label="학교 홈페이지가기"
+            link={homePage}
+          />
+          <Content
+            imagePath="/Diagnosis.png"
+            label="자가진단 하러가기"
+            link={Diagnosis}
+          />
+          <Content
+            imagePath="/online.png"
+            label="온라인 클래스로"
+            link={onlineClass}
+          />
+        </WhatIsProblem>
         {data && <h2>오늘의 급식</h2>}
         {loading && <h2 style={{ fontSize: "1.5rem" }}>loading</h2>}
         {!loading && !data && (

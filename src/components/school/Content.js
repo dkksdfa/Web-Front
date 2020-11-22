@@ -1,20 +1,23 @@
 import React from "react";
-import {
-  Box,
-  ImageTemplate,
-  Img,
-  TextTemplate,
-} from "../../styles/StyledSchool";
+import { Box, ImageTemplate, TextTemplate } from "../../styles/StyledSchool";
 
 const Content = ({ imagePath, label, link }) => {
   return (
     <Box>
-      <ImageTemplate href={link} target="_blank" rel="noopener noreferrer">
-        <Img imagePath={imagePath} />
-      </ImageTemplate>
+      <a href={link} target="_blank" rel="noopener noreferrer">
+        <ImageTemplate imagePath={imagePath} />
+      </a>
 
       <TextTemplate>
-        <a href={link} target="_blank" rel="noopener noreferrer">
+        <a
+          style={{
+            fontFamily:
+              "-apple-system BlinkMacSystemFont Segoe UI Roboto Oxygen Ubuntu Cantarell Fira Sans Droid Sans Helvetica Neue sans-serif",
+          }}
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {label}
         </a>
       </TextTemplate>
