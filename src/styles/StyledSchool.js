@@ -1,10 +1,14 @@
 import styled from "styled-components";
-import { ContentJustify, ContentTemplate } from "./StyledPageWrap";
-const Template = styled(ContentJustify)`
-  /* margin: 0 auto; */
-`;
+import {
+  ContentJustify as Template,
+  ContentTemplate as Justify,
+  StyledTitle,
+} from "./StyledPageWrap";
 
-const Justify = styled(ContentTemplate)``;
+const FeedText = styled(StyledTitle)`
+  text-align: center;
+  margin: 100px 0;
+`;
 
 const WhatIsProblem = styled.div`
   display: flex;
@@ -22,6 +26,7 @@ const Box = styled.div`
     margin-right: 5%;
   }
 `;
+
 const ImageTemplate = styled.div`
   cursor: pointer;
   width: 100%;
@@ -44,4 +49,12 @@ const TextSpan = styled.div`
   }
 `;
 
-export { Box, ImageTemplate, TextSpan, Template, Justify, WhatIsProblem };
+export {
+  Box,
+  ImageTemplate,
+  TextSpan,
+  Template,
+  Justify,
+  WhatIsProblem,
+  FeedText,
+};

@@ -4,7 +4,12 @@ import cheerio from "cheerio";
 import Content from "./Content";
 import { firestore } from "../../firebase";
 import PageWrap from "../PageWrap";
-import { Justify, Template, WhatIsProblem } from "../../styles/StyledSchool";
+import {
+  FeedText,
+  Justify,
+  Template,
+  WhatIsProblem,
+} from "../../styles/StyledSchool";
 const School = ({ userObj }) => {
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = useState(false);
@@ -82,12 +87,12 @@ const School = ({ userObj }) => {
             link={onlineClass}
           />
         </WhatIsProblem>
-        {data && <h2>오늘의 급식</h2>}
-        {loading && <h2 style={{ fontSize: "1.5rem" }}>loading</h2>}
+        {data && <FeedText>오늘의 급식</FeedText>}
+        {loading && <FeedText style={{ fontSize: "1.5rem" }}>loading</FeedText>}
         {!loading && !data && (
-          <h2 style={{ fontSize: "1.5rem" }}>
+          <FeedText style={{ fontSize: "1.5rem" }}>
             오늘은 주말/공휴일이라 급식이 없습니다.
-          </h2>
+          </FeedText>
         )}
       </Template>
     </Justify>
