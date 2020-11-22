@@ -16,8 +16,7 @@ const WhatIsProblem = styled.div`
 `;
 const Box = styled.div`
   width: 30%;
-  display: block;
-  margin: 50px 0;
+  margin-top: 50px;
   &:nth-child(2) {
     margin-left: 5%;
     margin-right: 5%;
@@ -28,17 +27,18 @@ const ImageTemplate = styled.div`
   width: 100%;
   height: 300px;
   margin: 0 auto;
+  margin-bottom: 10px;
   background: ${(props) => `url("image/${props.imagePath}")`} no-repeat;
   background-size: 100% 100%;
 `;
 
-const TextSpan = styled.span`
+const TextSpan = styled.div`
   font-size: 1.4rem;
   font-weight: bold;
-  margin: 0 auto;
   margin-top: 0.5rem;
   text-align: center;
   color: #0066cc;
+
   &:hover {
     text-decoration: underline;
   }
