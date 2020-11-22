@@ -54,7 +54,9 @@ function App() {
           <Route path="/" exact>
             <Home isLoggedIn={isLoggedIn} />
           </Route>
-          <Route path="/School" component={School} />
+          <Route path="/School">
+            <School userObj={userObj} />
+          </Route>
           <Route path="/clubs/:category" exact component={Club} />
           <Route path="/club/:category/:clublink" exact component={Community} />
           <Route path="/write/:category/:clublink" component={Write} />

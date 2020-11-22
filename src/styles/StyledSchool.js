@@ -1,4 +1,20 @@
 import styled from "styled-components";
+import { ContentJustify, ContentTemplate, StyledTitle } from "./StyledPageWrap";
+const Template = styled(ContentJustify)`
+  /* margin: 0 auto; */
+`;
+
+const Justify = styled(ContentTemplate)``;
+
+const Box = styled.div`
+  width: 30%;
+  display: block;
+  margin-bottom: 100px;
+  justify-content: center;
+`;
+const ImageTemplate = styled.div`
+  cursor: pointer;
+`;
 
 const Background = styled.div`
   display: flex;
@@ -15,15 +31,6 @@ const Wrap = styled.div`
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-const Box = styled.div`
-  width: 30%;
-  display: block;
-  margin-bottom: 100px;
-  justify-content: center;
-`;
-const ImageTemplate = styled.div`
-  cursor: pointer;
 `;
 
 const Img = styled.div`
@@ -95,4 +102,6 @@ export {
   ImageTemplate,
   Img,
   TextTemplate,
+  Template,
+  Justify,
 };

@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import cheerio from "cheerio";
-// import { getDateDifference } from "../../library/functions";
-// import { Background, Today, Container, Wrap } from "../../styles/StyledSchool";
 import Content from "./Content";
-import { Userinfo } from "../../App";
 import { firestore } from "../../firebase";
-const School = () => {
-  console.error("School Feed Information Error");
+import PageWrap from "../PageWrap";
+import { Justify, Template } from "../../styles/StyledSchool";
+const School = ({ userObj }) => {
   const [data, setData] = React.useState(null);
+  const [loading, setLoading] = useState(false);
   const Diagnosis = "https://hcs.eduro.go.kr/#/loginHome";
   const homePage = "http://daekyeong.sen.hs.kr/index.do";
   let [onlineClass, setOnlineClass] = React.useState(
@@ -17,14 +16,15 @@ const School = () => {
   React.useEffect(() => {
     const getHtml = async () => {
       try {
-        let result = "lodding";
-        console.error("you have to think the weekend");
+        setLoading(true);
         const response = await axios.get(
           `http://daekyeong.sen.hs.kr/70633/subMenu.do`
         );
         const $ = cheerio.load(response.data);
-        const $bodyList = $("td.today")[0].children[1].children[1].children[1]
-          .attribs.onclick;
+        const $bodyList =
+          $("td.today")[0].children[1] &&
+          $("td.today")[0].children[1].children[1].children[1].attribs.onclick;
+
         if ($bodyList) {
           const rResult = $bodyList.replace(/[^0-9]/g, "");
           const sponse = await axios.get(
@@ -33,82 +33,64 @@ const School = () => {
           const op = cheerio.load(sponse.data);
           const $tableList = op("table tbody").children("tr")[3];
           const rawData = $tableList.children[3].children[0].data;
-          result = rawData.slice(7, rawData.length - 6).split(",");
-          setData(result);
+          const formattedList = rawData.slice(7, rawData.length - 6).split(",");
+          setData(formattedList);
         } else {
-          result = "주말이라 급식 정보가 없습니다.";
-          setData(result);
+          setData(false);
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
     getHtml();
   }, []);
 
-  const userinfo = React.useContext(Userinfo);
-
-  // React.useEffect(() => {}, []);
   React.useEffect(() => {
     const getUserinfo = async () => {
-      if (userinfo.isLoggedIn) {
-        for (let i in userinfo.userObj) {
-          if (i === "uid") {
-            const userData = await firestore
-              .collection("additional userinfo")
-              .doc(userinfo.userObj[i])
-              .get();
-
-            if (userData) {
-              console.log(userData);
-              setOnlineClass(
-                `https://hoc23.ebssw.kr/20dk${userData.data().grade}${
-                  userData.data().classnumber
-                }`
-              );
-            }
-          }
-        }
+      if (userObj) {
+        const userData = await firestore
+          .collection("additional userinfo")
+          .doc(userObj.uid)
+          .get();
+        setOnlineClass(
+          `https://hoc23.ebssw.kr/20dk${userData.data().grade}${
+            userData.data().classNumber
+          }`
+        );
       }
     };
     getUserinfo();
-  }, [userinfo]);
+  }, [userObj]);
   return (
-    <div>
-      <div>
-        <div>
-          <Content
-            imagePath="/school.jpg"
-            label="학교 홈페이지가기"
-            link={homePage}
-          />
-          <Content
-            imagePath="/Diagnosis.png"
-            label="자가진단 하러가기"
-            link={Diagnosis}
-          />
-          <Content
-            imagePath="/online.png"
-            label="온라인 클래스로"
-            link={onlineClass}
-          />
-        </div>
-      </div>
-      <div>
-        <h2>오늘의 급식</h2>
-        <h2>-----------------------------</h2>
-        {!data ? (
-          <h2 style={{ fontSize: "1.5rem" }}>loading</h2>
-        ) : (
-          data.map((val, index) => (
-            <h2 key={index} style={{ fontSize: "1.5rem" }}>
-              {val}
-            </h2>
-          ))
+    <Justify>
+      <Template>
+        <Content
+          imagePath="/school.jpg"
+          label="학교 홈페이지가기"
+          link={homePage}
+        />
+        <Content
+          imagePath="/Diagnosis.png"
+          label="자가진단 하러가기"
+          link={Diagnosis}
+        />
+        <Content
+          imagePath="/online.png"
+          label="온라인 클래스로"
+          link={onlineClass}
+        />
+
+        {data && <h2>오늘의 급식</h2>}
+        {loading && <h2 style={{ fontSize: "1.5rem" }}>loading</h2>}
+        {!loading && !data && (
+          <h2 style={{ fontSize: "1.5rem" }}>
+            오늘은 주말/공휴일이라 급식이 없습니다.
+          </h2>
         )}
-        <h2>-----------------------------</h2>
-      </div>
-    </div>
+      </Template>
+    </Justify>
   );
 };
 export default School;
