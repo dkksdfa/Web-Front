@@ -9,18 +9,14 @@ import { Button } from "../../styles/StyledPageWrap";
 import { LoginDiv } from "../../styles/StyledLogin";
 
 const Write = ({ match }) => {
+  console.error("제목, 내용 길게 입력 시 여러 줄로 표시되게 구현해야함.");
   const { clublink, category } = match.params;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isRegisterd, setRegisterd] = useState(false);
-  // const [image, setImage] = useState([]);
-
-  // const count = 0;
   const userinfo = React.useContext(Userinfo);
   const history = useHistory();
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async () => {
     if (!userinfo.isLoggedIn) {
       alert("로그인을 해주세요.");
       history.push("/login");
@@ -45,7 +41,6 @@ const Write = ({ match }) => {
       }
     }
   };
-
   const onChange = (e) => {
     const {
       target: { name, value },
@@ -56,7 +51,6 @@ const Write = ({ match }) => {
       // do something
     }
   };
-
   const onCancel = () => {
     history.push(`/club/${category}/${clublink}`);
   };
