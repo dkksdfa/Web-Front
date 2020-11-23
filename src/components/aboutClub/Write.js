@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import { firestore } from "../../firebase";
 import { Userinfo } from "../../App";
 import { useHistory } from "react-router-dom";
+import { Button } from "../../styles/StyledPageWrap";
+import { LoginDiv } from "../../styles/StyledLogin";
 
 const Write = ({ match }) => {
   const { clublink, category } = match.params;
@@ -54,6 +56,10 @@ const Write = ({ match }) => {
       // do something
     }
   };
+
+  const onCancel = () => {
+    history.push(`/club/${category}/${clublink}`);
+  };
   return (
     <PageWrap>
       <div id="container">
@@ -72,20 +78,25 @@ const Write = ({ match }) => {
             placeholder="New article title here..."
           />
         </div>
-        <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            value={content}
-            autoComplete="off"
-            name="content"
-            className="articleContent"
-            onChange={onChange}
-            placeholder="Write your article content here..."
-          />
-          <div>
-            <button type="submit">등록</button>
-          </div>
-        </form>
+
+        <input
+          type="text"
+          value={content}
+          autoComplete="off"
+          name="content"
+          className="articleContent"
+          onChange={onChange}
+          placeholder="Write your article content here..."
+        />
+        <LoginDiv>
+          <Button
+            onClick={onSubmit}
+            style={{ marginRight: "10px", background: "blue" }}
+          >
+            등록
+          </Button>
+          <Button onClick={onCancel}>취소</Button>
+        </LoginDiv>
       </div>
     </PageWrap>
   );
