@@ -7,7 +7,8 @@ import {
 
 const FeedText = styled(StyledTitle)`
   text-align: center;
-  margin: 100px 0;
+  font-size: 2rem;
+  margin: 10px 0;
 `;
 
 const WhatIsProblem = styled.div`

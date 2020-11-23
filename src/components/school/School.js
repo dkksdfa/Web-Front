@@ -87,13 +87,14 @@ const School = ({ userObj }) => {
             link={onlineClass}
           />
         </WhatIsProblem>
-        {data && <FeedText>오늘의 급식</FeedText>}
-        {loading && <FeedText style={{ fontSize: "1.5rem" }}>loading</FeedText>}
+        {data && <FeedText style={{ fontSize: "3rem" }}>오늘의 급식</FeedText>}
+        {loading && <FeedText>loading</FeedText>}
         {!loading && !data && (
-          <FeedText style={{ fontSize: "1.5rem" }}>
-            오늘은 주말/공휴일이라 급식이 없습니다.
-          </FeedText>
+          <FeedText>오늘은 주말/공휴일이라 급식이 없습니다.</FeedText>
         )}
+        {!loading &&
+          data &&
+          data.map((val, index) => <FeedText key={index}>{val}</FeedText>)}
       </Template>
     </Justify>
   );
