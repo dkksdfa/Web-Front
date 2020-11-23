@@ -109,7 +109,7 @@ const Article = ({ match }) => {
     <PageWrap>
       {!loading && done && (
         <>
-          <h1 className="title">{article.title}</h1>
+          <h1 className="articleTitle">{article.title}</h1>
           <div className="subInfoTemplate">
             <span className="creator">{article.creatorName}</span>
             <span className="subInfo">{date.formmatedDate}</span>

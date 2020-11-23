@@ -1,6 +1,6 @@
 import PageWrap from "../PageWrap";
 import React, { useState } from "react";
-// import "../../styles/Write.css";
+import "../../styles/Write.css";
 import { v4 as uuidv4 } from "uuid";
 import { firestore } from "../../firebase";
 import { Userinfo } from "../../App";
@@ -57,16 +57,19 @@ const Write = ({ match }) => {
   return (
     <PageWrap>
       <div id="container">
-        <div>{category}</div>
+        <div className="category">
+          {category}/{clublink}'s new article
+        </div>
         <div>
-          <label htmlFor="title">제목</label>
-          <input
+          <textarea
             id="title"
             type="text"
             name="title"
             autoComplete="off"
             value={title}
             onChange={onChange}
+            className="articleTitle"
+            placeholder="New article title here..."
           />
         </div>
         <form onSubmit={onSubmit}>
@@ -75,7 +78,9 @@ const Write = ({ match }) => {
             value={content}
             autoComplete="off"
             name="content"
+            className="articleContent"
             onChange={onChange}
+            placeholder="Write your article content here..."
           />
           <div>
             <button type="submit">등록</button>

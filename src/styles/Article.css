@@ -4,6 +4,12 @@
   margin-bottom: 1rem;
   margin-top: 0;
 }
+.articleTitle {
+  font-size: 4rem;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
 
 .subInfoTemplate {
   margin-bottom: 2rem;
