@@ -47,13 +47,17 @@ const Write = ({ match }) => {
       target: { name, value },
     } = e;
     if (name === "title") {setTitle(value);
-      if ((e.keyCode || e.which) == 13) {
+      if ((e.keyCode || e.which) === 13) {
         console.log('enter')
         return false;
       }
       if(titleRef !== null){
-        console.log(titleRef.current.scrollHeight)
-        titleRef.current.style.height = Math.floor(titleRef.current.scrollHeight/80)*80 +'px';
+        // titleRef.current.style.height = Math.floor(titleRef.current.scrollHeight/80)*80 +'px';
+        // console.log(Math.floor(titleRef.current.scrollHeight/80))
+
+        console.log('Jjang',Math.floor(titleRef.current.scrollHeight/80))
+        titleRef.current.rows = ''+Math.floor(titleRef.current.scrollHeight/80)
+
       }
     }
     if (name === "content") setContent(value);
@@ -77,6 +81,7 @@ const Write = ({ match }) => {
             value={title}
             onChange={onChange} 
             ref={titleRef}
+            rows='1'
             className="articleTitle"
             placeholder="New article title here..."
           />
