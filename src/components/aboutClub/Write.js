@@ -1,5 +1,5 @@
 import PageWrap from "../PageWrap";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../styles/Write.css";
 import { v4 as uuidv4 } from "uuid";
 import { firestore } from "../../firebase";
@@ -41,15 +41,20 @@ const Write = ({ match }) => {
       }
     }
   };
+  const titleRef = useRef(null);
   const onChange = (e) => {
     const {
       target: { name, value },
     } = e;
-    if (name === "title") setTitle(value);
-    if (name === "content") setContent(value);
-    if (name === "image") {
-      // do something
+    if (name === "title") {setTitle(value);
+      
+      if(titleRef !== null){
+        console.log(titleRef.current.scrollHeight)
+        titleRef.current.style.height = titleRef.current.scrollHeight +'px';
+      }
     }
+    if (name === "content") setContent(value);
+    if (name === "image") {    }
   };
   const onCancel = () => {
     history.push(`/club/${category}/${clublink}`);
@@ -67,12 +72,12 @@ const Write = ({ match }) => {
             name="title"
             autoComplete="off"
             value={title}
-            onChange={onChange}
+            onChange={onChange} 
+            ref={titleRef}
             className="articleTitle"
             placeholder="New article title here..."
           />
         </div>
-
         <input
           type="text"
           value={content}
