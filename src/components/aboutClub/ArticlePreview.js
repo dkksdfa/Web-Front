@@ -41,10 +41,13 @@ const ArticlePreview = ({ clublink, category, article, isOwner }) => {
           <div>
             <Writer>{creatorName}</Writer>
             <Info>
-              {Date(new Date(article.date.seconds * 1000)).toString()} | count :{" "}
-              {article.count}
+              {Date(new Date(article.date.seconds * 1000)).toString()}
             </Info>
-            <Title>{article.title}</Title>
+            <Title>
+              {article.title.length > 10
+                ? article.title.slice(0, 10) + "......"
+                : article.title}
+            </Title>
             <Comment>
               {/*Object.keys(article.comments).length || 0*/} Comments{" "}
             </Comment>{" "}

@@ -1,5 +1,5 @@
 import PageWrap from "../PageWrap";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "../../styles/Write.css";
 import { v4 as uuidv4 } from "uuid";
 import { firestore } from "../../firebase";
@@ -9,36 +9,43 @@ import { Button } from "../../styles/StyledPageWrap";
 import { LoginDiv } from "../../styles/StyledLogin";
 
 const Write = ({ match }) => {
-  console.error("제목, 내용 길게 입력 시 여러 줄로 표시되게 구현해야함.");
+  // console.error("제목, 내용 길게 입력 시 여러 줄로 표시되게 구현해야함.");
   const { clublink, category } = match.params;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [isRegisterd, setRegisterd] = useState(false);
+
   const userinfo = React.useContext(Userinfo);
   const history = useHistory();
+  const enc = new TextEncoder(); // always utf-8
+  if (!("TextEncoder" in window))
+    alert("Sorry, this browser does not support TextEncoder...");
+
   const onSubmit = async () => {
     if (!userinfo.isLoggedIn) {
       alert("로그인을 해주세요.");
       history.push("/login");
+      return;
+    }
+    if (enc.encode(title).length > 128) {
+      alert("title is too long (maximun is 128 characters)");
+    }
+    if (title === "") {
+      alert("title is empty (put something)");
+    } else if (content === "") {
+      alert("content is empty (put something to content)");
     } else {
-      if (!isRegisterd) {
-        setRegisterd(true);
-        const uid = userinfo.userObj.uid;
-        const newObj = {
-          title,
-          content,
-          count: 0,
-          articleId: uuidv4(),
-          date: new Date(),
-          creatorId: uid,
-          club: clublink,
-        };
-        await firestore
-          .collection("articles")
-          .doc(newObj.articleId)
-          .set(newObj);
-        history.push(`/club/${match.params.category}/${match.params.clublink}`);
-      }
+      const uid = userinfo.userObj.uid;
+      const newObj = {
+        title,
+        content,
+        count: 0,
+        articleId: uuidv4(),
+        date: new Date(),
+        creatorId: uid,
+        club: clublink,
+      };
+      await firestore.collection("articles").doc(newObj.articleId).set(newObj);
+      history.push(`/club/${match.params.category}/${match.params.clublink}`);
     }
   };
   const titleRef = useRef(null);
@@ -46,22 +53,14 @@ const Write = ({ match }) => {
     const {
       target: { name, value },
     } = e;
-    if (name === "title") {setTitle(value);
-      if ((e.keyCode || e.which) === 13) {
-        console.log('enter')
-        return false;
-      }
-      if(titleRef !== null){
-        // titleRef.current.style.height = Math.floor(titleRef.current.scrollHeight/80)*80 +'px';
-        // console.log(Math.floor(titleRef.current.scrollHeight/80))
-
-        console.log('Jjang',Math.floor(titleRef.current.scrollHeight/80))
-        titleRef.current.rows = ''+Math.floor(titleRef.current.scrollHeight/80)
-
-      }
+    if (name === "title") {
+      setTitle(value);
+      titleRef.current.rows =
+        "" + Math.floor(titleRef.current.scrollHeight / 80);
     }
     if (name === "content") setContent(value);
-    if (name === "image") {    }
+    if (name === "image") {
+    }
   };
   const onCancel = () => {
     history.push(`/club/${category}/${clublink}`);
@@ -79,9 +78,9 @@ const Write = ({ match }) => {
             name="title"
             autoComplete="off"
             value={title}
-            onChange={onChange} 
+            onChange={onChange}
             ref={titleRef}
-            rows='1'
+            rows="1"
             className="articleTitle"
             placeholder="New article title here..."
           />
