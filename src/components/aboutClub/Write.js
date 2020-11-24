@@ -1,5 +1,5 @@
 import PageWrap from "../PageWrap";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../styles/Write.css";
 import { v4 as uuidv4 } from "uuid";
 import { firestore } from "../../firebase";
@@ -13,12 +13,21 @@ const Write = ({ match }) => {
   const { clublink, category } = match.params;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
+  const titleRef = useRef(null);
   const userinfo = React.useContext(Userinfo);
   const history = useHistory();
   const enc = new TextEncoder(); // always utf-8
   if (!("TextEncoder" in window))
     alert("Sorry, this browser does not support TextEncoder...");
+
+  useEffect(() => {
+    if (!titleRef.current) return;
+    console.log(titleRef);
+    titleRef.current.style.height = "1px";
+    const newRows = Math.floor(titleRef.current.scrollHeight / 80);
+    titleRef.current.style.height = "auto";
+    titleRef.current.rows = newRows;
+  });
 
   const onSubmit = async () => {
     if (!userinfo.isLoggedIn) {
@@ -48,15 +57,13 @@ const Write = ({ match }) => {
       history.push(`/club/${match.params.category}/${match.params.clublink}`);
     }
   };
-  const titleRef = useRef(null);
+
   const onChange = (e) => {
     const {
       target: { name, value },
     } = e;
     if (name === "title") {
       setTitle(value);
-      titleRef.current.rows =
-        "" + Math.floor(titleRef.current.scrollHeight / 80);
     }
     if (name === "content") setContent(value);
     if (name === "image") {
