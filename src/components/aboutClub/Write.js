@@ -47,10 +47,13 @@ const Write = ({ match }) => {
       target: { name, value },
     } = e;
     if (name === "title") {setTitle(value);
-      
+      if ((e.keyCode || e.which) == 13) {
+        console.log('enter')
+        return false;
+      }
       if(titleRef !== null){
         console.log(titleRef.current.scrollHeight)
-        titleRef.current.style.height = titleRef.current.scrollHeight +'px';
+        titleRef.current.style.height = Math.floor(titleRef.current.scrollHeight/80)*80 +'px';
       }
     }
     if (name === "content") setContent(value);
