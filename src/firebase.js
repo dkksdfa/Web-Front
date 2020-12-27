@@ -26,7 +26,6 @@ const firebaseConfig = {
 };
 
 // firebaseConfig 정보로 firebase 시작
-
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
