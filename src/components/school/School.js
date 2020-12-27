@@ -1,71 +1,26 @@
 import React, { useState } from "react";
-import axios from "axios";
-import cheerio from "cheerio";
 import Content from "./Content";
-import { firestore } from "../../firebase";
-import PageWrap from "../PageWrap";
+// import PageWrap from "../PageWrap";
 import {
   FeedText,
   Justify,
   Template,
   WhatIsProblem,
 } from "../../styles/StyledSchool";
+import { getTodayMeal, getUserinfo } from "./school-function";
 const School = ({ userObj }) => {
-  const [data, setData] = React.useState(null);
+  const [meal, setMeal] = React.useState(null);
   const [loading, setLoading] = useState(false);
   const Diagnosis = "https://hcs.eduro.go.kr/#/loginHome";
   const homePage = "http://daekyeong.sen.hs.kr/index.do";
-  let [onlineClass, setOnlineClass] = React.useState(
+  let [onlineClassURL, setOnlineClassURL] = React.useState(
     "https://hoc23.ebssw.kr/onlineClass/search/onlineClassSearchView.do?schulCcode=00304&schCssTyp=online_high"
   );
   React.useEffect(() => {
-    const getHtml = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `http://daekyeong.sen.hs.kr/70633/subMenu.do`
-        );
-        const $ = cheerio.load(response.data);
-        const $bodyList =
-          $("td.today")[0].children[1] &&
-          $("td.today")[0].children[1].children[1].children[1].attribs.onclick;
-
-        if ($bodyList) {
-          const rResult = $bodyList.replace(/[^0-9]/g, "");
-          const sponse = await axios.get(
-            `http://daekyeong.sen.hs.kr/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId=${rResult}`
-          );
-          const op = cheerio.load(sponse.data);
-          const $tableList = op("table tbody").children("tr")[3];
-          const rawData = $tableList.children[3].children[0].data;
-          const formattedList = rawData.slice(7, rawData.length - 6).split(",");
-          setData(formattedList);
-        } else {
-          setData(false);
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getHtml();
+    getTodayMeal(setLoading, setMeal);
   }, []);
   React.useEffect(() => {
-    const getUserinfo = async () => {
-      if (userObj) {
-        const userData = await firestore
-          .collection("additional userinfo")
-          .doc(userObj.uid)
-          .get();
-        setOnlineClass(
-          `https://hoc23.ebssw.kr/20dk${userData.data().grade}${
-            userData.data().classNumber
-          }`
-        );
-      }
-    };
-    getUserinfo();
+    getUserinfo(userObj, setOnlineClassURL);
   }, [userObj]);
   return (
     <Justify>
@@ -84,17 +39,15 @@ const School = ({ userObj }) => {
           <Content
             imagePath="/online.png"
             label="온라인 클래스로"
-            link={onlineClass}
+            link={onlineClassURL}
           />
         </WhatIsProblem>
-        {data && <FeedText style={{ fontSize: "3rem" }}>오늘의 급식</FeedText>}
+        {meal && <FeedText style={{ fontSize: "3rem" }}>오늘의 급식</FeedText>}
         {loading && <FeedText>loading</FeedText>}
-        {!loading && !data && (
-          <FeedText>오늘은 주말/공휴일이라 급식이 없습니다.</FeedText>
-        )}
+        {!loading && !meal && <FeedText>오늘은 급식이 없습니다.</FeedText>}
         {!loading &&
-          data &&
-          data.map((val, index) => <FeedText key={index}>{val}</FeedText>)}
+          meal &&
+          meal.map((val, index) => <FeedText key={index}>{val}</FeedText>)}
       </Template>
     </Justify>
   );
