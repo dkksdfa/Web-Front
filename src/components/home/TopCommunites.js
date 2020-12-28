@@ -22,6 +22,7 @@ const BottomOfHome = () => {
       </Link>
     );
   });
+
   return (
     <Today>
       <TodayTitle>Today's Top Communities</TodayTitle>

@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonPosition, Button, Navigation } from "../styles/StyledNav";
+import { ButtonPosition, NavButton, Navigation } from "../styles/StyledNav";
 import { Link, useHistory } from "react-router-dom";
 import { Userinfo } from "../App";
 import { authService } from "../firebase";
@@ -31,7 +31,7 @@ const Nav = () => {
         <Navigation>
           <ButtonPosition>
             {menulist(isLoggedIn).map((val, i) => (
-              <Button key={i}>
+              <NavButton key={i}>
                 <Link
                   to={val.link}
                   style={{
@@ -40,14 +40,14 @@ const Nav = () => {
                 >
                   {val.title}
                 </Link>
-              </Button>
+              </NavButton>
             ))}
             {isLoggedIn ? (
-              <Button onClick={onClick}>Logout</Button>
+              <NavButton onClick={onClick}>Logout</NavButton>
             ) : (
-              <Button>
+              <NavButton>
                 <Link to="/login">Login</Link>
-              </Button>
+              </NavButton>
             )}
           </ButtonPosition>
         </Navigation>

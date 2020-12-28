@@ -15,7 +15,7 @@ const Navigation = styled.nav`
   }
 `;
 
-const Button = styled.button`
+const NavButton = styled.button`
   /* visibility: ${(props) => (props.visible ? "visible" : "hidden")}; */
   background: inherit;
   box-shadow: none;
@@ -49,4 +49,4 @@ const ButtonPosition = styled.div`
   background: black;
 `;
 
-export { ButtonPosition, Button, Navigation };
+export { ButtonPosition, NavButton, Navigation };

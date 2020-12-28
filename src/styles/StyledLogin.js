@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { StyledInputName } from "./StyledMoodify";
-import { Button } from "./StyledPageWrap";
+import { Button } from "../library/styles";
 
 // const Image = styled.img`
 //   width: 16px;
@@ -79,18 +79,19 @@ import { Button } from "./StyledPageWrap";
 //   MarginBetweenInputAndButton,
 // };
 
-const LoginButton = styled(Button)`
+export const LoginButton = styled(Button)`
   background: hotpink;
   &:hover {
     background: pink;
   }
 `;
-const LoginDiv = styled.div`
+export const ButtonDiv = styled.div`
   display: table-cell;
   width: 90vw;
   text-align: right;
 `;
-const GoogleButton = styled(Button)`
+
+export const GoogleButton = styled(Button)`
   background: rgb(170, 170, 170);
 
   &:hover {
@@ -98,7 +99,7 @@ const GoogleButton = styled(Button)`
   }
 `;
 
-const JoinButton = styled(Button)`
+export const JoinButton = styled(Button)`
   background: skyblue;
   margin: 0 10px;
   &:hover {
@@ -106,6 +107,4 @@ const JoinButton = styled(Button)`
   }
 `;
 
-const InputTitle = styled(StyledInputName)``;
-
-export { LoginButton, InputTitle, LoginDiv, GoogleButton, JoinButton };
+export const InputTitle = styled(StyledInputName)``;

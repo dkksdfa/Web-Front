@@ -1,13 +1,13 @@
 import React from "react";
 import { Background } from "../../styles/StyledHome";
-import { default as Top } from "./TopOfHome";
-import { default as Bottom } from "./BottomOfHome";
+import Introduction from "./Introduction";
+import TopCommunities from "./TopCommunites";
 
 const Main = () => {
   return (
     <Background>
-      <Top />
-      <Bottom />
+      <Introduction />
+      <TopCommunities />
     </Background>
   );
 };

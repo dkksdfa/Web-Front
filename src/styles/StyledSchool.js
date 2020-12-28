@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import { StyledTitle } from "../library/styles";
 import {
   ContentJustify as Template,
   ContentTemplate as Justify,
-  StyledTitle,
 } from "./StyledPageWrap";
 
 const FeedText = styled(StyledTitle)`
