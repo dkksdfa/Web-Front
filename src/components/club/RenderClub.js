@@ -1,6 +1,6 @@
 import React from "react";
 import PageWrap from "../PageWrap";
-import { Title, ClubWrap, ClubIntro } from "../../styles/StyledClub";
+import { Title, ClubWrap, ClubIntro } from "./StyledClub";
 import { Link } from "react-router-dom";
 
 const RenderClub = ({ clubs, category }) => {
