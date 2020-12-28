@@ -5,8 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import { firestore } from "../../firebase";
 import { Userinfo } from "../../App";
 import { useHistory } from "react-router-dom";
-import { Button } from "../../styles/StyledPageWrap";
-import { LoginDiv } from "../../styles/StyledLogin";
+import { Button } from "../../library/styles";
+import { ButtonDiv } from "../../styles/StyledLogin";
 
 const Write = ({ match }) => {
   // console.error("제목, 내용 길게 입력 시 여러 줄로 표시되게 구현해야함.");
@@ -101,7 +101,7 @@ const Write = ({ match }) => {
           onChange={onChange}
           placeholder="Write your article content here..."
         />
-        <LoginDiv>
+        <ButtonDiv>
           <Button
             onClick={onSubmit}
             style={{ marginRight: "10px", background: "blue" }}
@@ -109,7 +109,7 @@ const Write = ({ match }) => {
             등록
           </Button>
           <Button onClick={onCancel}>취소</Button>
-        </LoginDiv>
+        </ButtonDiv>
       </div>
     </PageWrap>
   );

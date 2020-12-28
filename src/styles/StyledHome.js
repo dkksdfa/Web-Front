@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-const Background = styled.div`
+export const Background = styled.div`
   width: 100vw;
   height: 200vh;
   display: flex;
   flex-direction: column;
   text-align: center;
 `;
-const MainBanner = styled.div`
+export const MainBanner = styled.div`
   width: 100%;
   height: 50%;
   top: 50px;
@@ -15,14 +15,14 @@ const MainBanner = styled.div`
   background-size: cover;
   background-position: center;
 `;
-const Text = styled.p((props) => ({
+export const Text = styled.p((props) => ({
   fontSize: `${props.size}rem`,
   // fontWeight: "300",
   marginTop: `${props.margin && "200px"}`,
   color: "#eee",
   lineHeight: "1rem",
 }));
-const Button = styled.button`
+export const IntroductionButton = styled.button`
   background: #cfb783;
   border: none;
   width: 20%;
@@ -42,7 +42,7 @@ const Button = styled.button`
     outline: none;
   }
 `;
-const Today = styled.div`
+export const Today = styled.div`
   height: 100vh;
   width: 100vw;
   margin: 0;
@@ -52,7 +52,7 @@ const Today = styled.div`
   background-position: center;
 `;
 
-const TodayTitle = styled.h1`
+export const TodayTitle = styled.h1`
   font-size: 5rem;
   color: #eee;
   font-weight: bold;
@@ -61,13 +61,13 @@ const TodayTitle = styled.h1`
   margin-bottom: 50px;
 `;
 
-const ClubWrap = styled.div`
+export const ClubWrap = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 `;
 
-const ClubIntro = styled.div`
+export const ClubIntro = styled.div`
   width: 200px;
   height: 200px;
   margin: 20px 40px;
@@ -83,14 +83,3 @@ const ClubIntro = styled.div`
     transition: 0.4s;
   }
 `;
-
-export {
-  Background,
-  Button,
-  Text,
-  Today,
-  ClubIntro,
-  ClubWrap,
-  MainBanner,
-  TodayTitle,
-};
