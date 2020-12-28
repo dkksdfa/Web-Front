@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { StyledTitle } from "../library/styles";
+import { StyledPageTitle } from "../library/styles";
 import {
   ContentJustify as Template,
   ContentTemplate as Justify,
 } from "./StyledPageWrap";
 
-const FeedText = styled(StyledTitle)`
+const FeedText = styled(StyledPageTitle)`
   text-align: center;
   font-size: 2rem;
   margin: 10px 0;

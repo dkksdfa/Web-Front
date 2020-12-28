@@ -9,7 +9,7 @@ import {
   SumbitDiv,
 } from "../../styles/StyledMoodify.js";
 import { useHistory } from "react-router-dom";
-import { StyledTitle } from "../../library/styles";
+import { StyledPageTitle } from "../../library/styles";
 
 const Modify = ({ isLoggedIn, userObj }) => {
   const [init, setInit] = useState(false);
@@ -53,7 +53,7 @@ const Modify = ({ isLoggedIn, userObj }) => {
     <PageWrap>
       {init ? (
         <>
-          <StyledTitle>Modify</StyledTitle>
+          <StyledPageTitle>Modify</StyledPageTitle>
           <div>
             <StyledInputName>Name</StyledInputName>
             <StyledName
@@ -96,7 +96,7 @@ const Modify = ({ isLoggedIn, userObj }) => {
           </SumbitDiv>
         </>
       ) : (
-        <StyledTitle>Loading...</StyledTitle>
+        <StyledPageTitle>Loading...</StyledPageTitle>
       )}
     </PageWrap>
   );

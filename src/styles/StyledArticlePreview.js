@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const Body = styled.article`
   background: white;
   border: 0.4px solid #aaa;

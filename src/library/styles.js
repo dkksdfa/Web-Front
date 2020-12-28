@@ -38,7 +38,7 @@ export const Input = styled.input`
   }
 `;
 
-export const StyledTitle = styled.h1`
+export const StyledPageTitle = styled.h1`
   font-weight: bolder;
   font-size: 5rem;
   margin: 0;

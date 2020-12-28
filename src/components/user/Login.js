@@ -4,7 +4,12 @@ import { authService as auth } from "../../firebase";
 import PageWrap from "../PageWrap";
 import { ButtonDiv } from "../../styles/StyledLogin";
 import GoogleLogin from "./GoogleLogin";
-import { StyledTitle, Input, Button, InputTitle } from "../../library/styles";
+import {
+  StyledPageTitle,
+  Input,
+  Button,
+  InputTitle,
+} from "../../library/styles";
 
 const loginButtonTheme = { backgroundColor: "hotpink", hoverColor: "pink" };
 const joinButtonTheme = {
@@ -52,7 +57,7 @@ export default ({ isLoggedIn }) => {
 
   return (
     <PageWrap>
-      <StyledTitle>login page</StyledTitle>
+      <StyledPageTitle>login page</StyledPageTitle>
 
       <InputTitle>Email</InputTitle>
       <Input

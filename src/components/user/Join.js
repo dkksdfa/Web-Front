@@ -7,7 +7,7 @@ import {
   SubmitButton,
   SumbitDiv,
 } from "../../styles/StyledMoodify";
-import { Input, StyledTitle } from "../../library/styles";
+import { Input, StyledPageTitle } from "../../library/styles";
 import PageWrap from "../PageWrap";
 
 const Join = ({ isLoggedIn }) => {
@@ -80,7 +80,7 @@ const Join = ({ isLoggedIn }) => {
   }
   return (
     <PageWrap>
-      <StyledTitle>Join page</StyledTitle>
+      <StyledPageTitle>Join page</StyledPageTitle>
       <form onSubmit={onSubmit}>
         <InputTitle>Email</InputTitle>
         <Input

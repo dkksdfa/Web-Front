@@ -12,6 +12,7 @@ const GoogleLogin = () => {
     await authService.signInWithPopup(provider);
     history.push("/");
   };
+
   const getData = async () => {
     await authService.onAuthStateChanged(async (user) => {
       if (user) {

@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import PageWrap from "../PageWrap";
-import "../../styles/Article.css";
 import { firestore } from "../../firebase";
 import { Userinfo } from "../../App";
 import { Link, useHistory } from "react-router-dom";
@@ -8,6 +7,14 @@ import AddComment from "./AddComment";
 import CommentList from "./CommentList";
 import { BsTrash } from "react-icons/bs";
 import { BiEditAlt } from "react-icons/bi";
+import { StyledPageTitle } from "../../library/styles";
+import {
+  ArticleContent,
+  ArticleCreatorName,
+  ArticleSubInfo,
+  ArticleTitle,
+  SubInfoDiv,
+} from "./StyledArticle";
 
 const Article = ({ match }) => {
   const [article, setArticle] = useState(null);
@@ -32,7 +39,7 @@ const Article = ({ match }) => {
         .collection("additional userinfo")
         .doc(realArticle.creatorId)
         .get();
-      const creatorName = dbUser.data().name;
+      const creatorName = dbUser.data().displayName;
       setArticle({ ...realArticle, creatorName });
       const articleDate = new Date(realArticle.date.seconds * 1000);
       var months = [
@@ -94,13 +101,13 @@ const Article = ({ match }) => {
   if (loading)
     return (
       <PageWrap>
-        <h1 className="title">loading...</h1>
+        <StyledPageTitle>loading...</StyledPageTitle>
       </PageWrap>
     );
   if (error) {
     return (
       <PageWrap>
-        <h1 className="title">Error!</h1>
+        <StyledPageTitle>Error!</StyledPageTitle>
         <Link to="/">Go to home</Link>
       </PageWrap>
     );
@@ -109,10 +116,10 @@ const Article = ({ match }) => {
     <PageWrap>
       {!loading && done && (
         <>
-          <h1 className="articleTitle">{article.title}</h1>
-          <div className="subInfoTemplate">
-            <span className="creator">{article.creatorName}</span>
-            <span className="subInfo">{date.formmatedDate}</span>
+          <ArticleTitle>{article.title}</ArticleTitle>
+          <SubInfoDiv>
+            <ArticleCreatorName>{article.creatorName}</ArticleCreatorName>
+            <ArticleSubInfo>{date.formmatedDate}</ArticleSubInfo>
             {userObj && userObj.uid === article.creatorId && (
               <>
                 <span className="subInfo">
@@ -123,7 +130,7 @@ const Article = ({ match }) => {
                 </span>
               </>
             )}
-          </div>
+          </SubInfoDiv>
           {userObj &&
             userObj.uid === article.creatorId &&
             (edit ? (
@@ -138,7 +145,7 @@ const Article = ({ match }) => {
               </form>
             ) : (
               <>
-                <div id="content">{article.content}</div>
+                <ArticleContent>{article.content}</ArticleContent>
               </>
             ))}
           <AddComment
