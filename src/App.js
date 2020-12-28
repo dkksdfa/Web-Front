@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
 import Nav from "./components/Nav.js";
-import "./App.scss";
 import { authService, firestore } from "./firebase";
 import Router from "./Router.js";
+import { StyledAppContainer } from "./StyledApp.js";
 
 export const Userinfo = createContext();
 
@@ -37,7 +37,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="container">
+    <StyledAppContainer>
       {init && (
         <Userinfo.Provider
           value={{
@@ -55,7 +55,7 @@ const App = () => {
           />
         </Userinfo.Provider>
       )}
-    </div>
+    </StyledAppContainer>
   );
 };
 
