@@ -17,6 +17,7 @@ const handleGettingMeal = async ($) => {
   const $tableList = op("table tbody").children("tr")[3];
   const mealData = $tableList.children[3].children[0].data;
   const formattedMealList = getFormattedMeal(mealData);
+  console.log({ formattedMealList });
   return formattedMealList;
 };
 
@@ -27,7 +28,7 @@ export const getTodayMeal = async (setLoading, setMeal) => {
       `http://daekyeong.sen.hs.kr/70633/subMenu.do`
     );
     const $ = cheerio.load(response.data);
-    if (isTodayMealExist($)) await setMeal(handleGettingMeal());
+    if (isTodayMealExist($)) setMeal(await handleGettingMeal($));
     else setMeal(false);
   } catch (error) {
     throw error;
