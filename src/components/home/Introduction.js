@@ -9,7 +9,7 @@ const Introduction = () => {
       <a
         target="_blank"
         rel="noopener noreferrer"
-        href="https://drive.google.com/file/d/1uXUOihY1JqfGnBlTpNDScUG5jmifjVRB/view?usp=sharing"
+        href="https://youtu.be/M6E-Ri4AGrY"
       >
         <IntroductionButton>소개 영상 보러가기</IntroductionButton>
       </a>
