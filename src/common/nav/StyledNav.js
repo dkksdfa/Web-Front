@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Navigation = styled.nav`
+export const Navigation = styled.nav`
   display: flex;
   /* position: fixed; */
   height: 44px;
@@ -15,7 +15,7 @@ const Navigation = styled.nav`
   }
 `;
 
-const NavButton = styled.button`
+export const NavButton = styled.button`
   /* visibility: ${(props) => (props.visible ? "visible" : "hidden")}; */
   background: inherit;
   box-shadow: none;
@@ -38,7 +38,7 @@ const NavButton = styled.button`
   }
 `;
 
-const ButtonPosition = styled.div`
+export const ButtonPosition = styled.div`
   display: flex;
   justify-content: center;
   /* position: fixed; */
@@ -48,5 +48,3 @@ const ButtonPosition = styled.div`
   height: 100%;
   background: black;
 `;
-
-export { ButtonPosition, NavButton, Navigation };

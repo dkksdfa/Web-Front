@@ -1,8 +1,8 @@
 import React from "react";
-import { ButtonPosition, NavButton, Navigation } from "../styles/StyledNav";
+import { ButtonPosition, NavButton, Navigation } from "./StyledNav";
 import { Link, useHistory } from "react-router-dom";
-import { Userinfo } from "../App";
-import { authService } from "../firebase";
+import { Userinfo } from "../../App";
+import { authService } from "../../firebase";
 
 const Nav = () => {
   const history = useHistory();

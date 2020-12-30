@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import Nav from "./components/Nav.js";
+import Nav from "./common/nav/index.js";
 import { authService, firestore } from "./firebase";
 import Router from "./Router.js";
 import { StyledAppContainer } from "./StyledApp.js";
