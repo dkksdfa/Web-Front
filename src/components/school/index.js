@@ -7,6 +7,7 @@ import {
   WhatIsProblem,
 } from "../../styles/StyledSchool";
 import { getTodayMeal, getUserinfo } from "./school-function";
+
 const School = ({ userObj }) => {
   const [meal, setMeal] = React.useState(null);
   const [loading, setLoading] = useState(false);
