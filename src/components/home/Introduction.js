@@ -1,5 +1,5 @@
 import React from "react";
-import { IntroductionButton, Text, MainBanner } from "../../styles/StyledHome";
+import { IntroductionButton, Text, MainBanner } from "./StyledHome";
 const Introduction = () => {
   return (
     <MainBanner>

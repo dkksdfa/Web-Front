@@ -1,5 +1,5 @@
 import React from "react";
-import { Background } from "../../styles/StyledHome";
+import { Background } from "./StyledHome";
 import Introduction from "./Introduction";
 import TopCommunities from "./TopCommunites";
 

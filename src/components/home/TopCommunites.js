@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Today,
-  ClubIntro,
-  ClubWrap,
-  TodayTitle,
-} from "../../styles/StyledHome";
+import { Today, ClubIntro, ClubWrap, TodayTitle } from "./StyledHome";
 import { Link } from "react-router-dom";
 const BottomOfHome = () => {
   const ClubExample = [
