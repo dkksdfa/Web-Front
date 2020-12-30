@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Content from "./Content";
-// import PageWrap from "../PageWrap";
 import {
   FeedText,
   Justify,
