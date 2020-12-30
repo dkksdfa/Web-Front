@@ -48,6 +48,6 @@ export { default as Club } from "./club/Club";
 export { default as Community } from "../community";
 export { default as Write } from "./club/Write";
 export { default as Login } from "./user/login";
-export { default as Join } from "./user/Join.js";
+export { default as Join } from "./user/join";
 export { default as Modify } from "./user/modify";
 export { default as Article } from "./club/Article";
