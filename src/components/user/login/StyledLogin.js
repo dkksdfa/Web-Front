@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { StyledInputName } from "./StyledMoodify";
-import { Button } from "../common/styles";
+import { Button } from "../../../common/styles";
 
 // const Image = styled.img`
 //   width: 16px;
@@ -85,11 +84,6 @@ export const LoginButton = styled(Button)`
     background: pink;
   }
 `;
-export const ButtonDiv = styled.div`
-  display: table-cell;
-  width: 90vw;
-  text-align: right;
-`;
 
 export const GoogleButton = styled(Button)`
   background: rgb(170, 170, 170);
@@ -106,5 +100,3 @@ export const JoinButton = styled(Button)`
     background: rgb(177, 228, 248);
   }
 `;
-
-export const InputTitle = styled(StyledInputName)``;

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authService as auth, firestore } from "../../firebase";
-import { InputTitle } from "../../styles/StyledLogin";
 import {
+  Button,
+  Input,
+  InputTitle,
+  StyledPageTitle,
   StyledSelect,
-  SubmitButton,
-  SumbitDiv,
-} from "../../styles/StyledMoodify";
-import { Input, StyledPageTitle } from "../../common/styles";
+  ButtonsWrapper,
+} from "../../common/styles";
 import PageWrap from "../PageWrap";
 
 const Join = ({ isLoggedIn }) => {
@@ -130,9 +131,16 @@ const Join = ({ isLoggedIn }) => {
           <option value="7">7반</option>
           <option value="8">8반</option>
         </StyledSelect>
-        <SumbitDiv>
-          <SubmitButton type="submit">join!</SubmitButton>
-        </SumbitDiv>
+        <ButtonsWrapper>
+          <Button
+            type="submit"
+            marginTop={true}
+            backgroundColor={"rgb(149, 0, 255)"}
+            hoverColor={"rgb(106, 0, 182)"}
+          >
+            join!
+          </Button>
+        </ButtonsWrapper>
       </form>
     </PageWrap>
   );

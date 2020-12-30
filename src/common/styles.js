@@ -8,6 +8,8 @@ export const Button = styled.button`
   height: 70px;
   font-size: 3rem;
   cursor: pointer;
+  margin-left: ${(props) => (props.theme.marginLeft ? "100px" : "0")};
+  margin-top: ${(props) => (props.theme.marginTop ? "100px" : "0")};
   border-radius: 10px;
   padding: 5px 10px;
   &:hover {
@@ -20,6 +22,8 @@ Button.defaultProps = {
   theme: {
     backgroundColor: "black",
     hoverColor: "gray",
+    marginLeft: false,
+    marginTop: false,
   },
 };
 
@@ -48,4 +52,24 @@ export const InputTitle = styled.h3`
   font-size: 2.5rem;
   color: gray;
   margin: 2rem 0 0.125rem 0;
+`;
+
+export const StyledSelect = styled.select`
+  border: 4px solid gray;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: gray;
+  &:focus {
+    border: 4px solid black;
+    transition: 0.5s ease;
+    color: black;
+  }
+`;
+
+export const ButtonsWrapper = styled.div`
+  display: table-cell;
+  width: 90vw;
+  text-align: right;
 `;

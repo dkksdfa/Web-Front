@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
-import PageWrap from "../PageWrap";
-import { firestore } from "../../firebase";
-import {
-  StyledInputName,
-  StyledName,
-  StyledSelect,
-  SubmitButton,
-  SumbitDiv,
-} from "../../styles/StyledMoodify.js";
+import PageWrap from "../../PageWrap";
+import { firestore } from "../../../firebase";
 import { useHistory } from "react-router-dom";
-import { StyledPageTitle } from "../../common/styles";
+import {
+  StyledPageTitle,
+  InputTitle,
+  Button,
+  ButtonsWrapper,
+  StyledSelect,
+  Input,
+} from "../../../common/styles";
 
 const Modify = ({ isLoggedIn, userObj }) => {
   const [init, setInit] = useState(false);
@@ -55,15 +55,15 @@ const Modify = ({ isLoggedIn, userObj }) => {
         <>
           <StyledPageTitle>Modify</StyledPageTitle>
           <div>
-            <StyledInputName>Name</StyledInputName>
-            <StyledName
+            <InputTitle>Name</InputTitle>
+            <Input
               name="displayName"
               value={userinfo.displayName}
               onChange={onChange}
             />
           </div>
           <div>
-            <StyledInputName>Years</StyledInputName>
+            <InputTitle>Years</InputTitle>
             <StyledSelect
               name="grade"
               onChange={onChange}
@@ -75,7 +75,7 @@ const Modify = ({ isLoggedIn, userObj }) => {
             </StyledSelect>
           </div>
           <div>
-            <StyledInputName>Class</StyledInputName>
+            <InputTitle>Class</InputTitle>
             <StyledSelect
               name="classNumber"
               onChange={onChange}
@@ -91,9 +91,16 @@ const Modify = ({ isLoggedIn, userObj }) => {
               <option value="8">8반</option>
             </StyledSelect>
           </div>
-          <SumbitDiv>
-            <SubmitButton onClick={onClick}>Modify</SubmitButton>
-          </SumbitDiv>
+          <ButtonsWrapper>
+            <Button
+              onClick={onClick}
+              marginTop={true}
+              backgroundColor={"rgb(149, 0, 255)"}
+              hoverColor={"rgb(106, 0, 182)"}
+            >
+              Modify
+            </Button>
+          </ButtonsWrapper>
         </>
       ) : (
         <StyledPageTitle>Loading...</StyledPageTitle>

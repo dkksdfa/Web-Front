@@ -37,6 +37,7 @@ const SubmitButton = styled.button`
   border: none;
   border-radius: 10px;
   &:hover {
+    transition: 0.2s ease;
     background: #0077ed;
   }
 `;

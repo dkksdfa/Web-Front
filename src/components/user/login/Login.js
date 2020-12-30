@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { authService as auth } from "../../firebase";
-import PageWrap from "../PageWrap";
-import { ButtonDiv } from "../../styles/StyledLogin";
+import { authService as auth } from "../../../firebase";
+import PageWrap from "../../PageWrap";
 import GoogleLogin from "./GoogleLogin";
 import {
   StyledPageTitle,
   Input,
   Button,
   InputTitle,
-} from "../../common/styles";
+  ButtonsWrapper,
+} from "../../../common/styles";
 
 const loginButtonTheme = { backgroundColor: "hotpink", hoverColor: "pink" };
 const joinButtonTheme = {
@@ -75,7 +75,7 @@ export default ({ isLoggedIn }) => {
         onChange={onChange}
       />
 
-      <ButtonDiv>
+      <ButtonsWrapper>
         <Button theme={loginButtonTheme} onClick={onSubmit}>
           login
         </Button>
@@ -87,7 +87,7 @@ export default ({ isLoggedIn }) => {
           join
         </Button>
         <GoogleLogin />
-      </ButtonDiv>
+      </ButtonsWrapper>
     </PageWrap>
   );
 };
