@@ -9,7 +9,7 @@ import {
   SumbitDiv,
 } from "../../styles/StyledMoodify.js";
 import { useHistory } from "react-router-dom";
-import { StyledPageTitle } from "../../library/styles";
+import { StyledPageTitle } from "../../common/styles";
 
 const Modify = ({ isLoggedIn, userObj }) => {
   const [init, setInit] = useState(false);

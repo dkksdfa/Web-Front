@@ -7,7 +7,7 @@ import {
   SubmitButton,
   SumbitDiv,
 } from "../../styles/StyledMoodify";
-import { Input, StyledPageTitle } from "../../library/styles";
+import { Input, StyledPageTitle } from "../../common/styles";
 import PageWrap from "../PageWrap";
 
 const Join = ({ isLoggedIn }) => {

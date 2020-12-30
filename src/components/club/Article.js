@@ -7,7 +7,7 @@ import AddComment from "./AddComment";
 import CommentList from "./CommentList";
 import { BsTrash } from "react-icons/bs";
 import { BiEditAlt } from "react-icons/bi";
-import { StyledPageTitle } from "../../library/styles";
+import { StyledPageTitle } from "../../common/styles";
 import {
   ArticleContent,
   ArticleCreatorName,

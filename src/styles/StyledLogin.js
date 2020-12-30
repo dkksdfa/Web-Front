@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { StyledInputName } from "./StyledMoodify";
-import { Button } from "../library/styles";
+import { Button } from "../common/styles";
 
 // const Image = styled.img`
 //   width: 16px;

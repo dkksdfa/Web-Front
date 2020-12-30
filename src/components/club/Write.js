@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { firestore } from "../../firebase";
 import { Userinfo } from "../../App";
 import { useHistory } from "react-router-dom";
-import { Button } from "../../library/styles";
+import { Button } from "../../common/styles";
 import { ButtonDiv } from "../../styles/StyledLogin";
 
 const Write = ({ match }) => {

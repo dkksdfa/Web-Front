@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../library/styles";
+import { Button } from "../common/styles";
 //  border: 2px solid black;
 //padding: 2rem;
 //border-radius: 10px;

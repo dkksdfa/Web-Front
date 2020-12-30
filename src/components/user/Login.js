@@ -9,7 +9,7 @@ import {
   Input,
   Button,
   InputTitle,
-} from "../../library/styles";
+} from "../../common/styles";
 
 const loginButtonTheme = { backgroundColor: "hotpink", hoverColor: "pink" };
 const joinButtonTheme = {

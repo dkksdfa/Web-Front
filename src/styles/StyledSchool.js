@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledPageTitle } from "../library/styles";
+import { StyledPageTitle } from "../common/styles";
 import {
   ContentJustify as Template,
   ContentTemplate as Justify,
