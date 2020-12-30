@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { firestore } from "../../firebase";
+import { firestore } from "../firebase";
 import {
   Body,
   Title,
@@ -7,9 +7,9 @@ import {
   Inner,
   Info,
   Comment,
-} from "../../styles/StyledArticlePreview";
-
+} from "./StyledArticlePreview";
 import { Link } from "react-router-dom";
+
 const ArticlePreview = ({ clublink, category, article, isOwner }) => {
   const [creatorName, setCreatorName] = useState("");
   const setInit = useCallback(async () => {

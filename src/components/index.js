@@ -45,7 +45,7 @@ export const clublist = {
 export { default as Home } from "./home";
 export { default as School } from "./school/School";
 export { default as Club } from "./club/Club";
-export { default as Community } from "./club/Community";
+export { default as Community } from "../community";
 export { default as Write } from "./club/Write";
 export { default as Login } from "./user/Login.js";
 export { default as Join } from "./user/Join.js";

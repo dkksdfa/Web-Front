@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import ArticlePreview from "./ArticlePreview";
-import { Body, Top, Write, Search } from "../../styles/StyledCommunity";
-import { firestore } from "../../firebase";
-import { Userinfo } from "../../App";
+import { Body, Top, Write, Search } from "./StyledCommunity";
+import { firestore } from "../firebase";
+import { Userinfo } from "../App";
 
 const Community = ({ match }) => {
   const [loading, setLoading] = useState(false);
