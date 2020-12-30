@@ -1,4 +1,4 @@
-import PageWrap from "../PageWrap";
+import PageWrap from "../../common/page-wrap";
 import React, { useEffect, useRef, useState } from "react";
 import "../../styles/Write.css";
 import { v4 as uuidv4 } from "uuid";

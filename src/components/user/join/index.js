@@ -9,7 +9,7 @@ import {
   StyledSelect,
   ButtonsWrapper,
 } from "../../../common/styles";
-import PageWrap from "../../PageWrap";
+import PageWrap from "../../../common/page-wrap";
 
 const Join = ({ isLoggedIn }) => {
   const [email, setEmail] = useState("");

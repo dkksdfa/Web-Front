@@ -3,7 +3,7 @@ import { StyledPageTitle } from "../common/styles";
 import {
   ContentJustify as Template,
   ContentTemplate as Justify,
-} from "./StyledPageWrap";
+} from "../common/page-wrap/StyledPageWrap";
 
 const FeedText = styled(StyledPageTitle)`
   text-align: center;

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import PageWrap from "../../PageWrap";
+import PageWrap from "../../../common/page-wrap";
 import { firestore } from "../../../firebase";
 import { useHistory } from "react-router-dom";
 import {

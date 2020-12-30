@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { authService as auth } from "../../../firebase";
-import PageWrap from "../../PageWrap";
+import PageWrap from "../../../common/page-wrap";
 import GoogleLogin from "./GoogleLogin";
 import {
   StyledPageTitle,

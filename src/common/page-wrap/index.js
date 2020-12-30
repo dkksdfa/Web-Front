@@ -1,5 +1,5 @@
 import React from "react";
-import { ContentJustify, ContentTemplate } from "../styles/StyledPageWrap";
+import { ContentJustify, ContentTemplate } from "./StyledPageWrap";
 
 const PageWrap = ({ children }) => {
   return (
