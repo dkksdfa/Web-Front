@@ -1,9 +1,5 @@
 import styled from "styled-components";
-import { StyledPageTitle } from "../common/styles";
-import {
-  ContentJustify as Template,
-  ContentTemplate as Justify,
-} from "../common/page-wrap/StyledPageWrap";
+import { StyledPageTitle } from "../../common/styles";
 
 const FeedText = styled(StyledPageTitle)`
   text-align: center;
@@ -11,7 +7,7 @@ const FeedText = styled(StyledPageTitle)`
   margin: 10px 0;
 `;
 
-const WhatIsProblem = styled.div`
+const SchoolContentWrapper = styled.div`
   display: flex;
   margin: 0;
   &:nth-child(1) {
@@ -50,12 +46,4 @@ const TextSpan = styled.div`
   }
 `;
 
-export {
-  Box,
-  ImageTemplate,
-  TextSpan,
-  Template,
-  Justify,
-  WhatIsProblem,
-  FeedText,
-};
+export { Box, ImageTemplate, TextSpan, SchoolContentWrapper, FeedText };

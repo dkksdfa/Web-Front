@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import Content from "./Content";
-import {
-  FeedText,
-  Justify,
-  Template,
-  WhatIsProblem,
-} from "../../styles/StyledSchool";
+import { FeedText, SchoolContentWrapper } from "./StyledSchool";
 import { getTodayMeal, getUserinfo } from "./school-function";
+import PageWrap from "../../common/page-wrap";
 
 const School = ({ userObj }) => {
   const [meal, setMeal] = React.useState(null);
@@ -23,33 +19,31 @@ const School = ({ userObj }) => {
     getUserinfo(userObj, setOnlineClassURL);
   }, [userObj]);
   return (
-    <Justify>
-      <Template>
-        <WhatIsProblem>
-          <Content
-            imagePath="/school.jpg"
-            label="학교 홈페이지가기"
-            link={homePage}
-          />
-          <Content
-            imagePath="/Diagnosis.png"
-            label="자가진단 하러가기"
-            link={Diagnosis}
-          />
-          <Content
-            imagePath="/online.png"
-            label="온라인 클래스로"
-            link={onlineClassURL}
-          />
-        </WhatIsProblem>
-        {meal && <FeedText style={{ fontSize: "3rem" }}>오늘의 급식</FeedText>}
-        {loading && <FeedText>loading</FeedText>}
-        {!loading && !meal && <FeedText>오늘은 급식이 없습니다.</FeedText>}
-        {!loading &&
-          meal &&
-          meal.map((val, index) => <FeedText key={index}>{val}</FeedText>)}
-      </Template>
-    </Justify>
+    <PageWrap>
+      <SchoolContentWrapper>
+        <Content
+          imagePath="/school.jpg"
+          label="학교 홈페이지가기"
+          link={homePage}
+        />
+        <Content
+          imagePath="/Diagnosis.png"
+          label="자가진단 하러가기"
+          link={Diagnosis}
+        />
+        <Content
+          imagePath="/online.png"
+          label="온라인 클래스로"
+          link={onlineClassURL}
+        />
+      </SchoolContentWrapper>
+      {meal && <FeedText style={{ fontSize: "3rem" }}>오늘의 급식</FeedText>}
+      {loading && <FeedText>loading</FeedText>}
+      {!loading && !meal && <FeedText>오늘은 급식이 없습니다.</FeedText>}
+      {!loading &&
+        meal &&
+        meal.map((val, index) => <FeedText key={index}>{val}</FeedText>)}
+    </PageWrap>
   );
 };
 export default School;

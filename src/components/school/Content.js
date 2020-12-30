@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, ImageTemplate, TextSpan } from "../../styles/StyledSchool";
+import { Box, ImageTemplate, TextSpan } from "./StyledSchool";
 
 const Content = ({ imagePath, label, link }) => {
   return (
