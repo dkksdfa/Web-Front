@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-import { firestore } from "../../firebase";
+import { firestore } from "../firebase";
 
 const Comment = ({ comment, isOwner, editing, setEditing }) => {
   const [username, setUsername] = useState("");

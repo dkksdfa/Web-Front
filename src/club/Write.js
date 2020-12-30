@@ -1,11 +1,11 @@
-import PageWrap from "../../common/page-wrap";
+import PageWrap from "../common/page-wrap";
 import React, { useEffect, useRef, useState } from "react";
-import "../../styles/Write.css";
+import "../styles/Write.css";
 import { v4 as uuidv4 } from "uuid";
-import { firestore } from "../../firebase";
-import { Userinfo } from "../../App";
+import { firestore } from "../firebase";
+import { Userinfo } from "../App";
 import { useHistory } from "react-router-dom";
-import { Button, ButtonsWrapper } from "../../common/styles";
+import { Button, ButtonsWrapper } from "../common/styles";
 
 const Write = ({ match }) => {
   // console.error("제목, 내용 길게 입력 시 여러 줄로 표시되게 구현해야함.");

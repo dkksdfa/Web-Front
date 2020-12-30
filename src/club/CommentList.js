@@ -1,7 +1,7 @@
-import { firestore } from "../../firebase";
+import { firestore } from "../firebase";
 import React, { useContext, useEffect, useState } from "react";
 import RenderComment from "./RenderComment";
-import { Userinfo } from "../../App";
+import { Userinfo } from "../App";
 
 const CommentList = ({ clublink, setDone, articleId }) => {
   const [comments, setComments] = useState([]);

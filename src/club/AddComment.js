@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { firestore } from "../../firebase";
+import { firestore } from "../firebase";
 
 const AddComment = ({ userObj, clublink, category, isLoggedIn, articleId }) => {
   const [newComment, setNewComment] = useState("");

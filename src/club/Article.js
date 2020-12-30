@@ -1,13 +1,13 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import PageWrap from "../../common/page-wrap";
-import { firestore } from "../../firebase";
-import { Userinfo } from "../../App";
+import PageWrap from "../common/page-wrap";
+import { firestore } from "../firebase";
+import { Userinfo } from "../App";
 import { Link, useHistory } from "react-router-dom";
 import AddComment from "./AddComment";
 import CommentList from "./CommentList";
 import { BsTrash } from "react-icons/bs";
 import { BiEditAlt } from "react-icons/bi";
-import { StyledPageTitle } from "../../common/styles";
+import { StyledPageTitle } from "../common/styles";
 import {
   ArticleContent,
   ArticleCreatorName,

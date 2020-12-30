@@ -1,6 +1,6 @@
 import React from "react";
 import RenderClub from "./RenderClub";
-import { clublist } from "../index";
+import { clublist } from "../components";
 
 const Club = ({ match }) => {
   const clubs = clublist[match.params.category];

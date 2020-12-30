@@ -1,5 +1,5 @@
 import React from "react";
-import PageWrap from "../../common/page-wrap";
+import PageWrap from "../common/page-wrap";
 import { Title, ClubWrap, ClubIntro } from "./StyledClub";
 import { Link } from "react-router-dom";
 
