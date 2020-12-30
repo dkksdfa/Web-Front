@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Button } from "../../../common/styles";
 import { authService, firebase, firestore } from "../../../firebase";
-import { GoogleButton } from "./StyledLogin";
 
 const GoogleLogin = () => {
   const history = useHistory();
@@ -39,14 +39,20 @@ const GoogleLogin = () => {
   };
 
   return (
-    <GoogleButton onClick={onClick}>
+    <Button
+      onClick={onClick}
+      theme={{
+        backgroundColor: "rgb(170, 170, 170)",
+        hoverColor: "rgb(201, 201, 201)",
+      }}
+    >
       <span style={{ color: "blue" }}>G</span>
       <span style={{ color: "red" }}>o</span>
       <span style={{ color: "yellow" }}>o</span>
       <span style={{ color: "blue" }}>g</span>
       <span style={{ color: "green" }}>l</span>
       <span style={{ color: "red" }}>e</span>
-    </GoogleButton>
+    </Button>
   );
 };
 
