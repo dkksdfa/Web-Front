@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Article from "./article/Article";
+import Article from "./article";
 import Club from "./club/Club";
 import Write from "./club/Write";
 import Community from "./community";
