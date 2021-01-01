@@ -16,7 +16,8 @@ const joinButtonTheme = {
   backgroundColor: "skyblue",
   hoverColor: "rgb(177, 228, 248)",
 };
-export default ({ isLoggedIn }) => {
+
+const Login = ({ isLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -91,3 +92,5 @@ export default ({ isLoggedIn }) => {
     </PageWrap>
   );
 };
+
+export default Login;
