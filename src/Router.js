@@ -1,16 +1,14 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import {
-  Article,
-  Club,
-  Community,
-  Home,
-  Join,
-  Login,
-  Modify,
-  School,
-  Write,
-} from "./components";
+import Article from "./club/Article";
+import Club from "./club/Club";
+import Community from "./community";
+import { Write } from "./community/StyledCommunity";
+import Home from "./components/home";
+import School from "./components/school";
+import Join from "./components/user/join";
+import Login from "./components/user/login";
+import Modify from "./components/user/modify";
 
 const Router = ({ isLoggedIn, userObj, setUserObj }) => (
   <>
