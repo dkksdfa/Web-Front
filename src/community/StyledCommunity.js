@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-const Body = styled.div`
+export const Body = styled.div`
   width: 50%;
   margin: 20px auto;
 `;
-const Top = styled.div`
+
+export const Top = styled.div`
   background: #eee;
   height: 60px;
   margin-top: 54px;
@@ -13,7 +14,8 @@ const Top = styled.div`
   align-items: center;
   width: 100%;
 `;
-const Write = styled.button`
+
+export const Write = styled.button`
   width: 120.78px;
   color: white;
   background: #3b49df;
@@ -27,7 +29,8 @@ const Write = styled.button`
     background: #323ebf;
   }
 `;
-const Search = styled.input`
+
+export const Search = styled.input`
   height: 40px;
   width: 300px;
   border-radius: 10px;
@@ -43,4 +46,3 @@ const Search = styled.input`
     box-shadow: 1px 1px 0 #4150f5;
   }
 `;
-export { Body, Top, Write, Search };

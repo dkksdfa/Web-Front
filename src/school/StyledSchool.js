@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { StyledPageTitle } from "../common/styles";
 
-const FeedText = styled(StyledPageTitle)`
+export const FeedText = styled(StyledPageTitle)`
   text-align: center;
   font-size: 2rem;
   margin: 10px 0;
 `;
 
-const SchoolContentWrapper = styled.div`
+export const SchoolContentWrapper = styled.div`
   display: flex;
   margin: 0;
   &:nth-child(1) {
@@ -15,7 +15,8 @@ const SchoolContentWrapper = styled.div`
     margin-right: 100px;
   }
 `;
-const Box = styled.div`
+
+export const Box = styled.div`
   width: 30%;
   margin-top: 50px;
   &:nth-child(2) {
@@ -24,7 +25,7 @@ const Box = styled.div`
   }
 `;
 
-const ImageTemplate = styled.div`
+export const ImageTemplate = styled.div`
   cursor: pointer;
   width: 100%;
   height: 300px;
@@ -34,7 +35,7 @@ const ImageTemplate = styled.div`
   background-size: 100% 100%;
 `;
 
-const TextSpan = styled.div`
+export const TextSpan = styled.div`
   font-size: 1.4rem;
   font-weight: bold;
   margin-top: 0.5rem;
@@ -45,5 +46,3 @@ const TextSpan = styled.div`
     text-decoration: underline;
   }
 `;
-
-export { Box, ImageTemplate, TextSpan, SchoolContentWrapper, FeedText };

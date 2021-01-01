@@ -1,18 +1,19 @@
 import styled from "styled-components";
 
-const Title = styled.div`
+export const Title = styled.div`
   color: #444;
   font-size: 4rem;
   font-weight: bold;
   margin-bottom: 20px;
 `;
-const ClubWrap = styled.div`
+
+export const ClubWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 `;
 
-const ClubIntro = styled.div`
+export const ClubIntro = styled.div`
   text-align: center;
   width: 220px;
   height: 220px;
@@ -29,4 +30,3 @@ const ClubIntro = styled.div`
     transition: 0.4s;
   }
 `;
-export { Title, ClubWrap, ClubIntro };

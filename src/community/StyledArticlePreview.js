@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Body = styled.article`
+export const Body = styled.article`
   background: white;
   border: 0.4px solid #aaa;
   border-radius: 10px;
@@ -10,27 +10,32 @@ const Body = styled.article`
     border: 0.4px solid black;
   }
 `;
-const Inner = styled.div`
+
+export const Inner = styled.div`
   margin-left: 14px;
   margin-top: 5px;
   margin-bottom: 7px;
 `;
-const Writer = styled.span`
+
+export const Writer = styled.span`
   font-size: 12px;
   background: #bbb;
   padding: 2px 4px;
 `;
-const Title = styled.div`
+
+export const Title = styled.div`
   font-weight: 500;
   font-size: 1.17em;
   margin-top: 10px;
 `;
-const Info = styled.span`
+
+export const Info = styled.span`
   color: gray;
   font-size: 12px;
   margin-left: 7px;
 `;
-const Comment = styled.div`
+
+export const Comment = styled.div`
   :hover {
     background: #dae0e6;
   }
@@ -41,5 +46,3 @@ const Comment = styled.div`
   font-size: 12px;
   width: max-content;
 `;
-
-export { Body, Title, Writer, Inner, Info, Comment };
