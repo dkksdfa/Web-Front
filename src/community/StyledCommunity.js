@@ -7,6 +7,7 @@ const Body = styled.div`
 const Top = styled.div`
   background: #eee;
   height: 60px;
+  margin-top: 54px;
   display: flex;
   justify-content: flex-start;
   align-items: center;

@@ -1,9 +1,9 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Article from "./club/Article";
+import Article from "./article/Article";
 import Club from "./club/Club";
+import Write from "./club/Write";
 import Community from "./community";
-import { Write } from "./community/StyledCommunity";
 import Home from "./home";
 import School from "./school";
 import Join from "./user/join";
