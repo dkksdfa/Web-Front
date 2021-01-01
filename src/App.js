@@ -1,8 +1,15 @@
 import React, { createContext, useEffect, useState } from "react";
+<<<<<<< HEAD
 import Nav from "./components/Nav.js";
 import "./App.scss";
 import { authService, firestore } from "./firebase";
 import Router from "./Router.js";
+=======
+import Nav from "./common/nav/index.js";
+import { authService, firestore } from "./firebase";
+import Router from "./Router.js";
+import { StyledAppContainer } from "./StyledApp.js";
+>>>>>>> 0781aaba32480e0e3c569bd8aaa1a47180d7e9a7
 
 export const Userinfo = createContext();
 
@@ -37,7 +44,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="container">
+    <StyledAppContainer>
       {init && (
         <Userinfo.Provider
           value={{
@@ -55,7 +62,7 @@ const App = () => {
           />
         </Userinfo.Provider>
       )}
-    </div>
+    </StyledAppContainer>
   );
 };
 
