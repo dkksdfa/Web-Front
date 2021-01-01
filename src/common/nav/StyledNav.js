@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Navigation = styled.nav`
   display: flex;
-  /* position: fixed; */
+  position: fixed;
+  top: 0;
   height: 44px;
   background: black;
   width: 100%;
