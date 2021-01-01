@@ -7,7 +7,6 @@ export const Navigation = styled.nav`
   height: 44px;
   background: black;
   width: 100%;
-
   @media all and (max-width: 1300px) {
     & * {
       display: none;
@@ -17,7 +16,6 @@ export const Navigation = styled.nav`
 `;
 
 export const NavButton = styled.button`
-  /* visibility: ${(props) => (props.visible ? "visible" : "hidden")}; */
   background: inherit;
   box-shadow: none;
   overflow: visible;
@@ -42,7 +40,6 @@ export const NavButton = styled.button`
 export const ButtonPosition = styled.div`
   display: flex;
   justify-content: center;
-  /* position: fixed; */
   margin: 0;
   padding: 0;
   width: 100%;

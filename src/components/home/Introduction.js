@@ -1,11 +1,15 @@
 import React from "react";
-import { IntroductionButton, Text, IntroductionWrapper } from "./StyledHome";
+import {
+  IntroductionButton,
+  IntroductionText,
+  IntroductionWrapper,
+} from "./StyledHome";
 const Introduction = () => {
   return (
     <IntroductionWrapper>
-      <Text size="5">2020 대경 매봉제</Text>
-      <Text size="2">2020. 09. 25</Text>
-      <Text size="3">Made By WebFront</Text>
+      <IntroductionText size="5">2020 대경 매봉제</IntroductionText>
+      <IntroductionText size="2">2020. 09. 25</IntroductionText>
+      <IntroductionText size="3">Made By WebFront</IntroductionText>
       <a
         target="_blank"
         rel="noopener noreferrer"

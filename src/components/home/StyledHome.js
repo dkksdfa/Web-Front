@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const Background = styled.div`
   width: 100vw;
-  /* height: 200vh; */
   display: flex;
   flex-direction: column;
   text-align: center;
 `;
+
 export const IntroductionWrapper = styled.div`
   width: 100%;
   height: 100vh;
@@ -15,13 +15,14 @@ export const IntroductionWrapper = styled.div`
   background-size: cover;
   background-position: center;
 `;
-export const Text = styled.p((props) => ({
+
+export const IntroductionText = styled.p((props) => ({
   fontSize: `${props.size}rem`,
-  // fontWeight: "300",
   marginTop: `${props.margin && "200px"}`,
   color: "#eee",
   lineHeight: "1rem",
 }));
+
 export const IntroductionButton = styled.button`
   background: #cfb783;
   border: none;
