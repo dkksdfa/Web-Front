@@ -19,3 +19,16 @@
 # Introduction
 
 This project was made to celebrate 'Daekyeong Highschool Maebongje'.
+
+# Contributors
+
+<ul>
+    <li>
+        <a
+        href="https://github.com/Da-Wit" target="_blank"
+        rel="noopener noreferrer"
+        >
+        Dawit Jeong
+        </a>
+    </li>
+</ul>
