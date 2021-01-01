@@ -24,10 +24,7 @@ This project was made to celebrate 'Daekyeong Highschool Maebongje'.
 
 <ul>
     <li>
-        <a
-        href="https://github.com/Da-Wit" target="_blank"
-        rel="noopener noreferrer"
-        >
+        <a href="https://github.com/Da-Wit">
         Dawit Jeong
         </a>
     </li>
