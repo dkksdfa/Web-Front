@@ -3,6 +3,7 @@ export const sortByLink = (a, b) => {
   if (a.link < b.link) return -1;
   return 0;
 };
+
 export const sortFunction = (previousValue, addedValue) => {
   return JSON.parse(JSON.stringify(previousValue))
     .concat(addedValue)
