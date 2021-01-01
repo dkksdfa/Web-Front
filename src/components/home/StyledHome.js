@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const Background = styled.div`
   width: 100vw;
-  height: 200vh;
+  /* height: 200vh; */
   display: flex;
   flex-direction: column;
   text-align: center;
 `;
-export const MainBanner = styled.div`
+export const IntroductionWrapper = styled.div`
   width: 100%;
-  height: 50%;
+  height: 100vh;
   top: 50px;
   background: url("image/background6.jpg") no-repeat;
   background-size: cover;
@@ -40,46 +40,5 @@ export const IntroductionButton = styled.button`
   }
   &:focus {
     outline: none;
-  }
-`;
-export const Today = styled.div`
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
-  background: url("image/background5.jpg") no-repeat;
-
-  background-size: cover;
-  background-position: center;
-`;
-
-export const TodayTitle = styled.h1`
-  font-size: 5rem;
-  color: #eee;
-  font-weight: bold;
-
-  margin-top: 100px;
-  margin-bottom: 50px;
-`;
-
-export const ClubWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-export const ClubIntro = styled.div`
-  width: 200px;
-  height: 200px;
-  margin: 20px 40px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  line-height: 350px;
-  background: ${(props) => `url(/image/clubbackground/${props.image}.png)`};
-  background-size: cover;
-  color: rgb(204, 204, 204);
-  &:hover {
-    transform: scale(1.2);
-    color: white;
-    transition: 0.4s;
   }
 `;
