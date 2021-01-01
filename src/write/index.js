@@ -1,11 +1,11 @@
 import PageWrap from "../common/page-wrap";
 import React, { useEffect, useRef, useState } from "react";
-import "./Write.css";
 import { v4 as uuidv4 } from "uuid";
 import { firestore } from "../firebase";
 import { Userinfo } from "../App";
 import { useHistory } from "react-router-dom";
 import { Button, ButtonsWrapper } from "../common/styles";
+import { ArticleCategory, ArticleTitle, ArticleContent } from "./StyledWrite";
 
 const Write = ({ match }) => {
   // console.error("제목, 내용 길게 입력 시 여러 줄로 표시되게 구현해야함.");
@@ -74,11 +74,11 @@ const Write = ({ match }) => {
   return (
     <PageWrap>
       <div id="container">
-        <div className="category">
+        <ArticleCategory>
           {category}/{clublink}'s new article
-        </div>
+        </ArticleCategory>
         <div>
-          <textarea
+          <ArticleTitle
             id="title"
             type="text"
             name="title"
@@ -91,7 +91,7 @@ const Write = ({ match }) => {
             placeholder="New article title here..."
           />
         </div>
-        <input
+        <ArticleContent
           type="text"
           value={content}
           autoComplete="off"
