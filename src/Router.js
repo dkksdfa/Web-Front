@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Article from "./article";
-import Club from "./club/Club";
+import Club from "./club";
 import Write from "./write";
 import Community from "./community";
 import Home from "./home";
