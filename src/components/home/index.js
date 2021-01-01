@@ -2,7 +2,7 @@ import React from "react";
 import { Background } from "./StyledHome";
 import Introduction from "./Introduction";
 
-const Main = () => {
+const Home = () => {
   return (
     <Background>
       <Introduction />
@@ -10,4 +10,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Home;
