@@ -11,6 +11,7 @@ export const IntroductionWrapper = styled.div`
   width: 100%;
   height: 100vh;
   top: 50px;
+  margin-top: 44px;
   background: url("image/background6.jpg") no-repeat;
   background-size: cover;
   background-position: center;

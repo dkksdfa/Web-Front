@@ -10,7 +10,7 @@ export const ContentTemplate = styled.div`
 
 export const ContentJustify = styled.div`
   width: 90%;
-  margin: 2vh auto;
+  margin: 54px auto 2vh;
   /* background: mintcream; */
   background: white;
   border-radius: 10px;
