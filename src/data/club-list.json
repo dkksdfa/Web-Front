@@ -1,0 +1,43 @@
+{
+  "SW": [
+    "webfront",
+    "ev3",
+    "youtube",
+    "basicdesign",
+    "ev3",
+    "jewelry",
+    "mural",
+    "shoesdesign",
+    "practicaldesign"
+  ],
+  "Food": ["cookingmedia", "dalbodre", "streetrestaurant", "sugar"],
+  "Finance": [
+    "analyzeeconomy",
+    "financialvillage",
+    "practicalaccounting",
+    "underwriting"
+  ],
+  "Other": [
+    "band",
+    "billiards",
+    "boardgame",
+    "broadcast",
+    "cheer",
+    "chinese",
+    "dance",
+    "ddobagi",
+    "employment",
+    "handicraft",
+    "hanyang",
+    "nailart",
+    "plamodel",
+    "portfolio",
+    "promotion1",
+    "promotion2",
+    "promotion3",
+    "promotionvideo",
+    "puzzle",
+    "screenseller",
+    "talent"
+  ]
+}
