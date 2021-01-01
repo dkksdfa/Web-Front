@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledPageTitle } from "../../common/styles";
+import { StyledPageTitle } from "../common/styles";
 
 const FeedText = styled(StyledPageTitle)`
   text-align: center;

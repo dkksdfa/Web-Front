@@ -4,11 +4,11 @@ import Article from "./club/Article";
 import Club from "./club/Club";
 import Community from "./community";
 import { Write } from "./community/StyledCommunity";
-import Home from "./components/home";
-import School from "./components/school";
-import Join from "./components/user/join";
-import Login from "./components/user/login";
-import Modify from "./components/user/modify";
+import Home from "./home";
+import School from "./school";
+import Join from "./user/join";
+import Login from "./user/login";
+import Modify from "./user/modify";
 
 const Router = ({ isLoggedIn, userObj, setUserObj }) => (
   <>

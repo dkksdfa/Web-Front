@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import PageWrap from "../../../common/page-wrap";
-import { firestore } from "../../../firebase";
+import PageWrap from "../../common/page-wrap";
+import { firestore } from "../../firebase";
 import { useHistory } from "react-router-dom";
 import {
   StyledPageTitle,
@@ -9,7 +9,7 @@ import {
   ButtonsWrapper,
   StyledSelect,
   Input,
-} from "../../../common/styles";
+} from "../../common/styles";
 
 const Modify = ({ isLoggedIn, userObj }) => {
   const [init, setInit] = useState(false);

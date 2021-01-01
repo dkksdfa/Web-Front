@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authService as auth, firestore } from "../../../firebase";
+import { authService as auth, firestore } from "../../firebase";
 import {
   Button,
   Input,
@@ -8,8 +8,8 @@ import {
   StyledPageTitle,
   StyledSelect,
   ButtonsWrapper,
-} from "../../../common/styles";
-import PageWrap from "../../../common/page-wrap";
+} from "../../common/styles";
+import PageWrap from "../../common/page-wrap";
 
 const Join = ({ isLoggedIn }) => {
   const [email, setEmail] = useState("");

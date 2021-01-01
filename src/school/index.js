@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Content from "./Content";
 import { FeedText, SchoolContentWrapper } from "./StyledSchool";
 import { getTodayMeal, getUserinfo } from "./school-function";
-import PageWrap from "../../common/page-wrap";
+import PageWrap from "../common/page-wrap";
 
 const School = ({ userObj }) => {
   const [meal, setMeal] = React.useState(null);

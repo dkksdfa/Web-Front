@@ -1,6 +1,6 @@
 import axios from "axios";
 import cheerio from "cheerio";
-import { firestore } from "../../firebase";
+import { firestore } from "../firebase";
 
 const isTodayMealExist = ($) => $("td.today")[0].children[1] !== undefined;
 
