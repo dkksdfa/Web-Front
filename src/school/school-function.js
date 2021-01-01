@@ -17,7 +17,6 @@ const handleGettingMeal = async ($) => {
   const $tableList = op("table tbody").children("tr")[3];
   const mealData = $tableList.children[3].children[0].data;
   const formattedMealList = getFormattedMeal(mealData);
-  console.log({ formattedMealList });
   return formattedMealList;
 };
 

@@ -47,7 +47,6 @@ const Login = ({ isLoggedIn }) => {
     const {
       target: { value, name },
     } = e;
-    console.log({ email, password });
     if (name === "email") setEmail(value);
     if (name === "password") setPassword(value);
   };

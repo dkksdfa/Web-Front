@@ -21,7 +21,6 @@ const Write = ({ match }) => {
 
   useEffect(() => {
     if (!titleRef.current) return;
-    console.log(titleRef);
     titleRef.current.style.height = "1px";
     const newRows = Math.floor(titleRef.current.scrollHeight / 80);
     titleRef.current.style.height = "auto";
