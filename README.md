@@ -1,7 +1,6 @@
 # Todo List
 
 - [x] Home Refactoring
-
 - [ ] Article Refactoring
 - [ ] Club Refactoring
 - [ ] Community Refactoring
