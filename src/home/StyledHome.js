@@ -1,30 +1,24 @@
 import styled from "styled-components";
 
-export const Background = styled.div`
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-`;
-
-export const IntroductionWrapper = styled.div`
+export const HomeWrapper = styled.div`
   width: 100%;
   height: 100vh;
   top: 50px;
-  margin-top: 44px;
+  padding-top: 44px;
+  text-align: center;
   background: url("image/background6.jpg") no-repeat;
   background-size: cover;
   background-position: center;
 `;
 
-export const IntroductionText = styled.p((props) => ({
-  fontSize: `${props.size}rem`,
+export const HomeText = styled.p((props) => ({
+  fontSize: `${props.size}`,
   marginTop: `${props.margin && "200px"}`,
   color: "#eee",
   lineHeight: "1rem",
 }));
 
-export const IntroductionButton = styled.button`
+export const HomeButton = styled.button`
   background: #cfb783;
   border: none;
   width: 20%;
