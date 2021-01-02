@@ -3,19 +3,23 @@ import constants from "../common/constants";
 import { HomeWrapper, HomeButton, HomeText } from "./StyledHome";
 
 const HomeContainer = () => {
+  const {
+    TEXT1,
+    TEXT2,
+    TEXT3,
+    TEXT1_SIZE,
+    TEXT2_SIZE,
+    TEXT3_SIZE,
+    BUTTON_TEXT,
+    VIDEO_URL,
+  } = constants.HOME;
   return (
     <HomeWrapper>
-      <HomeText size={constants.HOME_TEXT1_SIZE}>
-        {constants.HOME_TEXT1}
-      </HomeText>
-      <HomeText size={constants.HOME_TEXT2_SIZE}>
-        {constants.HOME_TEXT2}
-      </HomeText>
-      <HomeText size={constants.HOME_TEXT3_SIZE}>
-        {constants.HOME_TEXT3}
-      </HomeText>
-      <a target="_blank" rel="noopener noreferrer" href={constants.HOME_URL}>
-        <HomeButton>{constants.HOME_BUTTON_TEXT}</HomeButton>
+      <HomeText size={TEXT1_SIZE}>{TEXT1}</HomeText>
+      <HomeText size={TEXT2_SIZE}>{TEXT2}</HomeText>
+      <HomeText size={TEXT3_SIZE}>{TEXT3}</HomeText>
+      <a target="_blank" rel="noopener noreferrer" href={VIDEO_URL}>
+        <HomeButton>{BUTTON_TEXT}</HomeButton>
       </a>
     </HomeWrapper>
   );
