@@ -1,13 +1,8 @@
 import React from "react";
-import { Background } from "./StyledHome";
-import Introduction from "./Introduction";
+import HomeContainer from "./HomeContainer";
 
 const Home = () => {
-  return (
-    <Background>
-      <Introduction />
-    </Background>
-  );
+  return <HomeContainer />;
 };
 
 export default Home;
