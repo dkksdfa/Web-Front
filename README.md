@@ -4,7 +4,7 @@
 - [ ] Club Refactoring
 - [ ] Community Refactoring
 - [ ] Nav Refactoring
-- [ ] Home Refactoring
+- [x] Home Refactoring
 - [ ] School Refactoring
 - [ ] Join Refactoring
 - [ ] Login Refactoring
