@@ -13,6 +13,7 @@
 - [ ] App Refactoring
 - [ ] Fixing Error Occurred When Logging in By Google ID For The First Time
 - [ ] Using the redux instead of a Context
+- [ ] Making dynamic Navigation
 - [ ] Deploying
 - [ ] Adding a Constant file
 - [ ] Completing the Readme.md
