@@ -1,59 +1,37 @@
-import React from "react";
-import { ButtonPosition, NavButton, Navigation } from "./StyledNav";
-import { Link, useHistory } from "react-router-dom";
+import React, { useCallback, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Userinfo } from "../../App";
 import { authService } from "../../firebase";
+import NavContainer from "./NavContainer";
+import constants from "./constants.json";
+import commonConstants from "../constants.json";
+import { logout } from "../functions";
 
 const Nav = () => {
   const history = useHistory();
-  const menulist = (login) => [
-    { title: "Home", link: "/" },
-    { title: "School", link: "/School" },
-    { title: "SW", link: "/clubs/SW" },
-    { title: "Food", link: "/clubs/Food" },
-    { title: "Finance", link: "/clubs/Finance" },
-    { title: "Other", link: "/clubs/Other" },
-    login === true
-      ? {
-          title: "Modify",
-          link: "/Modify",
-        }
-      : { title: "Join", link: "/Join" },
+  const { isLoggedIn } = useContext(Userinfo);
+  const getItemObj = useCallback(
+    (title, link, onClick) => ({ title, link, onClick: onClick || undefined }),
+    []
+  );
+  const itemList = [
+    getItemObj(constants.HOME_TEXT, commonConstants.HOME_PATH),
+    getItemObj(constants.SCHOOL_TEXT, commonConstants.SCHOOL_PATH),
+    getItemObj(constants.SW_TEXT, `${commonConstants.CLUB_PATH}/SW`),
+    getItemObj(constants.FOOD_TEXT, `${commonConstants.CLUB_PATH}/Food`),
+    getItemObj(constants.FINANCE_TEXT, `${commonConstants.CLUB_PATH}/Finance`),
+    getItemObj(constants.OTHER_TEXT, `${commonConstants.CLUB_PATH}/Other`),
+    isLoggedIn === true
+      ? getItemObj(constants.MODIFY_TEXT, commonConstants.MODIFY_PATH)
+      : getItemObj(constants.JOIN_TEXT, commonConstants.JOIN_PATH),
+    isLoggedIn === true
+      ? getItemObj(constants.LOGOUT_TEXT, "", () =>
+          logout(authService, history)
+        )
+      : getItemObj(constants.LOGIN_TEXT, commonConstants.LOGIN_PATH),
   ];
 
-  const onClick = () => {
-    authService.signOut();
-    history.go(0);
-  };
-  return (
-    <Userinfo.Consumer>
-      {({ isLoggedIn }) => (
-        <Navigation>
-          <ButtonPosition>
-            {menulist(isLoggedIn).map((val, i) => (
-              <NavButton key={i}>
-                <Link
-                  to={val.link}
-                  style={{
-                    color: "unset",
-                  }}
-                >
-                  {val.title}
-                </Link>
-              </NavButton>
-            ))}
-            {isLoggedIn ? (
-              <NavButton onClick={onClick}>Logout</NavButton>
-            ) : (
-              <NavButton>
-                <Link to="/login">Login</Link>
-              </NavButton>
-            )}
-          </ButtonPosition>
-        </Navigation>
-      )}
-    </Userinfo.Consumer>
-  );
+  return <NavContainer itemList={itemList} />;
 };
 
 export default Nav;
