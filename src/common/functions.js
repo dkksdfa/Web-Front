@@ -1,3 +1,5 @@
+import commonConstants from "./constants.json";
+
 export const sortByLink = (a, b) => {
   if (a.link > b.link) return 1;
   if (a.link < b.link) return -1;
@@ -28,3 +30,8 @@ export function uploadImageCallBack(file) {
     });
   });
 }
+
+export const logout = (authService, history) => {
+  authService.signOut();
+  history.push(commonConstants.HOME_PATH);
+};

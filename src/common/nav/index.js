@@ -5,15 +5,10 @@ import { authService } from "../../firebase";
 import NavContainer from "./NavContainer";
 import constants from "./constants.json";
 import commonConstants from "../constants.json";
+import { logout } from "../functions";
 
 const Nav = () => {
   const history = useHistory();
-
-  const onLogoutButtonClick = () => {
-    authService.signOut();
-    history.go(0);
-  };
-
   const { isLoggedIn } = useContext(Userinfo);
   const itemList = [
     { title: constants.HOME_TEXT, link: commonConstants.HOME_PATH },
@@ -29,9 +24,14 @@ const Nav = () => {
       ? { title: constants.MODIFY_TEXT, link: commonConstants.MODIFY_PATH }
       : { title: constants.JOIN_TEXT, link: commonConstants.JOIN_PATH },
     isLoggedIn === true
-      ? { title: constants.LOGOUT_TEXT, link: "", onClick: onLogoutButtonClick }
+      ? {
+          title: constants.LOGOUT_TEXT,
+          link: "",
+          onClick: () => logout(authService, history),
+        }
       : { title: constants.LOGIN_TEXT, link: commonConstants.LOGIN_PATH },
   ];
+
   return <NavContainer itemList={itemList} />;
 };
 
