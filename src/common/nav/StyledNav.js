@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import commonConstants from "../constants.json";
 
 export const Navigation = styled.nav`
   display: flex;
   position: fixed;
   top: 0;
-  height: 44px;
+  height: ${commonConstants.NAV_HEIGHT};
   background: black;
   width: 100%;
   @media all and (max-width: 1300px) {
