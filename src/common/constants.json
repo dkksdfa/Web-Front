@@ -1,3 +1,9 @@
 {
-  "NAV_HEIGHT": "44px"
+  "NAV_HEIGHT": "44px",
+  "HOME_PATH": "/",
+  "SCHOOL_PATH": "/School",
+  "MODIFY_PATH": "/Modify",
+  "JOIN_PATH": "/Join",
+  "LOGIN_PATH": "/Login",
+  "CLUB_PATH": "/clubs"
 }

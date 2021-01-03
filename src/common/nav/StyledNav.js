@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import commonConstants from "../constants.json";
 
@@ -36,6 +37,10 @@ export const NavButton = styled.button`
   &:focus {
     outline: none;
   }
+`;
+
+export const StyledLink = styled(Link)`
+  color: unset;
 `;
 
 export const ButtonPosition = styled.div`

@@ -1,29 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { ButtonPosition, NavButton, Navigation } from "./StyledNav";
+import { Navigation, ButtonPosition } from "./StyledNav";
+import NavItem from "./NavItem";
 
-const NavContainer = ({ Userinfo, itemList }) => {
-  return (
-    <Userinfo.Consumer>
-      {({ isLoggedIn }) => (
-        <Navigation>
-          <ButtonPosition>
-            {itemList(isLoggedIn).map((val, i) => (
-              <NavButton key={i}>
-                <Link
-                  to={val.link}
-                  style={{ color: "unset" }}
-                  onClick={val.onClick || null}
-                >
-                  {val.title}
-                </Link>
-              </NavButton>
-            ))}
-          </ButtonPosition>
-        </Navigation>
-      )}
-    </Userinfo.Consumer>
-  );
-};
+const NavContainer = ({ itemList }) => (
+  <Navigation>
+    <ButtonPosition>
+      {itemList.map((val, i) => (
+        <NavItem key={i} item={val} />
+      ))}
+    </ButtonPosition>
+  </Navigation>
+);
 
 export default NavContainer;

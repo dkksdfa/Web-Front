@@ -1,46 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Userinfo } from "../../App";
 import { authService } from "../../firebase";
 import NavContainer from "./NavContainer";
 import constants from "./constants.json";
+import commonConstants from "../constants.json";
 
 const Nav = () => {
   const history = useHistory();
-  const {
-    HOME_TEXT,
-    SCHOOL_TEXT,
-    SW_TEXT,
-    FOOD_TEXT,
-    FINANCE_TEXT,
-    OTHER_TEXT,
-    MODIFY_TEXT,
-    JOIN_TEXT,
-    LOGOUT_TEXT,
-    LOGIN_TEXT,
-  } = constants;
 
   const onLogoutButtonClick = () => {
     authService.signOut();
     history.go(0);
   };
 
-  const itemList = (login) => [
-    { title: HOME_TEXT, link: "/" },
-    { title: SCHOOL_TEXT, link: "/School" },
-    { title: SW_TEXT, link: "/clubs/SW" },
-    { title: FOOD_TEXT, link: "/clubs/Food" },
-    { title: FINANCE_TEXT, link: "/clubs/Finance" },
-    { title: OTHER_TEXT, link: "/clubs/Other" },
-    login === true
-      ? { title: MODIFY_TEXT, link: "/Modify" }
-      : { title: JOIN_TEXT, link: "/Join" },
-    login === true
-      ? { title: LOGOUT_TEXT, link: "", onClick: onLogoutButtonClick }
-      : { title: LOGIN_TEXT, link: "/login" },
+  const { isLoggedIn } = useContext(Userinfo);
+  const itemList = [
+    { title: constants.HOME_TEXT, link: commonConstants.HOME_PATH },
+    { title: constants.SCHOOL_TEXT, link: commonConstants.SCHOOL_PATH },
+    { title: constants.SW_TEXT, link: `${commonConstants.CLUB_PATH}/SW` },
+    { title: constants.FOOD_TEXT, link: `${commonConstants.CLUB_PATH}/Food` },
+    {
+      title: constants.FINANCE_TEXT,
+      link: `${commonConstants.CLUB_PATH}/Finance`,
+    },
+    { title: constants.OTHER_TEXT, link: `${commonConstants.CLUB_PATH}/Other` },
+    isLoggedIn === true
+      ? { title: constants.MODIFY_TEXT, link: commonConstants.MODIFY_PATH }
+      : { title: constants.JOIN_TEXT, link: commonConstants.JOIN_PATH },
+    isLoggedIn === true
+      ? { title: constants.LOGOUT_TEXT, link: "", onClick: onLogoutButtonClick }
+      : { title: constants.LOGIN_TEXT, link: commonConstants.LOGIN_PATH },
   ];
-
-  return <NavContainer Userinfo={Userinfo} itemList={itemList} />;
+  return <NavContainer itemList={itemList} />;
 };
 
 export default Nav;
