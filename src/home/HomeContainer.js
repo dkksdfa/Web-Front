@@ -1,5 +1,5 @@
 import React from "react";
-import constants from "../common/constants";
+import constants from "./constants.json";
 import { HomeWrapper, HomeButton, HomeText } from "./StyledHome";
 
 const HomeContainer = () => {
@@ -12,7 +12,7 @@ const HomeContainer = () => {
     TEXT3_SIZE,
     BUTTON_TEXT,
     VIDEO_URL,
-  } = constants.HOME;
+  } = constants;
   return (
     <HomeWrapper>
       <HomeText size={TEXT1_SIZE}>{TEXT1}</HomeText>

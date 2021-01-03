@@ -1,10 +1,9 @@
 import React from "react";
-import { ButtonPosition, NavButton, Navigation } from "./StyledNav";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Userinfo } from "../../App";
 import { authService } from "../../firebase";
-import constants from "../constants";
 import NavContainer from "./NavContainer";
+import constants from "./constants.json";
 
 const Nav = () => {
   const history = useHistory();
@@ -19,7 +18,7 @@ const Nav = () => {
     JOIN_TEXT,
     LOGOUT_TEXT,
     LOGIN_TEXT,
-  } = constants.NAV;
+  } = constants;
 
   const onLogoutButtonClick = () => {
     authService.signOut();
