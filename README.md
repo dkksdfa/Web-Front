@@ -1,10 +1,10 @@
 # Todo List
 
 - [x] Home Refactoring
+- [x] Nav Refactoring
 - [ ] Article Refactoring
 - [ ] Club Refactoring
 - [ ] Community Refactoring
-- [ ] Nav Refactoring
 - [ ] School Refactoring
 - [ ] Join Refactoring
 - [ ] Login Refactoring
