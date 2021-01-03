@@ -1,14 +1,14 @@
 import React from "react";
-import { NavButton, StyledLink } from "./StyledNav";
+import { Item, StyledLink } from "./StyledNav";
 
 const NavItem = ({ item }) => {
   const onClick = () => item.onClick && item.onClick();
   return (
-    <NavButton>
+    <Item>
       <StyledLink to={item.link} onClick={onClick}>
         {item.title}
       </StyledLink>
-    </NavButton>
+    </Item>
   );
 };
 

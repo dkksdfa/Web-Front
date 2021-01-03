@@ -1,15 +1,13 @@
 import React from "react";
-import { Navigation, ButtonPosition } from "./StyledNav";
+import { NavWrapper } from "./StyledNav";
 import NavItem from "./NavItem";
 
 const NavContainer = ({ itemList }) => (
-  <Navigation>
-    <ButtonPosition>
-      {itemList.map((val, i) => (
-        <NavItem key={i} item={val} />
-      ))}
-    </ButtonPosition>
-  </Navigation>
+  <NavWrapper>
+    {itemList.map((item, index) => (
+      <NavItem key={index} item={item} />
+    ))}
+  </NavWrapper>
 );
 
 export default NavContainer;

@@ -8,5 +8,15 @@
   "MODIFY_TEXT": "Modify",
   "JOIN_TEXT": "Join",
   "LOGOUT_TEXT": "Logout",
-  "LOGIN_TEXT": "Login"
+  "LOGIN_TEXT": "Login",
+
+  "NAV_WRAPPER_BACKGROUND_COLOR": "black",
+  "NAV_WRAPPER_WIDTH": "100vw",
+
+  "ITEM_WIDTH": "10%",
+  "ITEM_HEIGHT": "100%",
+  "ITEM_COLOR": "rgb(204, 204, 204)",
+  "ITEM_FONT_SIZE": "1.5rem",
+  "ITEM_HOVER_COLOR": "white",
+  "ITEM_TRANSITION_TIME": "0.3s"
 }
