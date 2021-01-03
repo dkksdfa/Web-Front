@@ -1,38 +1,52 @@
 import styled from "styled-components";
+import constants from "./constants.json";
 
 export const HomeWrapper = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  top: 50px;
-  padding-top: 44px;
+  position: absolute;
+  z-index: -1;
+  top: 0;
   text-align: center;
-  background: url("image/background6.jpg") no-repeat;
+  background: url(${constants.BACKGROUND_PATH}) no-repeat;
   background-size: cover;
   background-position: center;
 `;
 
+export const Contents = styled.div`
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+`;
+
+// HomeText is a styled p tag that will
+// be displayed in the center of the Home page.
+// HomeText's text introduce what this site is.
 export const HomeText = styled.p((props) => ({
   fontSize: `${props.size}`,
-  marginTop: `${props.margin && "200px"}`,
-  color: "#eee",
-  lineHeight: "1rem",
+  color: constants.TEXT_COLOR,
+  lineHeight: constants.TEXT_LINE_HEIGHT,
 }));
 
 export const HomeButton = styled.button`
-  background: #cfb783;
+  background: ${constants.BUTTON_BACKGROUND_COLOR};
   border: none;
-  width: 20%;
-  height: 12%;
+  width: ${constants.BUTTON_WIDTH};
+  height: ${constants.BUTTON_HEIGHT};
   cursor: pointer;
-  border-radius: 50px;
-  color: black;
-  font-size: 2rem;
-  margin-top: 4rem;
-
-  font-weight: 600;
+  border-radius: ${constants.BUTTON_BORDER_RADIUS};
+  color: ${constants.BUTTON_TEXT_COLOR};
+  font-size: ${constants.BUTTON_FONT_SIZE};
+  margin-top: ${constants.BUTTON_MARGIN_TOP};
+  font-weight: ${constants.BUTTON_FONT_WEIGHT};
   &:hover {
-    background: #e2d4b5;
-    transition: 0.3s ease;
+    background: ${constants.BUTTON_HOVER_BACKGROUND_COLOR};
+    transition: ${constants.BUTTON_TRANSITION_TIME} ease;
   }
   &:focus {
     outline: none;
