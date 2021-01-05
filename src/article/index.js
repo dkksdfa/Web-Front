@@ -15,6 +15,7 @@ import {
   ArticleTitle,
   SubInfoDiv,
 } from "./StyledArticle";
+import commonConstants from "../common/constants.json";
 
 const Article = ({ match }) => {
   const [article, setArticle] = useState(null);
@@ -32,11 +33,14 @@ const Article = ({ match }) => {
   const history = useHistory();
   const getArticle = useCallback(async () => {
     setLoading(true);
-    const rawData = await firestore.collection("articles").doc(articleId).get();
+    const rawData = await firestore
+      .collection(commonConstants.firebase.ARTICLE_COLLECTION_NAME)
+      .doc(articleId)
+      .get();
     const realArticle = rawData.data();
     if (realArticle) {
       const dbUser = await firestore
-        .collection("additional userinfo")
+        .collection(commonConstants.firebase.USER_COLLECTION_NAME)
         .doc(realArticle.creatorId)
         .get();
       const creatorName = dbUser.data().displayName;

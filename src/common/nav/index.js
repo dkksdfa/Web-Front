@@ -15,20 +15,23 @@ const Nav = () => {
     []
   );
   const itemList = [
-    getItemObj(constants.HOME_TEXT, commonConstants.HOME_PATH),
-    getItemObj(constants.SCHOOL_TEXT, commonConstants.SCHOOL_PATH),
-    getItemObj(constants.SW_TEXT, `${commonConstants.CLUB_PATH}/SW`),
-    getItemObj(constants.FOOD_TEXT, `${commonConstants.CLUB_PATH}/Food`),
-    getItemObj(constants.FINANCE_TEXT, `${commonConstants.CLUB_PATH}/Finance`),
-    getItemObj(constants.OTHER_TEXT, `${commonConstants.CLUB_PATH}/Other`),
+    getItemObj(constants.HOME_TEXT, commonConstants.path.HOME_PATH),
+    getItemObj(constants.SCHOOL_TEXT, commonConstants.path.SCHOOL_PATH),
+    getItemObj(constants.SW_TEXT, `${commonConstants.path.CLUB_PATH}/SW`),
+    getItemObj(constants.FOOD_TEXT, `${commonConstants.path.CLUB_PATH}/Food`),
+    getItemObj(
+      constants.FINANCE_TEXT,
+      `${commonConstants.path.CLUB_PATH}/Finance`
+    ),
+    getItemObj(constants.OTHER_TEXT, `${commonConstants.path.CLUB_PATH}/Other`),
     isLoggedIn === true
-      ? getItemObj(constants.MODIFY_TEXT, commonConstants.MODIFY_PATH)
-      : getItemObj(constants.JOIN_TEXT, commonConstants.JOIN_PATH),
+      ? getItemObj(constants.MODIFY_TEXT, commonConstants.path.MODIFY_PATH)
+      : getItemObj(constants.JOIN_TEXT, commonConstants.path.JOIN_PATH),
     isLoggedIn === true
       ? getItemObj(constants.LOGOUT_TEXT, "", () =>
           NavFunctions.logout(authService, history)
         )
-      : getItemObj(constants.LOGIN_TEXT, commonConstants.LOGIN_PATH),
+      : getItemObj(constants.LOGIN_TEXT, commonConstants.path.LOGIN_PATH),
   ];
 
   return <NavContainer itemList={itemList} />;
