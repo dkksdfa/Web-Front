@@ -5,7 +5,7 @@ import { authService } from "../../firebase";
 import NavContainer from "./NavContainer";
 import constants from "./constants.json";
 import commonConstants from "../constants.json";
-import { logout } from "../functions";
+import NavFunctions from "./NavFunctions";
 
 const Nav = () => {
   const history = useHistory();
@@ -26,7 +26,7 @@ const Nav = () => {
       : getItemObj(constants.JOIN_TEXT, commonConstants.JOIN_PATH),
     isLoggedIn === true
       ? getItemObj(constants.LOGOUT_TEXT, "", () =>
-          logout(authService, history)
+          NavFunctions.logout(authService, history)
         )
       : getItemObj(constants.LOGIN_TEXT, commonConstants.LOGIN_PATH),
   ];
