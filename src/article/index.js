@@ -2,26 +2,13 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import PageWrap from "../common/page-wrap";
 import { firestore } from "../firebase";
 import { Userinfo } from "../App";
-import { Link, useHistory } from "react-router-dom";
-import AddComment from "./AddComment";
-import CommentList from "./CommentList";
-import { BsTrash } from "react-icons/bs";
-import { BiEditAlt } from "react-icons/bi";
-import { StyledPageTitle } from "../common/styles";
-import {
-  ArticleContent,
-  ArticleCreatorName,
-  ArticleSubInfo,
-  ArticleTitle,
-  SubInfoDiv,
-} from "./StyledArticle";
+import { useHistory } from "react-router-dom";
 import commonConstants from "../common/constants.json";
+import ArticleContainer from "./ArticleContainer";
 
 const Article = ({ match }) => {
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [edit, setEdit] = useState(false);
-  const [editText, setEditText] = useState(null);
   const [error, setError] = useState(false);
   const [done, setDone] = useState(false);
   const [date, setDate] = useState(null);
@@ -70,8 +57,6 @@ const Article = ({ match }) => {
           }-${articleDate.getDate()} ${articleDate.getHours()}:${articleDate.getMinutes()}:${articleDate.getSeconds()}`
         ),
       });
-
-      setEditText(realArticle.content);
     } else {
       setError(true);
     }
@@ -84,87 +69,30 @@ const Article = ({ match }) => {
       history.push(`/club/${category}/${clublink}`);
     }
   };
-  const onEditToggle = () => {
-    setEdit((prev) => !prev);
+  const onEdit = () => {
+    console.error("Make onEdit function");
   };
-  const submitChange = async (e) => {
-    e.preventDefault();
-    await firestore
-      .doc(`articles/${article.articleId}`)
-      .update({ content: editText });
-    setEdit(false);
-    setArticle((prev) => ({ ...prev, content: editText }));
-  };
-  const onEditValueChange = (e) => {
-    setEditText(e.target.value);
-  };
+
   useEffect(() => {
     getArticle();
   }, [getArticle]);
 
-  if (loading)
-    return (
-      <PageWrap>
-        <StyledPageTitle>loading...</StyledPageTitle>
-      </PageWrap>
-    );
-  if (error) {
-    return (
-      <PageWrap>
-        <StyledPageTitle>Error!</StyledPageTitle>
-        <Link to="/">Go to home</Link>
-      </PageWrap>
-    );
-  }
   return (
     <PageWrap>
-      {!loading && done && (
-        <>
-          <ArticleTitle>{article.title}</ArticleTitle>
-          <SubInfoDiv>
-            <ArticleCreatorName>{article.creatorName}</ArticleCreatorName>
-            <ArticleSubInfo>{date.formmatedDate}</ArticleSubInfo>
-            {userObj && userObj.uid === article.creatorId && (
-              <>
-                <span className="subInfo">
-                  <BiEditAlt onClick={onEditToggle}></BiEditAlt>
-                </span>
-                <span className="subInfo">
-                  <BsTrash onClick={onDelete}>Delete</BsTrash>
-                </span>
-              </>
-            )}
-          </SubInfoDiv>
-          {userObj &&
-            userObj.uid === article.creatorId &&
-            (edit ? (
-              <form onSubmit={submitChange}>
-                <input
-                  value={editText}
-                  onChange={onEditValueChange}
-                  placeholder="Edit content"
-                />
-                <button onClick={onEditToggle}>Cancle</button>
-                <input type="submit" value="Edit" />
-              </form>
-            ) : (
-              <>
-                <ArticleContent>{article.content}</ArticleContent>
-              </>
-            ))}
-          <AddComment
-            userObj={userObj}
-            clublink={clublink}
-            category={category}
-            isLoggedIn={isLoggedIn}
-            articleId={articleId}
-          />
-        </>
-      )}
-      <CommentList
+      <ArticleContainer
+        loading={loading}
+        error={error}
+        isDone={done}
+        article={article}
+        date={date}
+        userObj={userObj}
+        onEdit={onEdit}
+        onDelete={onDelete}
         clublink={clublink}
-        setDone={setDone}
+        category={category}
+        isLoggedIn={isLoggedIn}
         articleId={articleId}
+        setDone={setDone}
       />
     </PageWrap>
   );
