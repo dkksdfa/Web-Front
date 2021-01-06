@@ -1,98 +1,58 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import PageWrap from "../common/page-wrap";
-import { firestore } from "../firebase";
 import { Userinfo } from "../App";
 import { useHistory } from "react-router-dom";
-import commonConstants from "../common/constants.json";
 import ArticleContainer from "./ArticleContainer";
+import CommentContainer from "./CommentContainer";
+import ArticleFunctions from "./article-functions";
+
+const articleFuncs = new ArticleFunctions();
 
 const Article = ({ match }) => {
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [done, setDone] = useState(false);
-  const [date, setDate] = useState(null);
-
+  const [commentLoading, setCommentLoading] = useState(false);
   const {
     params: { category, articleId, clublink },
   } = match;
   const { userObj, isLoggedIn } = useContext(Userinfo);
+
   const history = useHistory();
+
   const getArticle = useCallback(async () => {
     setLoading(true);
-    const rawData = await firestore
-      .collection(commonConstants.firebase.ARTICLE_COLLECTION_NAME)
-      .doc(articleId)
-      .get();
-    const realArticle = rawData.data();
-    if (realArticle) {
-      const dbUser = await firestore
-        .collection(commonConstants.firebase.USER_COLLECTION_NAME)
-        .doc(realArticle.creatorId)
-        .get();
-      const creatorName = dbUser.data().displayName;
-      setArticle({ ...realArticle, creatorName });
-      const articleDate = new Date(realArticle.date.seconds * 1000);
-      var months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
-      setDate({
-        formmatedDate: `${
-          months[articleDate.getMonth()]
-        } ${articleDate.getDate()}, ${articleDate.getFullYear()}`,
-        originaldate: Date(
-          `${articleDate.getFullYear()}-${
-            articleDate.getMonth() - 1
-          }-${articleDate.getDate()} ${articleDate.getHours()}:${articleDate.getMinutes()}:${articleDate.getSeconds()}`
-        ),
-      });
-    } else {
-      setError(true);
-    }
+    const [article, error] = await articleFuncs.getArticle(articleId);
+    if (error !== null) setError(true);
+    else setArticle(article);
     setLoading(false);
   }, [articleId]);
+
   const onDelete = async () => {
-    const lastCheck = window.confirm("Are you sure to delete this article?");
-    if (lastCheck) {
-      await firestore.collection("articles").doc(article.articleId).delete();
-      history.push(`/club/${category}/${clublink}`);
-    }
-  };
-  const onEdit = () => {
-    console.error("Make onEdit function");
+    const error = articleFuncs.deleteArticle(articleId);
+    if (error !== null) setError(true);
+    else history.push(`/club/${category}/${clublink}`);
   };
 
-  useEffect(() => {
-    getArticle();
-  }, [getArticle]);
+  const onEdit = () => console.error("Make onEdit function");
 
   return (
     <PageWrap>
       <ArticleContainer
         loading={loading}
         error={error}
-        isDone={done}
         article={article}
-        date={date}
-        userObj={userObj}
+        isOwner={userObj && article && userObj.uid === article.creatorId}
         onEdit={onEdit}
         onDelete={onDelete}
-        clublink={clublink}
+      />
+      <CommentContainer
+        userObj={userObj}
         category={category}
+        clublink={clublink}
         isLoggedIn={isLoggedIn}
+        setDone={setCommentLoading}
         articleId={articleId}
-        setDone={setDone}
       />
     </PageWrap>
   );

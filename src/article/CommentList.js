@@ -23,16 +23,20 @@ const CommentList = ({ clublink, setDone, articleId }) => {
         setDone(true);
       });
   }, [setDone, articleId]);
+
   return (
     <div>
       {comments !== [] && (
         <div>
           {comments.map((val, i) => {
+            // console.log(i, val);
             return (
               <RenderComment
                 comment={val}
                 isOwner={
-                  userinfo.isLoggedIn && val.creatorId === userinfo.userObj.uid
+                  userinfo.isLoggedIn &&
+                  userinfo.userObj &&
+                  val.creatorId === userinfo.userObj.uid
                 }
                 key={i}
                 editing={editing}

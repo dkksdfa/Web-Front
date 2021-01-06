@@ -9,7 +9,7 @@
     "CLUB_PATH": "/clubs"
   },
   "firebase": {
-    "ARTICLE_COLLECTION_NAME": "articles",
-    "USER_COLLECTION_NAME": "additional userinfo"
+    "ARTICLE": "articles",
+    "USER": "additional userinfo"
   }
 }

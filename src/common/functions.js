@@ -1,3 +1,5 @@
+import { firestore } from "../firebase";
+
 class Functions {
   // This Function is not being referred.
   uploadImageCallBack(file) {
@@ -18,6 +20,56 @@ class Functions {
       });
     });
   }
+
+  async getCollect(collectName, where, orderBy) {
+    try {
+      let firestoreCollection;
+      if (where)
+        firestoreCollection = orderBy
+          ? await firestore
+              .collection(collectName)
+              .where(where.attrName, where.operator, where.value)
+              .orderBy(orderBy.attrName, orderBy.order)
+              .get()
+          : await firestore
+              .collection(collectName)
+              .where(where.attrName, where.operator, where.value)
+              .get();
+      else
+        firestoreCollection = orderBy
+          ? await firestore
+              .collection(collectName)
+              .orderBy(orderBy.attrName, orderBy.order)
+              .get()
+          : await firestore.collection(collectName).get();
+
+      return [firestoreCollection, null];
+    } catch (err) {
+      return [null, err];
+    }
+  }
+
+  async getDoc(collectName, docName) {
+    try {
+      let firestoreDoc = await firestore
+        .collection(collectName)
+        .doc(docName)
+        .get();
+
+      return [firestoreDoc.data(), null];
+    } catch (err) {
+      return [null, err];
+    }
+  }
+
+  async deleteDoc(collectName, docName) {
+    try {
+      await firestore.collection(collectName).doc(docName).delete();
+      return null;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
-export default new Functions();
+export default Functions;
