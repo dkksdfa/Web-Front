@@ -2,8 +2,18 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { firestore } from "../firebase";
+import commonConstants from "../common/constants.json";
+import CommonFunctions from "../common/functions";
 
-const AddComment = ({ userObj, clublink, category, isLoggedIn, articleId }) => {
+const functions = new CommonFunctions();
+const AddComment = ({
+  userObj,
+  clublink,
+  category,
+  isLoggedIn,
+  articleId,
+  setError,
+}) => {
   const [newComment, setNewComment] = useState("");
   const onChange = (e) => {
     setNewComment(e.target.value);
@@ -27,15 +37,15 @@ const AddComment = ({ userObj, clublink, category, isLoggedIn, articleId }) => {
       articleId,
     };
     setNewComment("");
-    try {
-      if (newComment)
-        await firestore
-          .collection("comments")
-          .doc(newCommentObject.commentId)
-          .set(newCommentObject);
-    } catch (error) {
-      throw error;
-    }
+    const {
+      firebase: { COMMENT },
+    } = commonConstants;
+    const error = functions.commonsetDoc(
+      COMMENT,
+      newCommentObject.commentId,
+      newCommentObject
+    );
+    if (error !== null) setError(true);
   };
   return (
     <>

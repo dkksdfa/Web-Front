@@ -1,16 +1,13 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import PageWrap from "../common/page-wrap";
 import { Userinfo } from "../App";
-import { useHistory } from "react-router-dom";
 import ArticleContainer from "./ArticleContainer";
 import CommentContainer from "./CommentContainer";
-import ArticleFunctions from "./article-functions";
-
-const articleFuncs = new ArticleFunctions();
+import { StyledPageTitle } from "../common/styles";
+import { Link } from "react-router-dom";
 
 const Article = ({ match }) => {
-  const [article, setArticle] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [articleLoading, setArticleLoading] = useState(true);
   const [error, setError] = useState(false);
   const [commentLoading, setCommentLoading] = useState(false);
   const {
@@ -18,37 +15,34 @@ const Article = ({ match }) => {
   } = match;
   const { userObj, isLoggedIn } = useContext(Userinfo);
 
-  const history = useHistory();
-
-  const getArticle = useCallback(async () => {
-    setLoading(true);
-    const [article, error] = await articleFuncs.getArticle(articleId);
-    if (error !== null) setError(true);
-    else setArticle(article);
-    setLoading(false);
-  }, [articleId]);
-
-  const onDelete = async () => {
-    const error = articleFuncs.deleteArticle(articleId);
-    if (error !== null) setError(true);
-    else history.push(`/club/${category}/${clublink}`);
-  };
-
-  const onEdit = () => console.error("Make onEdit function");
+  if (!articleLoading && !commentLoading)
+    return (
+      <PageWrap>
+        <StyledPageTitle>loading...</StyledPageTitle>
+      </PageWrap>
+    );
+  if (error)
+    return (
+      <PageWrap>
+        <StyledPageTitle>Error!</StyledPageTitle>
+        <Link to="/">Go to home</Link>
+      </PageWrap>
+    );
 
   return (
     <PageWrap>
       <ArticleContainer
-        loading={loading}
-        error={error}
-        article={article}
-        isOwner={userObj && article && userObj.uid === article.creatorId}
-        onEdit={onEdit}
-        onDelete={onDelete}
+        userObj={userObj}
+        setLoading={setArticleLoading}
+        setError={setError}
+        category={category}
+        clublink={clublink}
+        articleId={articleId}
       />
       <CommentContainer
         userObj={userObj}
         category={category}
+        setError={setError}
         clublink={clublink}
         isLoggedIn={isLoggedIn}
         setDone={setCommentLoading}

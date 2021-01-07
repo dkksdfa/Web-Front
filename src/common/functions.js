@@ -70,6 +70,15 @@ class Functions {
       return error;
     }
   }
+
+  async setDoc(collectName, docName, value) {
+    try {
+      await firestore.collection(collectName).doc(docName).set(value);
+      return null;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default Functions;

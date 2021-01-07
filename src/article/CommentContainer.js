@@ -9,6 +9,7 @@ const CommentContainer = ({
   isLoggedIn,
   setDone,
   articleId,
+  setError,
 }) => {
   return (
     <>
@@ -18,6 +19,7 @@ const CommentContainer = ({
         category={category}
         isLoggedIn={isLoggedIn}
         articleId={articleId}
+        setError={setError}
       />
       <CommentList
         clublink={clublink}

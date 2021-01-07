@@ -10,6 +10,7 @@
   },
   "firebase": {
     "ARTICLE": "articles",
-    "USER": "additional userinfo"
+    "USER": "additional userinfo",
+    "COMMENT": "comments"
   }
 }
