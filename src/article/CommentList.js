@@ -7,6 +7,7 @@ const CommentList = ({ clublink, setDone, articleId }) => {
   const [comments, setComments] = useState([]);
   const [editing, setEditing] = useState(false);
   const userinfo = useContext(Userinfo);
+
   useEffect(() => {
     setDone(false);
     setComments([]);
@@ -20,8 +21,8 @@ const CommentList = ({ clublink, setDone, articleId }) => {
           ...doc.data(),
         }));
         setComments(commentArray);
-        setDone(true);
       });
+    setDone(true);
   }, [setDone, articleId]);
 
   return (

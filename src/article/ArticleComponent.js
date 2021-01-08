@@ -1,8 +1,6 @@
 import React from "react";
 import { BiEditAlt } from "react-icons/bi";
 import { BsTrash } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import { StyledPageTitle } from "../common/styles";
 import {
   ArticleContent,
   ArticleCreatorName,
@@ -12,13 +10,7 @@ import {
 } from "./StyledArticle";
 
 const ArticleComponent = ({ isOwner, article, onEdit, onDelete }) => {
-  console.log();
-  if (article === null)
-    return (
-      <>
-        <ArticleTitle>Article is empty.</ArticleTitle>
-      </>
-    );
+  if (article === null) return null;
   return (
     <>
       <ArticleTitle>{article.title}</ArticleTitle>

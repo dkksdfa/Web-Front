@@ -7,33 +7,25 @@ const articleFuncs = new ArticleFunctions();
 
 const ArticleContainer = ({
   userObj,
-  setLoading,
   setError,
   category,
   clublink,
+  article,
   articleId,
 }) => {
-  const [article, setArticle] = useState(null);
   const history = useHistory();
 
-  const getArticle = useCallback(async () => {
-    const [article, error] = await articleFuncs.getArticle(articleId);
-    if (error !== null) setError(true);
-    else setArticle(article);
-    setLoading(false);
-  }, [articleId, setArticle, setError, setLoading]);
-
   const onDelete = useCallback(async () => {
-    const error = articleFuncs.deleteArticle(articleId);
-    if (error !== null) setError(true);
-    else history.push(`/club/${category}/${clublink}`);
+    await articleFuncs.onDelete(
+      articleId,
+      setError,
+      history,
+      category,
+      clublink
+    );
   }, [articleId, setError, category, clublink, history]);
 
   const onEdit = () => console.error("Make onEdit function");
-
-  useEffect(() => {
-    getArticle();
-  }, [getArticle]);
 
   return (
     <ArticleComponent
