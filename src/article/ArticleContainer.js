@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import ArticleFunctions from "./article-functions";
 import ArticleComponent from "./ArticleComponent";
