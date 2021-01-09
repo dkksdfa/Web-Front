@@ -89,13 +89,6 @@ class ArticleFunctions {
     else history.push(`/club/${category}/${clublink}`);
   }
 
-  //(snapshot) => {
-  //   const commentArray = snapshot.docs.map((doc) => ({
-  //     id: doc.id,
-  //     ...doc.data(),
-  //   }));
-  // }
-
   async getComments(articleId, setComments, cachedUid, setCachedUid) {
     try {
       firestore
