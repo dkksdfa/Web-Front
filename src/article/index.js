@@ -11,9 +11,10 @@ const articleFuncs = new ArticleFunctions();
 
 const Article = ({ match }) => {
   const [article, setArticle] = useState(null);
-  const [comments, setComments] = useState(null);
+  const [comments, setComments] = useState([]);
   const [articleLoading, setArticleLoading] = useState(true);
   const [error, setError] = useState({ error: false, message: "" });
+  const [cachedUid, setCachedUid] = useState([]);
   const [commentLoading, setCommentLoading] = useState(true);
   const {
     params: { category, articleId, clublink },
@@ -29,14 +30,16 @@ const Article = ({ match }) => {
         setArticleLoading
       );
       await articleFuncs.onCommentsLoad(
+        cachedUid,
+        articleId,
+        setCachedUid,
         setCommentLoading,
         setComments,
-        articleId,
         setError
       );
     };
     asyncFunc();
-  }, [articleId, setError, setArticle, setArticleLoading]);
+  }, [articleId, setError, setArticle, setArticleLoading, cachedUid]);
 
   if (error.error) {
     console.error(`ERROR: ${error.message}`);

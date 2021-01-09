@@ -103,16 +103,18 @@ class ArticleFunctions {
         .where("articleId", "==", articleId)
         .orderBy("date", "desc")
         .onSnapshot((snapshot) => {
-          const comments = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-            creatorName: await this.getCommentOwner(
-              cachedUid,
-              setCachedUid,
-              doc.creatorId
-            ),
-          }));
-          setComments(comments);
+          snapshot.docs.map(async (doc) => {
+            const comments = {
+              id: doc.id,
+              ...doc.data(),
+              creatorName: await this.getCommentCreatorName(
+                cachedUid,
+                setCachedUid,
+                doc.data().creatorId
+              ),
+            };
+            setComments((prevComments) => [...prevComments, comments]);
+          });
         });
       return null;
     } catch (e) {
@@ -122,24 +124,39 @@ class ArticleFunctions {
 
   async getUserName(userId) {
     try {
-      return [await this.common.getDoc(this.USER, userId).name, null];
+      const [result, error] = await this.common.getDoc(this.USER, userId);
+      if (error !== null) return [null, error];
+      return [result.displayName, null];
     } catch (error) {
       return [null, error];
     }
   }
 
-  async getCommentOwner(cachedUid, setCachedUid, commentUid) {
+  async getCommentCreatorName(cachedUid, setCachedUid, commentUid) {
     const userInfo = cachedUid.filter((u) => u.uid === commentUid);
     if (userInfo.length === 1) return userInfo.name;
     const [userName, error] = await this.getUserName(commentUid);
     if ((await error) !== null) return [null, error];
-    setCachedUid({ uid: commentUid, name: userName });
+    const nextCachedUid = cachedUid.concat({ uid: commentUid, name: userName });
+    setCachedUid(nextCachedUid);
     return userName;
   }
 
-  async onCommentsLoad(setLoading, setComments, articleId, setError) {
+  async onCommentsLoad(
+    cachedUid,
+    articleId,
+    setCachedUid,
+    setLoading,
+    setComments,
+    setError
+  ) {
     setLoading(true);
-    const error = this.getComments(articleId, setComments);
+    const error = this.getComments(
+      articleId,
+      setComments,
+      cachedUid,
+      setCachedUid
+    );
     if ((await error) !== null)
       setError({ error: true, message: "There's a problem to get comments." });
     setLoading(false);

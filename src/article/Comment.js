@@ -1,38 +1,16 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { firestore } from "../firebase";
 
-const Comment = ({
-  comment,
-  users,
-  setUsers,
-  isOwner,
-  editing,
-  setEditing,
-}) => {
-  console.log(comment);
-  console.log(isOwner);
-  console.log(editing);
-  console.log(setEditing);
-  console.log("---------------");
-  const [username, setUsername] = useState("");
-  const [loading, setLoading] = useState("");
+const Comment = ({ comment, isOwner, editing, setEditing }) => {
+  // console.log(comment);
+  // console.log(isOwner);
+  // console.log(editing);
+  // console.log(setEditing);
+  // console.log("---------------");
+
   const [editText, setEditText] = useState(comment.content);
   const [edit, setEdit] = useState(false);
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    const dbUser = await firestore
-      .collection("additional userinfo")
-      .doc(comment.creatorId)
-      .get();
-    setUsername(dbUser.data().name);
-    setLoading(false);
-    setUsers(users.concat(comment.creatorId));
-  }, [comment, setUsers, users]);
 
-  useEffect(() => {
-    if (users.includes(comment.creatorId)) return;
-    fetchData();
-  }, [fetchData, users, comment]);
   const onDelete = async () => {
     const sure = window.confirm("Are you sure?");
     if (sure) {
@@ -78,17 +56,16 @@ const Comment = ({
   }
   return (
     <>
-      {!loading && username && (
-        <div>
-          {comment.content} | {username} | {comment.category}/{comment.club}
-          {isOwner && (
-            <>
-              <button onClick={onDelete}>delete</button>
-              {!editing && <button onClick={onEditClick}>edit</button>}
-            </>
-          )}
-        </div>
-      )}
+      <div>
+        {comment.content} | {comment.creatorName} | {comment.category}/
+        {comment.club}
+        {isOwner && (
+          <>
+            <button onClick={onDelete}>delete</button>
+            {!editing && <button onClick={onEditClick}>edit</button>}
+          </>
+        )}
+      </div>
     </>
   );
 };
