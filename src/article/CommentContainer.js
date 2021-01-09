@@ -1,32 +1,25 @@
 import React from "react";
-import AddComment from "./AddComment";
-import CommentList from "./CommentList";
+import CommentComponent from "./CommentComponent";
 
 const CommentContainer = ({
   userObj,
-  clublink,
+  comments,
   category,
+  clublink,
   isLoggedIn,
-  setDone,
   articleId,
   setError,
 }) => {
   return (
-    <>
-      <AddComment
-        userObj={userObj}
-        clublink={clublink}
-        category={category}
-        isLoggedIn={isLoggedIn}
-        articleId={articleId}
-        setError={setError}
-      />
-      <CommentList
-        clublink={clublink}
-        setDone={setDone}
-        articleId={articleId}
-      />
-    </>
+    <CommentComponent
+      userObj={userObj}
+      comments={comments}
+      category={category}
+      clublink={clublink}
+      isLoggedIn={isLoggedIn}
+      articleId={articleId}
+      setError={setError}
+    />
   );
 };
 

@@ -51,11 +51,10 @@ class Functions {
 
   async getDoc(collectName, docName) {
     try {
-      let firestoreDoc = await firestore
+      const firestoreDoc = await firestore
         .collection(collectName)
         .doc(docName)
         .get();
-
       return [firestoreDoc.data(), null];
     } catch (err) {
       return [null, err];

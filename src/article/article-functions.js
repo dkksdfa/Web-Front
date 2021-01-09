@@ -67,7 +67,11 @@ class ArticleFunctions {
 
   async onArticleLoad(articleId, setError, setArticle, setLoading) {
     const [article, error] = await this.getArticle(articleId);
-    if (error !== null) setError(true);
+    if ((await error) !== null)
+      setError({
+        error: true,
+        message: "There's a problem to add this comment.",
+      });
     const creatorName = await this.getArticleCreatorName(article.creatorId);
     const timestampt = article.date.seconds;
     const date = this.getDateObject(timestampt);
@@ -77,7 +81,11 @@ class ArticleFunctions {
 
   async onDelete(articleId, setError, history, category, clublink) {
     const error = this.deleteArticle(articleId);
-    if (error !== null) setError(true);
+    if ((await error) !== null)
+      setError({
+        error: true,
+        message: "There's a problem to get this article.",
+      });
     else history.push(`/club/${category}/${clublink}`);
   }
 
@@ -88,31 +96,52 @@ class ArticleFunctions {
   //   }));
   // }
 
-  snapshotCallback(snapshot) {}
-
-  async getComments(articleId, setComments) {
+  async getComments(articleId, setComments, cachedUid, setCachedUid) {
     try {
       firestore
         .collection("comments")
         .where("articleId", "==", articleId)
         .orderBy("date", "desc")
         .onSnapshot((snapshot) => {
-          const commentArray = snapshot.docs.map((doc) => ({
+          const comments = snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
+            creatorName: await this.getCommentOwner(
+              cachedUid,
+              setCachedUid,
+              doc.creatorId
+            ),
           }));
-          setComments(commentArray);
+          setComments(comments);
         });
       return null;
     } catch (e) {
       return e;
     }
   }
+
+  async getUserName(userId) {
+    try {
+      return [await this.common.getDoc(this.USER, userId).name, null];
+    } catch (error) {
+      return [null, error];
+    }
+  }
+
+  async getCommentOwner(cachedUid, setCachedUid, commentUid) {
+    const userInfo = cachedUid.filter((u) => u.uid === commentUid);
+    if (userInfo.length === 1) return userInfo.name;
+    const [userName, error] = await this.getUserName(commentUid);
+    if ((await error) !== null) return [null, error];
+    setCachedUid({ uid: commentUid, name: userName });
+    return userName;
+  }
+
   async onCommentsLoad(setLoading, setComments, articleId, setError) {
     setLoading(true);
-    setComments([]);
     const error = this.getComments(articleId, setComments);
-    if (error !== null) setError(true);
+    if ((await error) !== null)
+      setError({ error: true, message: "There's a problem to get comments." });
     setLoading(false);
   }
 }

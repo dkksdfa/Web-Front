@@ -1,7 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { firestore } from "../firebase";
 
-const Comment = ({ comment, isOwner, editing, setEditing }) => {
+const Comment = ({
+  comment,
+  users,
+  setUsers,
+  isOwner,
+  editing,
+  setEditing,
+}) => {
+  console.log(comment);
+  console.log(isOwner);
+  console.log(editing);
+  console.log(setEditing);
+  console.log("---------------");
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState("");
   const [editText, setEditText] = useState(comment.content);
@@ -14,10 +26,13 @@ const Comment = ({ comment, isOwner, editing, setEditing }) => {
       .get();
     setUsername(dbUser.data().name);
     setLoading(false);
-  }, [comment]);
+    setUsers(users.concat(comment.creatorId));
+  }, [comment, setUsers, users]);
+
   useEffect(() => {
+    if (users.includes(comment.creatorId)) return;
     fetchData();
-  }, [fetchData]);
+  }, [fetchData, users, comment]);
   const onDelete = async () => {
     const sure = window.confirm("Are you sure?");
     if (sure) {

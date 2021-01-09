@@ -13,7 +13,7 @@ const Article = ({ match }) => {
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState(null);
   const [articleLoading, setArticleLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({ error: false, message: "" });
   const [commentLoading, setCommentLoading] = useState(true);
   const {
     params: { category, articleId, clublink },
@@ -38,13 +38,15 @@ const Article = ({ match }) => {
     asyncFunc();
   }, [articleId, setError, setArticle, setArticleLoading]);
 
-  if (error)
+  if (error.error) {
+    console.error(`ERROR: ${error.message}`);
     return (
       <PageWrap>
-        <StyledPageTitle>Error!</StyledPageTitle>
-        <Link to="/">Go to home</Link>
+        <StyledPageTitle>Error!!!</StyledPageTitle>
+        <Link to="/">Going to home</Link>
       </PageWrap>
     );
+  }
 
   if (articleLoading || commentLoading)
     return (
@@ -65,12 +67,12 @@ const Article = ({ match }) => {
       />
       <CommentContainer
         userObj={userObj}
+        comments={comments}
         category={category}
-        setError={setError}
         clublink={clublink}
         isLoggedIn={isLoggedIn}
-        setDone={setCommentLoading}
         articleId={articleId}
+        setError={setError}
       />
     </PageWrap>
   );

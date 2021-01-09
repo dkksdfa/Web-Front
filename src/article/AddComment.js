@@ -40,12 +40,16 @@ const AddComment = ({
     const {
       firebase: { COMMENT },
     } = commonConstants;
-    const error = functions.commonsetDoc(
+    const error = functions.setDoc(
       COMMENT,
       newCommentObject.commentId,
       newCommentObject
     );
-    if (error !== null) setError(true);
+    if ((await error) !== null)
+      setError({
+        error: true,
+        message: "There's a problem to add this comment.",
+      });
   };
   return (
     <>
