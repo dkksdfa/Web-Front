@@ -10,7 +10,6 @@ const CommentContainer = ({
   articleId,
   setError,
 }) => {
-  console.log("comment");
   return (
     <CommentComponent
       userObj={userObj}

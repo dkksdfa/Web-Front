@@ -5,12 +5,6 @@ import articleFuncs from "./article-functions";
 const ArticleFunctions = new articleFuncs();
 
 const Comment = ({ comment, isOwner, editing, setEditing }) => {
-  // console.log(comment);
-  // console.log(isOwner);
-  // console.log(editing);
-  // console.log(setEditing);
-  // console.log("---------------");
-
   const [editText, setEditText] = useState(comment.content);
   const [edit, setEdit] = useState(false);
 
@@ -46,7 +40,7 @@ const Comment = ({ comment, isOwner, editing, setEditing }) => {
     setEditing(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  if (comment.creatorName === undefined) return null;
   return (
     <>
       <div>

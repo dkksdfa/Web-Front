@@ -11,7 +11,6 @@ import Login from "./user/login";
 import Modify from "./user/modify";
 
 const Router = ({ isLoggedIn, userObj, setUserObj }) => {
-  console.log("rrr");
   return (
     <>
       <Route path="/" exact>
