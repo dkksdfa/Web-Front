@@ -10,6 +10,7 @@ import ArticleFunctions from "./article-functions";
 const articleFuncs = new ArticleFunctions();
 
 const Article = ({ match }) => {
+  console.log("rerendering");
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);
   const [articleLoading, setArticleLoading] = useState(true);
@@ -81,4 +82,4 @@ const Article = ({ match }) => {
   );
 };
 
-export default Article;
+export default React.memo(Article);

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { firestore } from "../firebase";
 import commonConstants from "../common/constants.json";
 import CommonFunctions from "../common/functions";
 

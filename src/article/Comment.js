@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { firestore } from "../firebase";
+import articleFuncs from "./article-functions";
+
+const ArticleFunctions = new articleFuncs();
 
 const Comment = ({ comment, isOwner, editing, setEditing }) => {
   // console.log(comment);
@@ -20,49 +23,54 @@ const Comment = ({ comment, isOwner, editing, setEditing }) => {
   // const onEdit= async () => {
   //   setEdit
   // };
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    await firestore
-      .collection("comments")
-      .doc(comment.id)
-      .set({ content: editText }, { merge: true });
-    setEdit(false);
-    setEditing(false);
-  };
-  const onCancle = () => {
+  const onSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await ArticleFunctions.editComment(comment.id, comment.content);
+      setEdit(false);
+      setEditing(false);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [comment.content]
+  );
+
+  const onCancle = useCallback(() => {
     setEdit(false);
     setEditText(comment.content);
     setEditing(false);
-  };
-  const onEditClick = () => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [comment.content]);
+
+  const onEditClick = useCallback(() => {
     setEdit(true);
     setEditing(true);
-  };
-  if (edit) {
-    return (
-      <>
-        <form onSubmit={onSubmit}>
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      <div>
+        {edit ? (
           <input
             value={editText}
             onChange={(e) => {
               setEditText(e.target.value);
             }}
           />
-          <input type="submit" value="edit" />
-          <input type="button" value="Cancle" onClick={onCancle} />
-        </form>
-      </>
-    );
-  }
-  return (
-    <>
-      <div>
-        {comment.content} | {comment.creatorName} | {comment.category}/
-        {comment.club}
-        {isOwner && (
+        ) : (
+          <span>{comment.content} </span>
+        )}
+        | {comment.creatorName} | {comment.category}/{comment.club}
+        {edit && (
+          <form onSubmit={onSubmit}>
+            <input type="submit" value="edit" />
+            <input type="button" value="Cancle" onClick={onCancle} />
+          </form>
+        )}
+        {!edit && isOwner && (
           <>
             <button onClick={onDelete}>delete</button>
-            {!editing && <button onClick={onEditClick}>edit</button>}
+            <button onClick={onEditClick}>edit</button>
           </>
         )}
       </div>

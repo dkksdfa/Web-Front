@@ -7,8 +7,8 @@ const CommentList = ({ comments, clublink, articleId }) => {
   const [users, setUsers] = useState([]);
   const userinfo = useContext(Userinfo);
 
-  console.log("comments:");
-  console.log(comments);
+  // console.log("comments:");
+  // console.log(comments);
   if (comments === null) return null;
   return (
     <div>

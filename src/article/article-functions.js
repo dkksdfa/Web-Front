@@ -21,6 +21,7 @@ class ArticleFunctions {
     ];
     this.ARTICLE = commonConstants.firebase.ARTICLE;
     this.USER = commonConstants.firebase.USER;
+    this.COMMENT = commonConstants.firebase.COMMENT;
     this.common = new CommonFunctions();
   }
   getDateFromTimestamp(timestamp) {
@@ -153,6 +154,18 @@ class ArticleFunctions {
     if ((await error) !== null)
       setError({ error: true, message: "There's a problem to get comments." });
     setLoading(false);
+  }
+
+  async editComment(id, content) {
+    try {
+      await firestore
+        .collection(this.COMMENT)
+        .doc(id)
+        .set({ content }, { merge: true });
+      return null;
+    } catch (e) {
+      return e;
+    }
   }
 }
 
