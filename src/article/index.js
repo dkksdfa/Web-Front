@@ -10,7 +10,7 @@ import ArticleFunctions from "./article-functions";
 const articleFuncs = new ArticleFunctions();
 
 const Article = ({ match }) => {
-  console.log("rerendering");
+  // console.log("rerendering");
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);
   const [articleLoading, setArticleLoading] = useState(true);
@@ -30,14 +30,20 @@ const Article = ({ match }) => {
         setArticle,
         setArticleLoading
       );
-      await articleFuncs.onCommentsLoad(
+      setCommentLoading(true);
+      const [newComments, error] = await articleFuncs.onCommentsLoad(
         cachedUid,
         articleId,
         setCachedUid,
         setCommentLoading,
-        setComments,
         setError
       );
+      setComments(newComments);
+      if (error !== null || (await error) !== null) {
+        console.error("ERROR: There's some problem to get comments.");
+        setError(true);
+      }
+      setCommentLoading(false);
     };
     asyncFunc();
   }, [articleId, setError, setArticle, setArticleLoading, cachedUid]);

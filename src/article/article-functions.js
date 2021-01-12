@@ -90,29 +90,21 @@ class ArticleFunctions {
     else history.push(`/club/${category}/${clublink}`);
   }
 
-  async getComments(articleId, setComments, cachedUid, setCachedUid) {
+  async getComments(articleId, cachedUid, setCachedUid) {
     try {
-      firestore
+      const result = [];
+      const dbComments = await firestore
         .collection("comments")
         .where("articleId", "==", articleId)
         .orderBy("date", "desc")
-        .onSnapshot((snapshot) => {
-          snapshot.docs.map(async (doc) => {
-            const comments = {
-              id: doc.id,
-              ...doc.data(),
-              creatorName: await this.getCommentCreatorName(
-                cachedUid,
-                setCachedUid,
-                doc.data().creatorId
-              ),
-            };
-            setComments((prevComments) => [...prevComments, comments]);
-          });
-        });
-      return null;
+        .get();
+      dbComments.forEach((i) => {
+        const comment = i.data();
+        result.push(comment);
+      });
+      return [result, null];
     } catch (e) {
-      return e;
+      return [null, e];
     }
   }
 
@@ -136,24 +128,19 @@ class ArticleFunctions {
     return userName;
   }
 
-  async onCommentsLoad(
-    cachedUid,
-    articleId,
-    setCachedUid,
-    setLoading,
-    setComments,
-    setError
-  ) {
-    setLoading(true);
-    const error = this.getComments(
+  async onCommentsLoad(cachedUid, articleId, setCachedUid) {
+    const [comments, error] = await this.getComments(
       articleId,
-      setComments,
       cachedUid,
       setCachedUid
     );
+
     if ((await error) !== null)
-      setError({ error: true, message: "There's a problem to get comments." });
-    setLoading(false);
+      return [
+        null,
+        { error: true, message: "There's a problem to get comments." },
+      ];
+    return [comments, null];
   }
 
   async editComment(id, content) {

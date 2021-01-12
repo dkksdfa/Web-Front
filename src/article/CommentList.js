@@ -3,7 +3,6 @@ import Comment from "./Comment";
 import { Userinfo } from "../App";
 
 const CommentList = ({ comments, clublink, articleId }) => {
-  const [editing, setEditing] = useState(false);
   const [users, setUsers] = useState([]);
   const userinfo = useContext(Userinfo);
 
@@ -23,8 +22,6 @@ const CommentList = ({ comments, clublink, articleId }) => {
               userinfo.userObj &&
               val.creatorId === userinfo.userObj.uid
             }
-            editing={editing}
-            setEditing={setEditing}
             key={i}
           ></Comment>
         );
