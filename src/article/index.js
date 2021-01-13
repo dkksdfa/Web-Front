@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import PageWrap from "../common/page-wrap";
 import { Userinfo } from "../App";
 import ArticleContainer from "./ArticleContainer";
-import CommentContainer from "./CommentContainer";
 import { StyledPageTitle } from "../common/styles";
 import { Link } from "react-router-dom";
 import ArticleFunctions from "./article-functions";
+import AddComment from "./AddComment";
+import CommentList from "./CommentList";
 
 const articleFuncs = new ArticleFunctions();
 
@@ -38,7 +39,8 @@ const Article = ({ match }) => {
         setCommentLoading,
         setError
       );
-      setComments(newComments);
+
+      newComments !== [] && setComments(newComments);
       if (error !== null || (await error) !== null) {
         console.error("ERROR: There's some problem to get comments.");
         setError(true);
@@ -64,7 +66,6 @@ const Article = ({ match }) => {
         <StyledPageTitle>loading...</StyledPageTitle>
       </PageWrap>
     );
-
   return (
     <PageWrap>
       <ArticleContainer
@@ -75,15 +76,15 @@ const Article = ({ match }) => {
         article={article}
         articleId={articleId}
       />
-      <CommentContainer
+      <AddComment
         userObj={userObj}
-        comments={comments}
-        category={category}
         clublink={clublink}
+        category={category}
         isLoggedIn={isLoggedIn}
         articleId={articleId}
         setError={setError}
       />
+      <CommentList comments={comments} />
     </PageWrap>
   );
 };

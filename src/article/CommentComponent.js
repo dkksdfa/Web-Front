@@ -21,11 +21,7 @@ const CommentComponent = ({
         articleId={articleId}
         setError={setError}
       />
-      <CommentList
-        comments={comments}
-        clublink={clublink}
-        articleId={articleId}
-      />
+      <CommentList comments={comments} />
     </>
   );
 };

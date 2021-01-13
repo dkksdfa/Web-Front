@@ -98,8 +98,18 @@ class ArticleFunctions {
         .where("articleId", "==", articleId)
         .orderBy("date", "desc")
         .get();
-      dbComments.forEach((i) => {
+      dbComments.forEach(async (i) => {
         const comment = i.data();
+        const [creatorName, error] = await this.getCommentCreatorName(
+          cachedUid,
+          setCachedUid,
+          comment.creatorId
+        );
+
+        if (error !== null || creatorName === undefined) throw error;
+
+        // console.log({ creatorName });
+        comment.creatorName = creatorName;
         result.push(comment);
       });
       return [result, null];
@@ -111,7 +121,7 @@ class ArticleFunctions {
   async getUserName(userId) {
     try {
       const [result, error] = await this.common.getDoc(this.USER, userId);
-      if (error !== null) return [null, error];
+      if (error !== null) throw error;
       return [result.displayName, null];
     } catch (error) {
       return [null, error];
@@ -120,12 +130,12 @@ class ArticleFunctions {
 
   async getCommentCreatorName(cachedUid, setCachedUid, commentUid) {
     const userInfo = cachedUid.filter((u) => u.uid === commentUid);
-    if (userInfo.length === 1) return userInfo.name;
+    if (userInfo.length === 1) return [userInfo.name, null];
     const [userName, error] = await this.getUserName(commentUid);
     if ((await error) !== null) return [null, error];
     const nextCachedUid = cachedUid.concat({ uid: commentUid, name: userName });
     setCachedUid(nextCachedUid);
-    return userName;
+    return [userName, null];
   }
 
   async onCommentsLoad(cachedUid, articleId, setCachedUid) {

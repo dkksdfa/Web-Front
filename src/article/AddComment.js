@@ -14,9 +14,7 @@ const AddComment = ({
   setError,
 }) => {
   const [newComment, setNewComment] = useState("");
-  const onChange = (e) => {
-    setNewComment(e.target.value);
-  };
+  const onChange = (e) => setNewComment(e.target.value);
   const history = useHistory();
 
   const onSubmit = async (e) => {
