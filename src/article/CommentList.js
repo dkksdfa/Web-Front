@@ -5,6 +5,7 @@ import { Userinfo } from "../App";
 const CommentList = ({ comments }) => {
   const [users, setUsers] = useState([]);
   const userinfo = useContext(Userinfo);
+
   return (
     <div>
       {comments.map((val, i) => {
@@ -14,9 +15,7 @@ const CommentList = ({ comments }) => {
             users={users}
             setUsers={setUsers}
             isOwner={
-              userinfo.isLoggedIn &&
-              userinfo.userObj &&
-              val.creatorId === userinfo.userObj.uid
+              userinfo.isLoggedIn && userinfo.userObj && val.creatorId === userinfo.userObj.uid
             }
             key={i}
           ></Comment>

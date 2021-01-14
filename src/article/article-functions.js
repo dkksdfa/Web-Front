@@ -32,9 +32,7 @@ class ArticleFunctions {
     const date = this.getDateFromTimestamp(timestamp);
 
     return {
-      formmatedDate: `${
-        this.months[date.getMonth()]
-      } ${date.getDate()}, ${date.getFullYear()}`,
+      formmatedDate: `${this.months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`,
       originaldate: Date(
         `${date.getFullYear()}-${
           date.getMonth() - 1
@@ -44,10 +42,7 @@ class ArticleFunctions {
   }
 
   async getArticle(articleId) {
-    const [dbArticle, articleErr] = await this.common.getDoc(
-      this.ARTICLE,
-      articleId
-    );
+    const [dbArticle, articleErr] = await this.common.getDoc(this.ARTICLE, articleId);
     if (articleErr) return [null, articleErr];
     return [dbArticle, null];
   }
@@ -92,26 +87,28 @@ class ArticleFunctions {
 
   async getComments(articleId, cachedUid, setCachedUid) {
     try {
-      const result = [];
+      let result = [];
       const dbComments = await firestore
         .collection("comments")
         .where("articleId", "==", articleId)
         .orderBy("date", "desc")
         .get();
-      dbComments.forEach(async (i) => {
-        const comment = i.data();
-        const [creatorName, error] = await this.getCommentCreatorName(
-          cachedUid,
-          setCachedUid,
-          comment.creatorId
-        );
+      const asyncFunc = async (cachedUid, setCachedUid, creatorId) => {
+        const result = await this.getCommentCreatorName(cachedUid, setCachedUid, creatorId);
+        return result;
+      };
+      await dbComments.forEach((dbComment, index) => {
+        const comment = dbComment.data();
 
+        const [creatorName, error] = asyncFunc(cachedUid, setCachedUid, comment.creatorId);
         if (error !== null || creatorName === undefined) throw error;
 
-        // console.log({ creatorName });
         comment.creatorName = creatorName;
-        result.push(comment);
+        result = [...result, comment];
+        console.log(result);
+        //
       });
+      // console.log(result);
       return [result, null];
     } catch (e) {
       return [null, e];
@@ -139,26 +136,16 @@ class ArticleFunctions {
   }
 
   async onCommentsLoad(cachedUid, articleId, setCachedUid) {
-    const [comments, error] = await this.getComments(
-      articleId,
-      cachedUid,
-      setCachedUid
-    );
+    const [comments, error] = await this.getComments(articleId, cachedUid, setCachedUid);
 
     if ((await error) !== null)
-      return [
-        null,
-        { error: true, message: "There's a problem to get comments." },
-      ];
+      return [null, { error: true, message: "There's a problem to get comments." }];
     return [comments, null];
   }
 
   async editComment(id, content) {
     try {
-      await firestore
-        .collection(this.COMMENT)
-        .doc(id)
-        .set({ content }, { merge: true });
+      await firestore.collection(this.COMMENT).doc(id).set({ content }, { merge: true });
       return null;
     } catch (e) {
       return e;

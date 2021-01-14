@@ -25,12 +25,7 @@ const Article = ({ match }) => {
 
   useEffect(() => {
     const asyncFunc = async () => {
-      await articleFuncs.onArticleLoad(
-        articleId,
-        setError,
-        setArticle,
-        setArticleLoading
-      );
+      await articleFuncs.onArticleLoad(articleId, setError, setArticle, setArticleLoading);
       setCommentLoading(true);
       const [newComments, error] = await articleFuncs.onCommentsLoad(
         cachedUid,

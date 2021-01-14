@@ -5,14 +5,7 @@ import commonConstants from "../common/constants.json";
 import CommonFunctions from "../common/functions";
 
 const functions = new CommonFunctions();
-const AddComment = ({
-  userObj,
-  clublink,
-  category,
-  isLoggedIn,
-  articleId,
-  setError,
-}) => {
+const AddComment = ({ userObj, clublink, category, isLoggedIn, articleId, setError }) => {
   const [newComment, setNewComment] = useState("");
   const onChange = (e) => setNewComment(e.target.value);
   const history = useHistory();
@@ -37,11 +30,7 @@ const AddComment = ({
     const {
       firebase: { COMMENT },
     } = commonConstants;
-    const error = functions.setDoc(
-      COMMENT,
-      newCommentObject.commentId,
-      newCommentObject
-    );
+    const error = functions.setDoc(COMMENT, newCommentObject.commentId, newCommentObject);
     if ((await error) !== null)
       setError({
         error: true,
@@ -51,11 +40,7 @@ const AddComment = ({
   return (
     <>
       <form onSubmit={onSubmit}>
-        <input
-          placeholder="Enter new comment here..."
-          onChange={onChange}
-          value={newComment}
-        />
+        <input placeholder="Enter new comment here..." onChange={onChange} value={newComment} />
         <input type="submit" value="add comment" />
       </form>
     </>
