@@ -35,7 +35,7 @@ const Article = ({ match }) => {
         setError
       );
 
-      newComments !== [] && setComments(newComments);
+      newComments !== [] && newComments !== null && setComments(newComments);
       if (error !== null || (await error) !== null) {
         console.error("ERROR: There's some problem to get comments.");
         setError(true);
