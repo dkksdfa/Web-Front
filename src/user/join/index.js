@@ -40,9 +40,7 @@ const Join = ({ isLoggedIn }) => {
       try {
         await auth.createUserWithEmailAndPassword(email, password);
         await auth.onAuthStateChanged((user) => {
-          if (user) {
-            userData = user.uid;
-          }
+          if (user) userData = user.uid;
         });
         const object = {
           displayName: name,
