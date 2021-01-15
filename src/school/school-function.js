@@ -1,11 +1,11 @@
 import axios from "axios";
 import cheerio from "cheerio";
 import { firestore } from "../firebase";
+import constants from "./constants.json";
 
 const isTodayMealExist = ($) => $("td.today")[0].children[1] !== undefined;
 
-const getFormattedMeal = (rawMealData) =>
-  rawMealData.slice(7, rawMealData.length - 6).split(",");
+const getFormattedMeal = (rawMealData) => rawMealData.slice(7, rawMealData.length - 6).split(",");
 
 const handleGettingMeal = async ($) => {
   const $todayMealLi = $("td.today")[0].children[1];
@@ -23,9 +23,7 @@ const handleGettingMeal = async ($) => {
 export const getTodayMeal = async (setLoading, setMeal) => {
   setLoading(true);
   try {
-    const response = await axios.get(
-      `http://daekyeong.sen.hs.kr/70633/subMenu.do`
-    );
+    const response = await axios.get(`http://daekyeong.sen.hs.kr/70633/subMenu.do`);
     const $ = cheerio.load(response.data);
     if (isTodayMealExist($)) setMeal(await handleGettingMeal($));
     else setMeal(false);
@@ -36,16 +34,7 @@ export const getTodayMeal = async (setLoading, setMeal) => {
   }
 };
 
-export const getUserinfo = async (userObj, setOnlineClassURL) => {
-  if (userObj) {
-    const userData = await firestore
-      .collection("additional userinfo")
-      .doc(userObj.uid)
-      .get();
-    setOnlineClassURL(
-      `https://hoc23.ebssw.kr/20dk${userData.data().grade}${
-        userData.data().classNumber
-      }`
-    );
-  }
+export const getSpecificEBSUrl = async (userObj) => {
+  const userData = await firestore.collection("additional userinfo").doc(userObj.uid).get();
+  return `https://hoc23.ebssw.kr/20dk${userData.data().grade}${userData.data().classNumber}`;
 };

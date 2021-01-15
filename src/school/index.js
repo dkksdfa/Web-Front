@@ -1,48 +1,27 @@
 import React, { useState } from "react";
-import Content from "./Content";
-import { FeedText, SchoolContentWrapper } from "./StyledSchool";
-import { getTodayMeal, getUserinfo } from "./school-function";
+import { FeedText } from "./StyledSchool";
+import { getTodayMeal } from "./school-function";
 import PageWrap from "../common/page-wrap";
+import constants from "./constants.json";
+import ContentContainer from "./ContentContainer";
 
 const School = ({ userObj }) => {
   const [meal, setMeal] = React.useState(null);
   const [loading, setLoading] = useState(false);
-  const Diagnosis = "https://hcs.eduro.go.kr/#/loginHome";
-  const homePage = "http://daekyeong.sen.hs.kr/index.do";
-  let [onlineClassURL, setOnlineClassURL] = React.useState(
-    "https://hoc23.ebssw.kr/onlineClass/search/onlineClassSearchView.do?schulCcode=00304&schCssTyp=online_high"
-  );
+
   React.useEffect(() => {
     getTodayMeal(setLoading, setMeal);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  React.useEffect(() => {
-    getUserinfo(userObj, setOnlineClassURL);
-  }, [userObj]);
+
   return (
     <PageWrap>
-      <SchoolContentWrapper>
-        <Content
-          imagePath="/school.jpg"
-          label="학교 홈페이지가기"
-          link={homePage}
-        />
-        <Content
-          imagePath="/Diagnosis.png"
-          label="자가진단 하러가기"
-          link={Diagnosis}
-        />
-        <Content
-          imagePath="/online.png"
-          label="온라인 클래스로"
-          link={onlineClassURL}
-        />
-      </SchoolContentWrapper>
-      {meal && <FeedText style={{ fontSize: "3rem" }}>오늘의 급식</FeedText>}
+      <ContentContainer userObj={userObj} />
+      {meal && <FeedText style={{ fontSize: "3rem" }}>{constants.THE_MEALS}</FeedText>}
       {loading && <FeedText>loading</FeedText>}
-      {!loading && !meal && <FeedText>오늘은 급식이 없습니다.</FeedText>}
-      {!loading &&
-        meal &&
-        meal.map((val, index) => <FeedText key={index}>{val}</FeedText>)}
+      {!loading && !meal && <FeedText>{constants.NO_MEALS}</FeedText>}
+      {!loading && meal && meal.map((val, index) => <FeedText key={index}>{val}</FeedText>)}
     </PageWrap>
   );
 };

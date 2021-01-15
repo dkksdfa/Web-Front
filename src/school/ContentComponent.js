@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, ImageTemplate, TextSpan } from "./StyledSchool";
 
-const Content = ({ imagePath, label, link }) => {
+const ContentComponent = ({ imagePath, label, link }) => {
   return (
     <Box>
       <a href={link} target="_blank" rel="noopener noreferrer">
@@ -24,4 +24,4 @@ const Content = ({ imagePath, label, link }) => {
   );
 };
 
-export default Content;
+export default ContentComponent;
