@@ -37,10 +37,7 @@ class Functions {
               .get();
       else
         firestoreCollection = orderBy
-          ? await firestore
-              .collection(collectName)
-              .orderBy(orderBy.attrName, orderBy.order)
-              .get()
+          ? await firestore.collection(collectName).orderBy(orderBy.attrName, orderBy.order).get()
           : await firestore.collection(collectName).get();
 
       return [firestoreCollection, null];
@@ -51,10 +48,7 @@ class Functions {
 
   async getDoc(collectName, docName) {
     try {
-      const firestoreDoc = await firestore
-        .collection(collectName)
-        .doc(docName)
-        .get();
+      const firestoreDoc = await firestore.collection(collectName).doc(docName).get();
       return [firestoreDoc.data(), null];
     } catch (err) {
       return [null, err];
