@@ -5,7 +5,7 @@
 - [ ] Article Refactoring
 - [ ] Club Refactoring
 - [ ] Community Refactoring
-- [ ] School Refactoring
+- [x] School Refactoring
 - [ ] Join Refactoring
 - [ ] Login Refactoring
 - [ ] Modify Refactoring
