@@ -12,5 +12,6 @@
     "ARTICLE": "articles",
     "USER": "additional userinfo",
     "COMMENT": "comments"
-  }
+  },
+  "LOADING_MESSAGE": "Loading..."
 }

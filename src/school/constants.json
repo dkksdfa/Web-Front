@@ -1,0 +1,19 @@
+{
+  "DIAGNOSIS_URL": "https://hcs.eduro.go.kr/#/loginHome",
+  "DK_URL": "http://daekyeong.sen.hs.kr/index.do",
+  "INITIAL_EBS_URL": "https://hoc23.ebssw.kr/onlineClass/search/onlineClassSearchView.do?schulCcode=00304&schCssTyp=online_high",
+
+  "DK_IMAGE_PATH": "/school.jpg",
+  "DIAGNOSIS_IMAGE_PATH": "/diagnosis.jpg",
+  "EBS_IMAGE_PATH": "/online.jpg",
+
+  "GO_TO_DK": "학교 홈페이지가기",
+  "GO_TO_DIAGNOSIS": "자가진단 하러가기",
+  "GO_TO_EBS": "온라인 클래스로",
+
+  "CONTENT_TEXT_FONT": "-apple-system BlinkMacSystemFont Segoe UI Roboto Oxygen Ubuntu Cantarell Fira Sans Droid Sans Helvetica Neue sans-serif",
+  "THE_MEALS": "오늘의 급식",
+  "NO_MEALS": "오늘은 급식이 없습니다.",
+  "MONTHLY_MEAL_URL": "http://daekyeong.sen.hs.kr/70633/subMenu.do",
+  "MEAL_LIST_URL": "http://daekyeong.sen.hs.kr/dggb/module/mlsv/selectMlsvDetailPopup.do?mlsvId="
+}
