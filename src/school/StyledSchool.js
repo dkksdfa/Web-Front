@@ -25,13 +25,13 @@ export const Box = styled.div`
   }
 `;
 
-export const ImageTemplate = styled.div`
+export const Image = styled.div`
   cursor: pointer;
   width: 100%;
   height: 300px;
   margin: 0 auto;
   margin-bottom: 10px;
-  background: ${(props) => `url("image/${props.imagePath}")`} no-repeat;
+  background: ${(props) => `url("image/${props.path}")`} no-repeat;
   background-size: 100% 100%;
 `;
 

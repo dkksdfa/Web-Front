@@ -1,27 +1,23 @@
 import React from "react";
-import { Box, ImageTemplate, TextSpan } from "./StyledSchool";
+import { Box, Image, TextSpan } from "./StyledSchool";
+import constants from "./constants.json";
 
-const ContentComponent = ({ imagePath, label, link }) => {
-  return (
-    <Box>
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        <ImageTemplate imagePath={imagePath} />
+const ContentComponent = ({ imagePath, label, link }) => (
+  <Box>
+    <a href={link} target="_blank" rel="noopener noreferrer">
+      <Image path={imagePath} />
+    </a>
+    <TextSpan>
+      <a
+        style={{ fontFamily: constants.CONTENT_TEXT_FONT }}
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {label}
       </a>
-      <TextSpan>
-        <a
-          style={{
-            fontFamily:
-              "-apple-system BlinkMacSystemFont Segoe UI Roboto Oxygen Ubuntu Cantarell Fira Sans Droid Sans Helvetica Neue sans-serif",
-          }}
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {label}
-        </a>
-      </TextSpan>
-    </Box>
-  );
-};
+    </TextSpan>
+  </Box>
+);
 
 export default ContentComponent;
