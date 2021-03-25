@@ -7,7 +7,7 @@ import { StyledAppContainer } from "./StyledApp.js";
 export const Userinfo = createContext();
 
 const initializeWhenUserExist = async (user, setUserObj) => {
-  const collectionName = "additional userinfo";
+  const collectionName = "additional userinfo";d
   const userCollection = await firestore.collection(collectionName);
   const additionalInfo = await userCollection.doc(user.uid).get();
   const uid = user.uid;
